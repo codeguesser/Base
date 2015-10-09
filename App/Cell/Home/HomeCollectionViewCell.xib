@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HomeCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="153"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="153"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QNs-kI-vYE" customClass="RoundButton">
+                        <rect key="frame" x="45" y="47" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="QFy-eC-9F1"/>
+                            <constraint firstAttribute="width" constant="60" id="xbe-QX-lkx"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="Add-1-01.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5I-hy-Yxv">
+                        <rect key="frame" x="54" y="124" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="h5I-hy-Yxv" secondAttribute="bottom" constant="8" id="0fS-93-RnH"/>
+                <constraint firstAttribute="centerY" secondItem="QNs-kI-vYE" secondAttribute="centerY" id="HuJ-22-Lbd"/>
+                <constraint firstAttribute="centerX" secondItem="QNs-kI-vYE" secondAttribute="centerX" id="MWj-i2-G9r"/>
+                <constraint firstAttribute="centerX" secondItem="h5I-hy-Yxv" secondAttribute="centerX" id="s5D-7U-AEu"/>
+            </constraints>
+            <size key="customSize" width="150" height="153"/>
+            <connections>
+                <outlet property="_coverButton" destination="QNs-kI-vYE" id="mNO-oM-KwT"/>
+                <outlet property="_titleLabel" destination="h5I-hy-Yxv" id="PBB-ja-pJq"/>
+            </connections>
+            <point key="canvasLocation" x="318" y="300.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Add-1-01.png" width="60" height="60"/>
+    </resources>
+</document>

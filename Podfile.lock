@@ -1,0 +1,55 @@
+PODS:
+  - Appirater (2.0.5)
+  - Aspects (1.4.1)
+  - Bugly (1.3.2)
+  - CocoaAsyncSocket (7.4.2)
+  - DZNEmptyDataSet (1.7.2)
+  - FXBlurView (1.6.4)
+  - JazzHands (2.0.7)
+  - MagicalRecord (2.3.0)
+  - Masonry (0.6.3)
+  - MBProgressHUD (0.9.1)
+  - MKNetworkKit (0.87):
+    - Reachability (~> 3.1.0)
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - Reachability (3.1.1)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+
+DEPENDENCIES:
+  - Appirater
+  - Aspects
+  - Bugly
+  - CocoaAsyncSocket
+  - DZNEmptyDataSet
+  - FXBlurView
+  - JazzHands
+  - MagicalRecord
+  - Masonry
+  - MBProgressHUD
+  - MKNetworkKit
+  - NJKWebViewProgress
+  - SDWebImage
+
+SPEC CHECKSUMS:
+  Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  Bugly: dba622a7c10bf4688d2577148d861c72e270becb
+  CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
+  DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
+  FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  JazzHands: 13b2930840957cdbb830e1d52434fc2342b050d8
+  MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MKNetworkKit: 60ad3c83b62183e40ba75ce772c9427c25b520de
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+
+COCOAPODS: 0.38.2
