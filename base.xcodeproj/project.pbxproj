@@ -27,7 +27,6 @@
 		4CDC1C481BC79A3D00137D24 /* NSDateFormatter+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C2A1BC79A3D00137D24 /* NSDateFormatter+Category.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C491BC79A3D00137D24 /* NSDictionary+CGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C2C1BC79A3D00137D24 /* NSDictionary+CGCategory.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C4A1BC79A3D00137D24 /* NSString+Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C2E1BC79A3D00137D24 /* NSString+Pinyin.m */; settings = {ASSET_TAGS = (); }; };
-		4CDC1C4B1BC79A3D00137D24 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C2F1BC79A3D00137D24 /* Reveal.framework */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CCD1BC79AAB00137D24 /* HomeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C521BC79AAB00137D24 /* HomeCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CCE1BC79AAB00137D24 /* HomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C531BC79AAB00137D24 /* HomeCollectionViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CCF1BC79AAB00137D24 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C561BC79AAB00137D24 /* Cell.m */; settings = {ASSET_TAGS = (); }; };
@@ -71,7 +70,6 @@
 		4CDC1CF51BC79AAB00137D24 /* color_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C8D1BC79AAB00137D24 /* color_black.png */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CF61BC79AAB00137D24 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C8E1BC79AAB00137D24 /* delete@2x.png */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CF71BC79AAB00137D24 /* myimage.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C8F1BC79AAB00137D24 /* myimage.jpeg */; settings = {ASSET_TAGS = (); }; };
-		4CDC1CF81BC79AAB00137D24 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C901BC79AAB00137D24 /* Reveal.framework */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CF91BC79AAB00137D24 /* NSNotification+CGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C931BC79AAB00137D24 /* NSNotification+CGCategory.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CFA1BC79AAB00137D24 /* Prefrence.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C951BC79AAB00137D24 /* Prefrence.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1CFB1BC79AAB00137D24 /* ShareHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C971BC79AAB00137D24 /* ShareHandle.m */; settings = {ASSET_TAGS = (); }; };
@@ -140,7 +138,6 @@
 		4CDC1C2C1BC79A3D00137D24 /* NSDictionary+CGCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CGCategory.m"; sourceTree = "<group>"; };
 		4CDC1C2D1BC79A3D00137D24 /* NSString+Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Pinyin.h"; sourceTree = "<group>"; };
 		4CDC1C2E1BC79A3D00137D24 /* NSString+Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Pinyin.m"; sourceTree = "<group>"; };
-		4CDC1C2F1BC79A3D00137D24 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4CDC1C301BC79A3D00137D24 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		4CDC1C511BC79AAB00137D24 /* HomeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCollectionViewCell.h; sourceTree = "<group>"; };
 		4CDC1C521BC79AAB00137D24 /* HomeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCollectionViewCell.m; sourceTree = "<group>"; };
@@ -196,7 +193,6 @@
 		4CDC1C8D1BC79AAB00137D24 /* color_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color_black.png; sourceTree = "<group>"; };
 		4CDC1C8E1BC79AAB00137D24 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
 		4CDC1C8F1BC79AAB00137D24 /* myimage.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = myimage.jpeg; sourceTree = "<group>"; };
-		4CDC1C901BC79AAB00137D24 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		4CDC1C921BC79AAB00137D24 /* NSNotification+CGCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotification+CGCategory.h"; sourceTree = "<group>"; };
 		4CDC1C931BC79AAB00137D24 /* NSNotification+CGCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotification+CGCategory.m"; sourceTree = "<group>"; };
 		4CDC1C941BC79AAB00137D24 /* Prefrence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefrence.h; sourceTree = "<group>"; };
@@ -270,9 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CDC1C4B1BC79A3D00137D24 /* Reveal.framework in Frameworks */,
 				4CDC1C431BC79A3D00137D24 /* Reveal.framework in Frameworks */,
-				4CDC1CF81BC79AAB00137D24 /* Reveal.framework in Frameworks */,
 				62E62F4E822F86F2BE8A3E27 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,7 +406,6 @@
 				4CDC1C2C1BC79A3D00137D24 /* NSDictionary+CGCategory.m */,
 				4CDC1C2D1BC79A3D00137D24 /* NSString+Pinyin.h */,
 				4CDC1C2E1BC79A3D00137D24 /* NSString+Pinyin.m */,
-				4CDC1C2F1BC79A3D00137D24 /* Reveal.framework */,
 				4CDC1C301BC79A3D00137D24 /* Util.h */,
 			);
 			path = Util;
@@ -449,7 +442,6 @@
 				4CDC1C621BC79AAB00137D24 /* Entity */,
 				4CDC1C6B1BC79AAB00137D24 /* Model */,
 				4CDC1C701BC79AAB00137D24 /* Resources */,
-				4CDC1C901BC79AAB00137D24 /* Reveal.framework */,
 				4CDC1C911BC79AAB00137D24 /* Util */,
 				4CDC1C981BC79AAB00137D24 /* ViewController */,
 			);
