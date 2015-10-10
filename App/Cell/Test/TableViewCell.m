@@ -16,6 +16,7 @@
     [_label setNeedsLayout];
     [_label2 layoutIfNeeded];
     [_label2 setNeedsLayout];
+    self.backgroundColor = [UIColor redColor];
 }
 -(void)updateConstraints{
     if (!self.isUpdated) {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; settings = {ASSET_TAGS = (); }; };
+		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C331BC79A3D00137D24 /* CGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1BFD1BC79A3D00137D24 /* CGAnimator.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1BFF1BC79A3D00137D24 /* CGTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C351BC79A3D00137D24 /* CGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C011BC79A3D00137D24 /* CGViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -102,6 +105,9 @@
 
 /* Begin PBXFileReference section */
 		1C5C3C3BBE49A0364A05F67C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		4CDC1BDB1BC799DA00137D24 /* base.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = base.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CDC1BFC1BC79A3D00137D24 /* CGAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAnimator.h; sourceTree = "<group>"; };
 		4CDC1BFD1BC79A3D00137D24 /* CGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAnimator.m; sourceTree = "<group>"; };
@@ -479,6 +485,9 @@
 				4CDC1C5B1BC79AAB00137D24 /* TableViewCell.h */,
 				4CDC1C5C1BC79AAB00137D24 /* TableViewCell.m */,
 				4CDC1C5D1BC79AAB00137D24 /* TableViewCell.xib */,
+				4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */,
+				4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */,
+				4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -809,6 +818,7 @@
 				4CDC1CE51BC79AAB00137D24 /* phone2@3x.png in Resources */,
 				4CDC1CDD1BC79AAB00137D24 /* client.p12 in Resources */,
 				4CDC1D0C1BC79AAB00137D24 /* TestAttributeViewController.xib in Resources */,
+				4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */,
 				4CDC1CE21BC79AAB00137D24 /* circle2.png in Resources */,
 				4CDC1CFD1BC79AAB00137D24 /* BookDetailViewController.xib in Resources */,
 				4CDC1CCE1BC79AAB00137D24 /* HomeCollectionViewCell.xib in Resources */,
@@ -871,9 +881,11 @@
 				4CDC1C3A1BC79A3D00137D24 /* Entity.m in Sources */,
 				4CDC1CCD1BC79AAB00137D24 /* HomeCollectionViewCell.m in Sources */,
 				4CDC1C491BC79A3D00137D24 /* NSDictionary+CGCategory.m in Sources */,
+				4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */,
 				4CDC1CFE1BC79AAB00137D24 /* BookMarkViewController.m in Sources */,
 				4CDC1CD61BC79AAB00137D24 /* EntityTest.m in Sources */,
 				4CDC1CF91BC79AAB00137D24 /* NSNotification+CGCategory.m in Sources */,
+				4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */,
 				4CDC1CFA1BC79AAB00137D24 /* Prefrence.m in Sources */,
 				4CDC1D141BC79AAB00137D24 /* UserLoginViewController.m in Sources */,
 				4CDC1CD11BC79AAB00137D24 /* CollectionViewCell.m in Sources */,
