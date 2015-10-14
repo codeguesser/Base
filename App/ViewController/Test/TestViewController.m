@@ -7,7 +7,7 @@
 //
 
 #import "TestViewController.h"
-
+#import "LoadingView.h"
 @interface TestViewController ()
 
 @end
@@ -17,17 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    LoadingView *view = [[LoadingView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    [self.view addSubview:view];
+    self.view.backgroundColor = [UIColor whiteColor];
+    view.center = self.view.center;
+    
+    
+    
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

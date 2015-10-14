@@ -10,6 +10,7 @@
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; settings = {ASSET_TAGS = (); }; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; settings = {ASSET_TAGS = (); }; };
+		4CDBA4A81BCB8876004EC99D /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDBA4A71BCB8876004EC99D /* LoadingView.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C331BC79A3D00137D24 /* CGAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1BFD1BC79A3D00137D24 /* CGAnimator.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1BFF1BC79A3D00137D24 /* CGTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		4CDC1C351BC79A3D00137D24 /* CGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C011BC79A3D00137D24 /* CGViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -108,6 +109,8 @@
 		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		4CDBA4A61BCB8876004EC99D /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		4CDBA4A71BCB8876004EC99D /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
 		4CDC1BDB1BC799DA00137D24 /* base.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = base.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CDC1BFC1BC79A3D00137D24 /* CGAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAnimator.h; sourceTree = "<group>"; };
 		4CDC1BFD1BC79A3D00137D24 /* CGAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAnimator.m; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 			children = (
 				4CDC1C5F1BC79AAB00137D24 /* RoundButton.h */,
 				4CDC1C601BC79AAB00137D24 /* RoundButton.m */,
+				4CDBA4A61BCB8876004EC99D /* LoadingView.h */,
+				4CDBA4A71BCB8876004EC99D /* LoadingView.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -896,6 +901,7 @@
 				4CDC1CD51BC79AAB00137D24 /* RoundButton.m in Sources */,
 				4CDC1D291BC79BF500137D24 /* AppDelegate.m in Sources */,
 				4CDC1D221BC79BDC00137D24 /* main.m in Sources */,
+				4CDBA4A81BCB8876004EC99D /* LoadingView.m in Sources */,
 				4CDC1D001BC79AAB00137D24 /* HomeViewController.m in Sources */,
 				4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */,
 				4CDC1CD71BC79AAB00137D24 /* ItemEntity.m in Sources */,

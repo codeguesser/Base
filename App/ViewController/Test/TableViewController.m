@@ -21,8 +21,8 @@ NSString *const cellId = @"TableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _tableView.tableFooterView = [UIView new];
-    _tableView.tableHeaderView = [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil][0];
+//    _tableView.tableFooterView = [UIView new];
+//    _tableView.tableHeaderView = [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil][0];
     _dataList = [NSMutableArray new];
     [_dataList addObject:@"123123"];
     [_dataList addObject:@"123123123123123123123123123123"];
@@ -76,10 +76,13 @@ NSString *const cellId = @"TableViewCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     return [[NSAttributedString alloc] initWithString:@"没有数据"];
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0;
-}
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [UIView new];
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 0.1;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 0.1;
+//}
+//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    return [UIView new];
+//}
 @end
