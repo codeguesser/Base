@@ -17,13 +17,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    LoadingView *view = [[LoadingView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
+    LoadingView *view = [[LoadingView alloc]initWithFrame:CGRectMake(0, 0, 300, 300)];
     [self.view addSubview:view];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
+    
     view.center = self.view.center;
     
+//    CALayer *layer = [CALayer layer];
+//    layer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height);
+//    layer.backgroundColor = [UIColor blueColor].CGColor;
+//    layer.contentsScale = [UIScreen mainScreen].scale;
+//    layer.delegate = self;
+//    [view.layer addSublayer:layer];
+//    [layer display];
     
     
 }
-
+//-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+//    CGContextSetLineWidth(ctx, 10.0f);
+//    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+//    CGContextStrokeEllipseInRect(ctx, layer.bounds);
+//}
 @end

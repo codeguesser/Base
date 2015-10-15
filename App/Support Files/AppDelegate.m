@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import "TestAnimate1ViewController.h"
 #import "PartEntity.h"
-#import "TableViewController.h"
+#import "TestViewController.h"
 //#import "TestSocketViewController.h"
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
@@ -50,7 +50,7 @@
 
 
 -(void)tableViewEmptyPageDemo{
-    TableViewController *vc = [[TableViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     self.window.rootViewController = nav;
 }
