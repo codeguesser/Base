@@ -10,6 +10,7 @@
 
 @interface LoadingView : UIView{
     CALayer *layer1;
+    CAGradientLayer *tLayer2;
 }
 
 @end

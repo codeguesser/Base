@@ -71,14 +71,14 @@
     tLayer1.delegate = self;
     [tLayer1 display];
     
-    CAGradientLayer *tLayer2 = [CAGradientLayer layer];
+    tLayer2 = [CAGradientLayer layer];
     tLayer2.frame = CGRectMake(0, 0 , self.frame.size.width, self.frame.size.height);
 
     tLayer2.colors =  @[(id)[[UIColor greenColor] CGColor],(id)[[UIColor redColor]CGColor]];
     tLayer2.locations =  @[@(0),@(1)];
 //    tLayer2.backgroundColor = [UIColor greenColor].CGColor;
     tLayer2.mask = tLayer1;
-    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeed) userInfo:nil repeats:YES];
 //    layer1 = [CALayer layer];
 //    layer1.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 //    layer1.backgroundColor = [UIColor blueColor].CGColor;
@@ -89,6 +89,9 @@
     
     
     [self.layer addSublayer:tLayer2];
+}
+-(void)changeed{
+    tLayer2.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1);
 }
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
     CGRect frame = layer.frame;
