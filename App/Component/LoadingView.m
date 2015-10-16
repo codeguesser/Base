@@ -59,8 +59,10 @@
 //         self.layer.shadowPath = path;
 //         */
 //        self.backgroundColor = [UIColor redColor];
-        
-        
+        angel = 0;
+        link = [CADisplayLink displayLinkWithTarget:self selector:@selector(changeed)];
+        link.frameInterval = 8;
+        [link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     }
     return self;
 }
@@ -76,6 +78,8 @@
 
     tLayer2.colors =  @[(id)[[UIColor greenColor] CGColor],(id)[[UIColor redColor]CGColor]];
     tLayer2.locations =  @[@(0),@(1)];
+    tLayer2.startPoint = CGPointMake(0, 0);
+    tLayer2.endPoint = CGPointMake(1, 1);
 //    tLayer2.backgroundColor = [UIColor greenColor].CGColor;
     tLayer2.mask = tLayer1;
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeed) userInfo:nil repeats:YES];
@@ -91,7 +95,10 @@
     [self.layer addSublayer:tLayer2];
 }
 -(void)changeed{
-    tLayer2.transform = CATransform3DMakeRotation(M_PI_2, 0, 0, 1);
+    angel +=10;
+    CGFloat realDegree = angel/180*M_PI;
+    tLayer2.startPoint = CGPointMake(sqrtf(0.5)-0.5+cosf(realDegree), sqrtf(0.5)-0.5+sin(realDegree));
+    tLayer2.endPoint = CGPointMake(sqrtf(0.5)-0.5-cosf(realDegree), sqrtf(0.5)-0.5-sin(realDegree));
 }
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
     CGRect frame = layer.frame;
