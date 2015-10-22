@@ -13,15 +13,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"%@",[NSDate date]);
         UIDatePicker *picker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        picker.date = [NSDate date];
+        picker.date = [NSDate dateYesterday];
         [self addSubview:picker];
         picker.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:8*3600];
         picker.locale = [NSLocale localeWithLocaleIdentifier:@"zh_ch"];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSDateFormatter *formatter = [NSDateFormatter defaultDateFormatter];
-            NSLog(@"%@",[formatter stringFromDate:picker.date]);
+            NSLog(@"%@,%@",[formatter dateFromString:[formatter stringFromDate:picker.date] ],[formatter stringFromDate:picker.date]);
         });
     }
     return self;
