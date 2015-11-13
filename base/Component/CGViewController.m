@@ -71,7 +71,7 @@
 }
 -(void)transformViewControllerWithMethod:(ITransformMethod)method fromController:(UIViewController *)fromController targetController:(UIViewController *)targetController{
     if ([targetController isKindOfClass:[UserProtectViewController class]]&&![[ShareHandle shareHandle] me]) {
-        CGLog(@"页面受保护，跳转切换为登陆视图...");
+        DDLogInfo(@"页面受保护，跳转切换为登陆视图...");
         self.cachedTargetController = targetController;
         self.cachedFromController = fromController;
         self.cachedMehod = method;

@@ -66,7 +66,7 @@
     NSInteger index=0;
     ABAddressBookRef iPhoneAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     for (NSString *contactString in arr) {
-        CGLog(@"%ld",index++);
+        DDLogInfo(@"%ld",index++);
         NSArray *arrOfField = [contactString componentsSeparatedByString:@","];
         ABRecordRef newPerson = ABPersonCreate();
         CFErrorRef error = NULL;

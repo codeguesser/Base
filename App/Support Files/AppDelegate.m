@@ -9,14 +9,14 @@
 //
 
 #import "AppDelegate.h"
-#import "TestAnimate1ViewController.h"
-#import "PartEntity.h"
-#import "TestViewController.h"
+//#import "TestAnimate1ViewController.h"
+//#import "PartEntity.h"
+//#import "TableViewController.h"
 //#import "TestSocketViewController.h"
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-
+#import "TableViewController.h"
 #import "NSString+Pinyin.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 #warning 什么东西来的
@@ -36,12 +36,12 @@
     [[UIAlertView appearance]setTintColor:[UIColor greenColor]];
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
-    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-    formatter.numberStyle = NSNumberFormatterNoStyle;
-    formatter.maximumFractionDigits = 20;
-    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
-    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
+//    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+//    formatter.numberStyle = NSNumberFormatterNoStyle;
+//    formatter.maximumFractionDigits = 20;
+//    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
+//    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
     
     
@@ -50,9 +50,14 @@
 
 
 -(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
+    TableViewController *vc = [[TableViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-    self.window.rootViewController = nav;
+    
+    nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
+    UITabBarController *tbc = [[UITabBarController alloc]init];
+    tbc.viewControllers = @[nav];
+    
+    self.window.rootViewController = tbc;
 }
 /*
 -(void)setupHTTPNetworkDemo{
@@ -98,9 +103,9 @@
     op.shouldContinueWithInvalidCertificate = YES;
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
-        NSLog(@"%@",completedOperation.responseJSON);
+        DDLogInfo(@"%@",completedOperation.responseJSON);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"%@",error);
+        DDLogInfo(@"%@",error);
     }];
     [engine enqueueOperation:op];
 }
@@ -124,9 +129,9 @@
                                             httpMethod:@"GET"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
-        NSLog(@"%@",completedOperation.responseData);
+        DDLogInfo(@"%@",completedOperation.responseData);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"%@",error);
+        DDLogInfo(@"%@",error);
     }];
     [engine enqueueOperation:op];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -143,9 +148,9 @@
                                                 params:@{@"token":@"string",@"book_id":@"123"}
                                             httpMethod:@"GET"];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%@",completedOperation.responseJSON);
+        DDLogInfo(@"%@",completedOperation.responseJSON);
     } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"%@",error);
+        DDLogInfo(@"%@",error);
     }];
     [engine enqueueOperation:op];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

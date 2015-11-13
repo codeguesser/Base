@@ -7,7 +7,11 @@
 //
 
 #import "Entity.h"
-
+/*!
+ @author wangshuguan, 15-07-22 14:07:32
+ 
+ @brief  章节：实体类基类
+ */
 @interface PartEntity : Entity
 @property (nonatomic, strong) NSNumber * pid;
 @property (nonatomic, strong) NSString * title;

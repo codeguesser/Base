@@ -27,14 +27,18 @@
     // Do any additional setup after loading the view from its nib.
     _progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
     _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
-    [_webView addSubview:_progressView];
     __weak NJKWebViewProgressView* progressView = _progressView;
     _webView.delegate = _progressProxy;
+    progressView.hidden = YES;
+    [progressView setProgress:0 animated:NO];
+//    _webView.scrollView.alwaysBounceHorizontal =
     _progressProxy.webViewProxyDelegate = self;
     _progressProxy.progressBlock = ^(float progress) {
+        progressView.hidden = NO;
         [progressView setProgress:progress animated:YES];
     };
     [self startLoadWeb];
+    [_webView addSubview:_progressView];
     resultView.dynamic = YES;
     resultView.blurRadius = 10;
     
@@ -50,7 +54,7 @@
     [self transformViewControllerWithMethod:ITransformMethodPush fromController:self.navigationController targetController:[ContactViewController new]];
 }
 -(IBAction)startLoadWeb{
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.codeguesser.cn"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.baidu.com"]]];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     resultView.hidden = NO;

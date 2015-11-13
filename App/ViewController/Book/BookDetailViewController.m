@@ -7,7 +7,6 @@
 //
 
 #import "BookDetailViewController.h"
-#import <MagicalRecord.h>
 #import "Part.h"
 #import "Prefrence.h"
 #import "BookMarkViewController.h"

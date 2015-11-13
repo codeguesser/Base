@@ -11,7 +11,10 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        NSLog(@"%@",DOCUMENT_DIR);
+        [DDLog addLogger:[DDASLLogger sharedInstance]];
+        [DDLog addLogger:[DDTTYLogger sharedInstance]];
+        
+        DDLogInfo(@"%@",DOCUMENT_DIR);
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

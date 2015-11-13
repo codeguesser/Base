@@ -9,5 +9,6 @@
 #ifndef base_Util_Classes_h
 #define base_Util_Classes_h
 #import "MBProgressHUD+CGCategory.h"
+static const DDLogLevel ddLogLevel = DDLogLevelAll;
 OBJC_EXPORT void ShowMessage(NSString * s);
 #endif

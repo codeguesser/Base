@@ -1,0 +1,13 @@
+//
+//  PunchedCardButton.h
+//  base
+//
+//  Created by wsg on 15/11/5.
+//  Copyright © 2015年 wsg. All rights reserved.
+//
+
+#import "RoundButton.h"
+
+@interface PunchedCardButton : RoundButton
+
+@end

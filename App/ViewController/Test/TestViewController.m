@@ -9,7 +9,13 @@
 #import "TestViewController.h"
 #import "LoadingView.h"
 #import "testDatepickerView.h"
-@interface TestViewController ()
+@interface TestViewController (){
+    
+    __weak IBOutlet UILabel *_label2;
+    __weak IBOutlet UILabel *_label1;
+    __weak IBOutlet UILabel *_label3;
+    __weak IBOutlet UIView *myContentVIew;
+}
 
 @end
 
@@ -33,7 +39,22 @@
 //    [view.layer addSublayer:layer];
 //    [layer display];
     
-    [self.view addSubview:[[testDatepickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 320)]];
+//    [self.view addSubview:[[testDatepickerView alloc] initWithFrame:CGRectMake(0, 0, 160, 320)]];
+    
+    
+    
+    _label1.text = @"阿里；弗拉德科夫";
+    _label2.text = @"阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫";
+    _label3.text = @"第二";
+    [_label1 layoutIfNeeded];
+    [_label1 setNeedsLayout];
+    [_label2 layoutIfNeeded];
+    [_label2 setNeedsLayout];
+    [_label3 layoutIfNeeded];
+    [_label3 setNeedsLayout];
+//    _label3.layer.
+    float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    NSLog(@"%f",height);
 }
 //-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
 //    CGContextSetLineWidth(ctx, 10.0f);

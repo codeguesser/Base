@@ -21,7 +21,7 @@
 #define PROJECT_DISPLAY_NAME [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"]
 #define PROJECT_CANNEL [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleIdentifier"]
 #define DOCUMENT_DIR [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSAllDomainsMask, YES) objectAtIndex:0]
-#define CGLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+//#define CGLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define SCREEN_WIDTH [[UIScreen mainScreen]bounds].size.width
 #define SCREEN_HEIGHT [[UIScreen mainScreen]bounds].size.height
 /**

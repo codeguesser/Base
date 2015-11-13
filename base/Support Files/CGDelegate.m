@@ -19,6 +19,7 @@ NSString *const kBuglyAppId = BuglyAppId;
 #ifdef AppStoreAppId
 NSString *const kAppStoreAppId = AppStoreAppId;
 #endif
+
 @implementation CGDelegate
 #pragma mark - System Hook
 -(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
@@ -26,13 +27,13 @@ NSString *const kAppStoreAppId = AppStoreAppId;
     [self setViewControllerSettings];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsSourceApplicationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSLog(@"ApplicationLaunchSourceApplication:%@",note);
+        DDLogInfo(@"ApplicationLaunchSourceApplication:%@",note);
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsRemoteNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSLog(@"ApplicationRemoteNotification:%@",note);
+        DDLogInfo(@"ApplicationRemoteNotification:%@",note);
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:kCGNotificationUserStatusChanged object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSLog(@"UserStatusChanged:%@",note);
+        DDLogInfo(@"UserStatusChanged:%@",note);
         if (![[ShareHandle shareHandle]me]) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 UserLoginViewController *userLoginController = [[UserLoginViewController alloc] init];
@@ -71,7 +72,7 @@ NSString *const kAppStoreAppId = AppStoreAppId;
     [Appirater appLaunched:YES];
 #endif
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSLog(@"ApplicationDidFinishLaunching:%@",note);
+        DDLogInfo(@"ApplicationDidFinishLaunching:%@",note);
     }];
     [self setupDataBase];
 }

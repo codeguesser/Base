@@ -25,7 +25,7 @@
     _mapManager = [[BMKMapManager alloc]init];
     BOOL ret = [_mapManager start:@"ImZ1b3Kyc0c9QsuGold6RED6"  generalDelegate:nil];
     if (!ret) {
-        NSLog(@"manager start failed!");
+        DDLogInfo(@"manager start failed!");
     }
     BMKGeoCodeSearch *_geoCodeSearch = [[BMKGeoCodeSearch alloc]init];
     _geoCodeSearch.delegate = self;

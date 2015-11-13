@@ -6,8 +6,8 @@
 //  Copyright (c) 2015年 wsg. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CGViewController.h"
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : CGViewController
 
 @end

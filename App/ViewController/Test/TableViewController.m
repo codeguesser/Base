@@ -56,6 +56,9 @@ NSString *const cellId = @"TableViewCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.data = _dataList[indexPath.row];
+//    cell.str1 = @"第一个值";
+//    cell.str2 = @"第二个值";
+//    cell.str3 = @"低三个值低三个值低三个值低三个值低三个值低三个值低三个值";
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     [cell layoutSubviews];
@@ -65,6 +68,9 @@ NSString *const cellId = @"TableViewCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.data = _dataList[indexPath.row];
+//    cell.str1 = @"第一个值";
+//    cell.str2 = @"第二个值";
+//    cell.str3 = @"低三个值低三个值低三个值低三个值低三个值低三个值低三个值";
     [cell setNeedsUpdateConstraints];
     [cell updateConstraintsIfNeeded];
     cell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.bounds));

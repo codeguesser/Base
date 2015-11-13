@@ -14,9 +14,8 @@
     self = [super initWithCoder:coder];
     if (self) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.layer roundWithRadius:self.frame.size.height];
+            [self.layer roundWithRadius:self.frame.size.height/2.0f];
             [self.layer borderWithWidth:0.5f color:[UIColor colorWithWhite:.3 alpha:1]];
-            self.backgroundColor = [UIColor greenColor];
         });
     }
     return self;

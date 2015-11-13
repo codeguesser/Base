@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, "7.0"
+platform :ios, "9.0"
 deployment_target = '7.0'
 pod 'Aspects'
 pod 'MagicalRecord'
@@ -16,6 +16,8 @@ pod 'CocoaAsyncSocket'
 pod 'MKNetworkKit'#采用这个么？
 pod 'NJKWebViewProgress'#web 的加载条
 pod 'JazzHands'#加上前期的帧动画流
+pod 'CocoaLumberjack'#日志系统
+#pod 'UITableView+FDTemplateLayoutCell'#动态计算cell的高度
 #pod 'AFNetworking'#还是打算用这个了
 #pod 'RMPZoomTransitionAnimator'#talbeview cell 点击放大的图片
 #pod 'RETableViewManager'#没有设计师的时候用这个
