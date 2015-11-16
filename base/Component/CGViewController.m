@@ -38,6 +38,7 @@
         make.centerX.equalTo(self.view).offset = 0;
     }];
     animator = [CGAnimator new];
+    
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -109,6 +110,7 @@
         [fromController presentViewController:nav animated:NO completion:nil];
          */
     }else{
+        animator.fromViewController = fromController;
         if (method == ITransformMethodPush) {
             self.navigationController.delegate = animator;
             [(UINavigationController *)fromController pushViewController:targetController animated:YES];

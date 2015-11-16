@@ -11,5 +11,6 @@
 /*!
  @brief  转换方式
  */
-@property(nonatomic,assign)ITransformMethod method;
+@property(nonatomic,assign)ITransformMethod method;//逻辑的类型,tab ,nav ，present
+@property(nonatomic,assign)UIViewController * fromViewController;//开始的那个源控制器，用以判断当前真正需要的是哪个控制器
 @end

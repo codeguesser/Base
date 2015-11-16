@@ -21,17 +21,11 @@
     UIViewController* toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController* fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     [[transitionContext containerView] addSubview:toViewController.view];
-    toViewController.view.alpha = 0;
-    @weakify(fromViewController)
-    @weakify(toViewController)
+
+    toViewController.view.frame = CGRectMake(fromViewController.view.bounds.size.width, fromViewController.view.frame.origin.y, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        @strongify(fromViewController)
-        @strongify(toViewController)
-        strong_fromViewController.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
-        strong_toViewController.view.alpha = 1;
+        toViewController.view.frame = CGRectMake(0, fromViewController.view.frame.origin.y, fromViewController.view.bounds.size.width, fromViewController.view.bounds.size.height);
     } completion:^(BOOL finished) {
-        @strongify(fromViewController)
-        strong_fromViewController.view.transform = CGAffineTransformIdentity;
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         
     }];

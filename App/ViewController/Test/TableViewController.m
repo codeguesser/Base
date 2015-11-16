@@ -8,6 +8,7 @@
 
 #import "TableViewController.h"
 #import "TableViewCell.h"
+#import "WebViewController.h"
 NSString *const cellId = @"TableViewCell";
 @interface TableViewController ()<UITableViewDataSource,DZNEmptyDataSetSource,DZNEmptyDataSetDelegate,UITableViewDelegate>{
     NSMutableArray *_dataList;
@@ -82,13 +83,17 @@ NSString *const cellId = @"TableViewCell";
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView{
     return [[NSAttributedString alloc] initWithString:@"没有数据"];
 }
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 0.1;
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 0.1;
-//}
-//- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    return [UIView new];
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [UIView new];
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    WebViewController  *webViewController = [WebViewController new];
+    [self transformViewControllerWithMethod:ITransformMethodPush fromController:self.navigationController targetController:webViewController];
+}
 @end
