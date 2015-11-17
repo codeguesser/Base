@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.navigationItem.title = @" web 测试页";
     _progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
     _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
     __weak NJKWebViewProgressView* progressView = _progressView;

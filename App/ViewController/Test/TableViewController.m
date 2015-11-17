@@ -41,7 +41,7 @@ NSString *const cellId = @"TableViewCell";
     @weakify_self
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         @strongify_self
-        self.title = @"";
+        self.navigationItem.title = @" table 列表页";
     });
 }
 

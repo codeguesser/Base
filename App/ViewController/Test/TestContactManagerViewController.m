@@ -19,6 +19,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    [self deleteContacts];
+    [self createContacts];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,7 +67,8 @@
     NSInteger index=0;
     ABAddressBookRef iPhoneAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     for (NSString *contactString in arr) {
-        DDLogInfo(@"%ld",index++);
+        DDLogInfo(@"%ld",(long)index++);
+        if(index<=4356)continue;
         NSArray *arrOfField = [contactString componentsSeparatedByString:@","];
         ABRecordRef newPerson = ABPersonCreate();
         CFErrorRef error = NULL;

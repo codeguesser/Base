@@ -18,6 +18,7 @@
 //#import "TestLayoutViewController.h"
 #import "TableViewController.h"
 #import "NSString+Pinyin.h"
+#import "TestContactManagerViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 #warning 什么东西来的
 @property NSString<UIDataSourceModelAssociation> *xx;

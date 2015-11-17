@@ -110,7 +110,7 @@
         [fromController presentViewController:nav animated:NO completion:nil];
          */
     }else{
-        animator.fromViewController = fromController;
+        animator.fromViewController = self;
         if (method == ITransformMethodPush) {
             self.navigationController.delegate = animator;
             [(UINavigationController *)fromController pushViewController:targetController animated:YES];
