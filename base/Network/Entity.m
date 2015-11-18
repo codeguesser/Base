@@ -61,4 +61,19 @@
     }
     return var;
 }
+-(BOOL)isEqual:(id)object{
+    if (self == object) {
+        return YES;
+    }
+    BOOL isequal = YES;
+    if ([self.class propertyKeys].count>0) {
+        for (NSString *s in [self.class propertyKeys]) {
+            if(![[self valueForKey:s]isEqual:[object valueForKey:s]]){
+                isequal = NO;
+                break;
+            }
+        }
+    }
+    return isequal;
+}
 @end

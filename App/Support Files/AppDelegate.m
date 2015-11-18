@@ -46,7 +46,7 @@
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
     
-    [CGAreaService service];
+    CGAreaService *service = [CGAreaService service];
     return YES;
 }
 

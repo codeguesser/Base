@@ -39,13 +39,24 @@
     }
     return self;
 }
+-(BOOL)isEqual:(CGAreaData *)object{
+    return [self.name isEqualToString:object.name];
+}
 @end
 @implementation CGAreaService
 + (id)service{
     CGAreaService *service = [[CGAreaService alloc]init];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"area" ofType:@"plist"] ];
-    NSArray *arr = [self arrayFormDictionary:dic];
+    service.allProvinces = [self arrayFormDictionary:dic];
     return service;
+}
+- (CGAreaData *)provinceWithName:(NSString *)province{
+    for (CGAreaData *d in self.allProvinces) {
+        if ([d.name isEqual:province]) {
+            return d;
+        }
+    }
+    return nil;
 }
 +(NSArray *)arrayFormDictionary:(NSDictionary *)dic{
     NSMutableArray *allProvinces = [NSMutableArray new];
