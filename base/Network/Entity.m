@@ -56,8 +56,6 @@
     }
     else if ([target isKindOfClass:[NSNull class]]) {
         var = @"";
-    }else if ([target isKindOfClass:[NSArray class]]) {
-        var = (NSString *)@[];
     }else{
         var = target;
     }

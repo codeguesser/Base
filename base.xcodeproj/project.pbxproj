@@ -14,6 +14,7 @@
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
 		4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */; };
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
+		4C959A981BFC078B009E276F /* CGAreaService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C959A971BFC078B009E276F /* CGAreaService.m */; };
 		4CA532C41BF0868800F9352E /* CGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA532C31BF0868800F9352E /* CGNetwork.m */; };
 		4CA871E51BE9A44B00DBF709 /* TestAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA871E31BE9A44B00DBF709 /* TestAnimateViewController.m */; };
 		4CA871E61BE9A44B00DBF709 /* TestAnimateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CA871E41BE9A44B00DBF709 /* TestAnimateViewController.xib */; };
@@ -130,6 +131,8 @@
 		4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchedCardViewController.xib; sourceTree = "<group>"; };
 		4C34D7F81BEB3A5B00632623 /* PunchedCardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchedCardButton.h; sourceTree = "<group>"; };
 		4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardButton.m; sourceTree = "<group>"; };
+		4C959A961BFC078B009E276F /* CGAreaService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAreaService.h; sourceTree = "<group>"; };
+		4C959A971BFC078B009E276F /* CGAreaService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAreaService.m; sourceTree = "<group>"; };
 		4CA532C21BF0868800F9352E /* CGNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGNetwork.h; sourceTree = "<group>"; };
 		4CA532C31BF0868800F9352E /* CGNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGNetwork.m; sourceTree = "<group>"; };
 		4CA871E21BE9A44B00DBF709 /* TestAnimateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAnimateViewController.h; sourceTree = "<group>"; };
@@ -382,6 +385,8 @@
 				4CDC1C0B1BC79A3D00137D24 /* Entity.m */,
 				4CA532C21BF0868800F9352E /* CGNetwork.h */,
 				4CA532C31BF0868800F9352E /* CGNetwork.m */,
+				4C959A961BFC078B009E276F /* CGAreaService.h */,
+				4C959A971BFC078B009E276F /* CGAreaService.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -965,6 +970,7 @@
 				4CDC1CDB1BC79AAB00137D24 /* Part.m in Sources */,
 				4CDC1C461BC79A3D00137D24 /* CALayer+CGCategory.m in Sources */,
 				4CDC1C3A1BC79A3D00137D24 /* Entity.m in Sources */,
+				4C959A981BFC078B009E276F /* CGAreaService.m in Sources */,
 				4CDC1CCD1BC79AAB00137D24 /* HomeCollectionViewCell.m in Sources */,
 				4CDC1C491BC79A3D00137D24 /* NSDictionary+CGCategory.m in Sources */,
 				4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */,

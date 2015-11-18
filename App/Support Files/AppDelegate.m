@@ -19,6 +19,7 @@
 #import "TableViewController.h"
 #import "NSString+Pinyin.h"
 #import "TestContactManagerViewController.h"
+#import "CGAreaService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 #warning 什么东西来的
 @property NSString<UIDataSourceModelAssociation> *xx;
@@ -45,7 +46,7 @@
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
     
-    
+    [CGAreaService service];
     return YES;
 }
 
