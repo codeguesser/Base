@@ -5,6 +5,11 @@
 //  Created by wsg on 15/11/18.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
+//  如何使用 How to use it!!!!!!
+//
+//  CGAreaService *service = [CGAreaService service];
+//
+//
 
 #import <Foundation/Foundation.h>
 #import "Entity.h"
@@ -29,6 +34,7 @@
  @brief  全部的省份
  */
 @property(nonatomic,strong)NSArray *allProvinces;
+@property(nonatomic,strong)NSArray *allCitys;
 /*!
  @brief  通过名字获取省级行政区
  

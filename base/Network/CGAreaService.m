@@ -48,6 +48,13 @@
     CGAreaService *service = [[CGAreaService alloc]init];
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"area" ofType:@"plist"] ];
     service.allProvinces = [self arrayFormDictionary:dic];
+    NSMutableArray *citys = [NSMutableArray new];
+    for (CGAreaData *p in service.allProvinces) {
+        if (p.data.count>0) {
+            [citys addObjectsFromArray:p.data];
+        }
+    }
+    service.allCitys = citys;
     return service;
 }
 - (CGAreaData *)provinceWithName:(NSString *)province{
