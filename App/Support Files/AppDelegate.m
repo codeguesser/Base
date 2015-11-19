@@ -48,7 +48,7 @@
     [self tableViewEmptyPageDemo];
 //    NSInteger
 //    CGAreaService *service = [CGAreaService service];
-    CGContactService *service = [CGContactService service];
+//    CGContactService *service = [CGContactService service];
     return YES;
 }
 

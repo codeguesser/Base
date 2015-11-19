@@ -23,6 +23,10 @@
 		4CB183C41BE3431B00FCDF3B /* HomeContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB183C31BE3431B00FCDF3B /* HomeContactView.xib */; };
 		4CB183C81BE3495A00FCDF3B /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB183C61BE3495A00FCDF3B /* ContactCell.m */; };
 		4CB183C91BE3495A00FCDF3B /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB183C71BE3495A00FCDF3B /* ContactCell.xib */; };
+		4CB5E3B61BFE198B0087294C /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B31BFE198B0087294C /* Order.m */; settings = {ASSET_TAGS = (); }; };
+		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; settings = {ASSET_TAGS = (); }; };
+		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; settings = {ASSET_TAGS = (); }; };
+		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -147,6 +151,13 @@
 		4CB183C51BE3495A00FCDF3B /* ContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactCell.h; sourceTree = "<group>"; };
 		4CB183C61BE3495A00FCDF3B /* ContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactCell.m; sourceTree = "<group>"; };
 		4CB183C71BE3495A00FCDF3B /* ContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactCell.xib; sourceTree = "<group>"; };
+		4CB5E3B21BFE198B0087294C /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		4CB5E3B31BFE198B0087294C /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		4CB5E3B41BFE198B0087294C /* APAuthV2Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APAuthV2Info.h; sourceTree = "<group>"; };
+		4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APAuthV2Info.m; sourceTree = "<group>"; };
+		4CB5E3B81BFE1A910087294C /* TestPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPayViewController.h; sourceTree = "<group>"; };
+		4CB5E3B91BFE1A910087294C /* TestPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPayViewController.m; sourceTree = "<group>"; };
+		4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestPayViewController.xib; sourceTree = "<group>"; };
 		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
@@ -382,6 +393,10 @@
 		4CDC1C071BC79A3D00137D24 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4CB5E3B21BFE198B0087294C /* Order.h */,
+				4CB5E3B31BFE198B0087294C /* Order.m */,
+				4CB5E3B41BFE198B0087294C /* APAuthV2Info.h */,
+				4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */,
 				4CDC1C081BC79A3D00137D24 /* CGResult.h */,
 				4CDC1C091BC79A3D00137D24 /* CGResult.m */,
 				4CDC1C0A1BC79A3D00137D24 /* Entity.h */,
@@ -742,6 +757,9 @@
 				4CA871E21BE9A44B00DBF709 /* TestAnimateViewController.h */,
 				4CA871E31BE9A44B00DBF709 /* TestAnimateViewController.m */,
 				4CA871E41BE9A44B00DBF709 /* TestAnimateViewController.xib */,
+				4CB5E3B81BFE1A910087294C /* TestPayViewController.h */,
+				4CB5E3B91BFE1A910087294C /* TestPayViewController.m */,
+				4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -875,6 +893,7 @@
 				4CDC1CEE1BC79AAB00137D24 /* 名片icon2.png in Resources */,
 				4CDC1D061BC79AAB00137D24 /* MasMakeViewController.xib in Resources */,
 				4CB183C91BE3495A00FCDF3B /* ContactCell.xib in Resources */,
+				4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */,
 				4CDC1D151BC79AAB00137D24 /* UserLoginViewController.xib in Resources */,
 				4CDC1D041BC79AAB00137D24 /* LoadingViewController.xib in Resources */,
 				4CDC1CDE1BC79AAB00137D24 /* client.pfx in Resources */,
@@ -993,6 +1012,7 @@
 				4CDC1C441BC79A3D00137D24 /* MBProgressHUD+CGCategory.m in Sources */,
 				4CA532C41BF0868800F9352E /* CGNetwork.m in Sources */,
 				4CDC1D111BC79AAB00137D24 /* TestViewController.m in Sources */,
+				4CB5E3B61BFE198B0087294C /* Order.m in Sources */,
 				4CDC1CD51BC79AAB00137D24 /* RoundButton.m in Sources */,
 				4CDC1D291BC79BF500137D24 /* AppDelegate.m in Sources */,
 				4CDC1D221BC79BDC00137D24 /* main.m in Sources */,
@@ -1000,9 +1020,11 @@
 				4CDC1D001BC79AAB00137D24 /* HomeViewController.m in Sources */,
 				4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */,
 				4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */,
+				4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */,
 				4CDC1CD71BC79AAB00137D24 /* ItemEntity.m in Sources */,
 				4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */,
 				4CDC1D161BC79AAB00137D24 /* UserProtectViewController.m in Sources */,
+				4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */,
 				4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */,
 				4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */,
 				4CB183C81BE3495A00FCDF3B /* ContactCell.m in Sources */,

@@ -12,6 +12,14 @@
 #import "ShareHandle.h"
 #pragma mark - notification const
 UIKIT_EXTERN NSString *const CGTestNotification;
+/*!
+ @brief  支付宝的支付成功消息
+ */
+UIKIT_EXTERN NSString *const CGAlipaySuccessNotification;
+/*!
+ @brief  支付宝的支付失败消息
+ */
+UIKIT_EXTERN NSString *const CGAlipayFalseNotification;
 
 #pragma mark - webservice const
 /*!

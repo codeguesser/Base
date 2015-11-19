@@ -20,6 +20,9 @@ NSString *const kCGFalseTag = @"NO";
 
 NSString *const kCGNotificationUserStatusChanged = @"kCGNotificationUserStatusChanged";
 NSString *const CGTestNotification = @"CGTestNotification";
+NSString *const CGAlipaySuccessNotification = @"CGAlipaySuccessNotification";
+NSString *const CGAlipayFalseNotification = @"CGAlipayFalseNotification";
+
 @implementation NSNotificationCenter(CGCategory)
 
 @end

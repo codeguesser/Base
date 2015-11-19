@@ -30,5 +30,5 @@ pod 'CocoaLumberjack'#日志系统
 #pod 'BonMot'#考虑要不要用这个，attributeString的简化版
 
 
-
+#pod 'CG-AlipaySDK', :git => 'https://git.oschina.net/codeguesser/CG-AlipaySDK.git'
 pod 'cg-libxg-sdk', :git => 'https://git.oschina.net/codeguesser/cg-libxg-sdk.git'  #指定
