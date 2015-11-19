@@ -84,9 +84,24 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>cg-libxg-sdk-cg-libxg-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>cg-libxg-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>098C7EB056265675551F56AE82C15AAD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
 		<dict>
 			<key>primary</key>
@@ -97,17 +112,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>204668270E5642146B9A8966EA227714</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>21A8F266963A1C31E766132AE864BE08</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<key>3963F48E616CA897C0614EE1CBBDA4F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5FAF3FA1DAD478A23C2383B6B66965D9</key>
+		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +157,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3ADD0A79C0FB55B9A10A0302DCFB36A</key>
+		<key>D54AB3ECEB9A8FBA15D4F73CBE326692</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D54AB3ECEB9A8FBA15D4F73CBE326692</key>
+		<key>D6B8FC2744298771EAA7222C907F6D94</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -28,3 +28,7 @@ pod 'CocoaLumberjack'#日志系统
 #pod 'MJRefresh'#下拉刷新
 #pod 'GPUImage'#高级图片渲染，考虑要不要
 #pod 'BonMot'#考虑要不要用这个，attributeString的简化版
+
+
+
+pod 'cg-libxg-sdk', :git => 'https://git.oschina.net/codeguesser/cg-libxg-sdk.git'  #指定

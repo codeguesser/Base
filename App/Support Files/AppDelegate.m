@@ -45,8 +45,8 @@
 //    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
-    
-    CGAreaService *service = [CGAreaService service];
+//    NSInteger
+//    CGAreaService *service = [CGAreaService service];
     return YES;
 }
 

@@ -2,6 +2,7 @@ PODS:
   - Appirater (2.0.5)
   - Aspects (1.4.1)
   - Bugly (1.3.2)
+  - cg-libxg-sdk (2.4.4)
   - CocoaAsyncSocket (7.4.2)
   - CocoaLumberjack (2.2.0):
     - CocoaLumberjack/Default (= 2.2.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - Appirater
   - Aspects
   - Bugly
+  - cg-libxg-sdk (from `https://git.oschina.net/codeguesser/cg-libxg-sdk.git`)
   - CocoaAsyncSocket
   - CocoaLumberjack
   - DZNEmptyDataSet
@@ -45,10 +47,20 @@ DEPENDENCIES:
   - NJKWebViewProgress
   - SDWebImage
 
+EXTERNAL SOURCES:
+  cg-libxg-sdk:
+    :git: https://git.oschina.net/codeguesser/cg-libxg-sdk.git
+
+CHECKOUT OPTIONS:
+  cg-libxg-sdk:
+    :commit: a5bb9c3f81ed65acd2d47cac9e80a47053886eb3
+    :git: https://git.oschina.net/codeguesser/cg-libxg-sdk.git
+
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   Bugly: dba622a7c10bf4688d2577148d861c72e270becb
+  cg-libxg-sdk: 143c707d94fbe1b522aff9d42515067781c6dd68
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6

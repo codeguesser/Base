@@ -1,0 +1,26 @@
+{
+  "name": "cg-libxg-sdk",
+  "version": "2.4.4",
+  "summary": "cg-libxg-sdk.",
+  "description": "这里是对信鸽sdk的pod封装，以后比较容易使用",
+  "homepage": "http://git.oschina.net/codeguesser/cg-libxg-sdk",
+  "license": "MIT",
+  "authors": {
+    "rsaif": "wangshuguan@gmail.com"
+  },
+  "source": {
+    "git": "https://git.oschina.net/codeguesser/cg-libxg-sdk.git",
+    "tag": "2.4.4"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "cg-libxg-sdk": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "public_header_files": "Pod/Classes/*.h"
+}
