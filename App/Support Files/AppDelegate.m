@@ -20,6 +20,7 @@
 #import "NSString+Pinyin.h"
 #import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
+#import "CGContactService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 #warning 什么东西来的
 @property NSString<UIDataSourceModelAssociation> *xx;
@@ -47,6 +48,7 @@
     [self tableViewEmptyPageDemo];
 //    NSInteger
 //    CGAreaService *service = [CGAreaService service];
+    CGContactService *service = [CGContactService service];
     return YES;
 }
 

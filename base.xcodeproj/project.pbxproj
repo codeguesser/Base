@@ -11,6 +11,7 @@
 		4C0DAEB61BDA22A400E208EA /* TableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0DAEB41BDA22A400E208EA /* TableViewCell2.xib */; };
 		4C0DAEB81BDA32C500E208EA /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0DAEB71BDA32C500E208EA /* TestViewController.xib */; };
 		4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CB81BC79AAB00137D24 /* TestContactManagerViewController.m */; };
+		4C3273CA1BFDC39A00E32A28 /* CGContactService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3273C91BFDC39A00E32A28 /* CGContactService.m */; };
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
 		4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */; };
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
@@ -126,6 +127,8 @@
 		4C0DAEB31BDA22A400E208EA /* TableViewCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell2.m; sourceTree = "<group>"; };
 		4C0DAEB41BDA22A400E208EA /* TableViewCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell2.xib; sourceTree = "<group>"; };
 		4C0DAEB71BDA32C500E208EA /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		4C3273C81BFDC39A00E32A28 /* CGContactService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGContactService.h; sourceTree = "<group>"; };
+		4C3273C91BFDC39A00E32A28 /* CGContactService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGContactService.m; sourceTree = "<group>"; };
 		4C34D7F31BEB35EB00632623 /* PunchedCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchedCardViewController.h; sourceTree = "<group>"; };
 		4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardViewController.m; sourceTree = "<group>"; };
 		4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchedCardViewController.xib; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				4CA532C31BF0868800F9352E /* CGNetwork.m */,
 				4C959A961BFC078B009E276F /* CGAreaService.h */,
 				4C959A971BFC078B009E276F /* CGAreaService.m */,
+				4C3273C81BFDC39A00E32A28 /* CGContactService.h */,
+				4C3273C91BFDC39A00E32A28 /* CGContactService.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1001,6 +1006,7 @@
 				4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */,
 				4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */,
 				4CB183C81BE3495A00FCDF3B /* ContactCell.m in Sources */,
+				4C3273CA1BFDC39A00E32A28 /* CGContactService.m in Sources */,
 				4CDC1D211BC79BDC00137D24 /* CGDelegate.m in Sources */,
 				4CDC1C331BC79A3D00137D24 /* CGAnimator.m in Sources */,
 				4CDC1CD31BC79AAB00137D24 /* TableViewCell.m in Sources */,
@@ -1129,6 +1135,57 @@
 				GCC_PREFIX_HEADER = "base/Support Files/base-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/base/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Appirater\"",
+					"-l\"Aspects\"",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"DZNEmptyDataSet\"",
+					"-l\"FXBlurView\"",
+					"-l\"JazzHands\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MKNetworkKit\"",
+					"-l\"MagicalRecord\"",
+					"-l\"Masonry\"",
+					"-l\"NJKWebViewProgress\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"XG-SDK\"",
+					"-l\"c++\"",
+					"-l\"cg-libxg-sdk\"",
+					"-l\"sqlite3\"",
+					"-l\"sqlite3.0\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Bugly\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8fa74f8a-cef2-4a39-8ce7-6021822d8ac1";
@@ -1151,6 +1208,57 @@
 				GCC_PREFIX_HEADER = "base/Support Files/base-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/base/Support Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Appirater\"",
+					"-l\"Aspects\"",
+					"-l\"CocoaAsyncSocket\"",
+					"-l\"CocoaLumberjack\"",
+					"-l\"DZNEmptyDataSet\"",
+					"-l\"FXBlurView\"",
+					"-l\"JazzHands\"",
+					"-l\"MBProgressHUD\"",
+					"-l\"MKNetworkKit\"",
+					"-l\"MagicalRecord\"",
+					"-l\"Masonry\"",
+					"-l\"NJKWebViewProgress\"",
+					"-l\"Reachability\"",
+					"-l\"SDWebImage\"",
+					"-l\"XG-SDK\"",
+					"-l\"c++\"",
+					"-l\"cg-libxg-sdk\"",
+					"-l\"sqlite3\"",
+					"-l\"sqlite3.0\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"Bugly\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-w",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8fa74f8a-cef2-4a39-8ce7-6021822d8ac1";
