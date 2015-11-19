@@ -1117,7 +1117,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8EB3F5F4B15DCB147D739740 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan Saifsoft Technology Company Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: li zhang (Y8QM93SKYY)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1131,7 +1131,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13319549-57cc-4008-8bc6-40fee74c726f";
+				PROVISIONING_PROFILE = "8fa74f8a-cef2-4a39-8ce7-6021822d8ac1";
 			};
 			name = Debug;
 		};
@@ -1139,7 +1139,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C5C3C3BBE49A0364A05F67C /* Pods.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Henan Saifsoft Technology Company Limited";
+				CODE_SIGN_IDENTITY = "iPhone Developer: li zhang (Y8QM93SKYY)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1153,7 +1153,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13319549-57cc-4008-8bc6-40fee74c726f";
+				PROVISIONING_PROFILE = "8fa74f8a-cef2-4a39-8ce7-6021822d8ac1";
 			};
 			name = Release;
 		};

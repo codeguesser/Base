@@ -22,5 +22,17 @@
       "Pod/Assets/*.png"
     ]
   },
-  "public_header_files": "Pod/Classes/*.h"
+  "public_header_files": "Pod/Classes/*.h",
+  "frameworks": [
+    "CFNetwork",
+    "SystemConfiguration",
+    "CoreTelephony",
+    "Security"
+  ],
+  "libraries": [
+    "z",
+    "sqlite3",
+    "sqlite3.0"
+  ],
+  "vendored_libraries": "Pod/Classes/libXG-SDK.a"
 }

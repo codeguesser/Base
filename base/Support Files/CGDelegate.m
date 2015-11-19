@@ -9,6 +9,8 @@
 #import "CGDelegate.h"
 #import <Bugly/CrashReporter.h>
 #import <Appirater.h>
+#import <XGPush.h>
+#import <XGSetting.h>
 #import "ShareHandle.h"
 #import "UserProtectViewController.h"
 #import "UserLoginViewController.h"
@@ -20,12 +22,21 @@ NSString *const kBuglyAppId = BuglyAppId;
 NSString *const kAppStoreAppId = AppStoreAppId;
 #endif
 
+#ifdef XingeAppId
+#ifdef XingeAppKey
+NSString *const kXingeAppKey = XingeAppKey;
+long long const kXingeAppId = XingeAppId;
+#endif
+#endif
 @implementation CGDelegate
 #pragma mark - System Hook
 -(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-    [self setupSpecialSdks];
+    [self setupSpecialSdksWithOptions:(NSDictionary *)launchOptions];
     [self setViewControllerSettings];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsSourceApplicationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
+        DDLogInfo(@"ApplicationLaunchSourceApplication:%@",note);
+    }];
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsSourceApplicationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
         DDLogInfo(@"ApplicationLaunchSourceApplication:%@",note);
     }];
@@ -56,7 +67,7 @@ NSString *const kAppStoreAppId = AppStoreAppId;
     } error:nil];
 }
 #pragma mark - 设置特别的sdk，包括crash日志工具和提醒评价工具
--(void)setupSpecialSdks{
+-(void)setupSpecialSdksWithOptions:(NSDictionary *)launchOptions{
     [ShareHandle shareHandle].appStartDate = [NSDate date];
 #ifdef BuglyAppId
     [[CrashReporter sharedInstance] setUserId:@"100"];
@@ -71,9 +82,16 @@ NSString *const kAppStoreAppId = AppStoreAppId;
     [Appirater setDebug:NO];
     [Appirater appLaunched:YES];
 #endif
+#ifdef XingeAppId
+#ifdef XingeAppKey
+    [self setupXingeSdkWithOptions:launchOptions];
+#endif
+#endif
+    
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         DDLogInfo(@"ApplicationDidFinishLaunching:%@",note);
     }];
+    
     [self setupDataBase];
 }
 #pragma mark - 设置本地数据库
@@ -84,5 +102,78 @@ NSString *const kAppStoreAppId = AppStoreAppId;
     }
     
     [MagicalRecord setupCoreDataStackWithStoreNamed:sqliteFileName];
+}
+#pragma mark - 设置信鸽功能
+#ifdef XingeAppId
+#ifdef XingeAppKey
+-(void)setupXingeSdkWithOptions:(NSDictionary *)launchOptions{
+    [XGPush startApp:kXingeAppId appKey:kXingeAppKey];
+    void (^successCallback)(void) = ^(void){
+        //如果变成需要注册状态
+        if(![XGPush isUnRegisterStatus])
+        {
+            float sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
+            if(sysVer < 8){
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+            }
+            else{
+                //Types
+                UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+                //Actions
+                UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+                acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+                acceptAction.title = @"Accept";
+                acceptAction.activationMode = UIUserNotificationActivationModeForeground;
+                acceptAction.destructive = NO;
+                acceptAction.authenticationRequired = NO;
+                //Categories
+                UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
+                inviteCategory.identifier = @"INVITE_CATEGORY";
+                [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextDefault];
+                [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextMinimal];
+                
+                NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
+                UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+                [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }
+    };
+    [XGPush initForReregister:successCallback];
+    
+    //推送反馈回调版本示例
+    void (^successBlock)(void) = ^(void){
+        NSLog(@"[XGPush]handleLaunching's successBlock");
+    };
+    void (^errorBlock)(void) = ^(void){
+        NSLog(@"[XGPush]handleLaunching's errorBlock");
+    };
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    //清除所有通知(包含本地通知)
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [XGPush handleLaunching:launchOptions successCallback:successBlock errorCallback:errorBlock];
+}
+#endif
+#endif
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [XGPush setAccount:@"testAccount"];
+    
+    void (^successBlock)(void) = ^(void){
+        //成功之后的处理
+        NSLog(@"[XGPush Demo]register successBlock");
+    };
+    
+    void (^errorBlock)(void) = ^(void){
+        //失败之后的处理
+        NSLog(@"[XGPush Demo]register errorBlock");
+    };
+    
+    //注册设备
+    XGSetting *setting = (XGSetting *)[XGSetting getInstance];
+    [setting setChannel:@"appstore"];
+    [setting setGameServer:@"巨神峰"];
+    
+    NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
+    DDLogInfo(@"[XGPush Demo] deviceTokenStr is %@",deviceTokenStr);
 }
 @end
