@@ -62,9 +62,11 @@ long long const kXingeAppId = XingeAppId;
  @brief  控制器通用功能
  */
 -(void)setViewControllerSettings{
+    /*
     [UIViewController aspect_hookSelector:@selector(viewWillAppear:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo){
 //        UIViewController *vc = aspectInfo.instance;
     } error:nil];
+     */
 }
 #pragma mark - 设置特别的sdk，包括crash日志工具和提醒评价工具
 -(void)setupSpecialSdksWithOptions:(NSDictionary *)launchOptions{

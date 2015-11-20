@@ -7,7 +7,11 @@
 //  Copyright © 2015年 wsg. All rights reserved.
 //
 //  如何使用    How to use it...
+//  tip:本类的数据都是动态获取的，所以如果想使用它，最好先初始化，等待数据处理完毕在调用，提前初始化
 //
+//  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+//  service = [CGContactService service];
+//  arr = [service contactsForExport];
 //
 #import <Foundation/Foundation.h>
 @import AddressBook;
@@ -15,7 +19,7 @@
 /*!
  @brief  初始化数据
  
- @return 
+ @return
  */
 + (id)service;
 /*!
@@ -24,8 +28,13 @@
 @property(nonatomic,strong)NSArray *groups;
 /*!
  @brief  全部的联系人
- 
- @return 全部的联系人，默认是空的
  */
-- (NSArray *)allContacts;
+@property(nonatomic,strong)NSArray *contacts;
+#pragma mark - unReused , just for service
+/*!
+ @brief  需要导出时数组，组装好的内容
+ 
+ @return 默认返回空数组
+ */
+-(NSArray *)contactsForExport;
 @end

@@ -21,7 +21,9 @@
 #import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
 #import "CGContactService.h"
-@interface AppDelegate ()<UIAlertViewDelegate>
+@interface AppDelegate ()<UIAlertViewDelegate>{
+    CGContactService *service;
+}
 #warning 什么东西来的
 @property NSString<UIDataSourceModelAssociation> *xx;
 @end
@@ -47,11 +49,14 @@
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
 //    NSInteger
-//    CGAreaService *service = [CGAreaService service];
-//    CGContactService *service = [CGContactService service];
+    //    CGAreaService *service = [CGAreaService service];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+    service = [CGContactService service];
     return YES;
 }
-
+-(void)sthComming:(NSNotification *)no{
+    NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
+}
 
 -(void)tableViewEmptyPageDemo{
     TableViewController *vc = [[TableViewController alloc] init];
