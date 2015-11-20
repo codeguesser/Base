@@ -59,7 +59,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                              @"group_title":groupDic[kGroupServiceName],
                              @"name":@"",
                              @"tel":@"",
-                             @"contact_other":@"[]"}];
+                             @"contact_other":@""}];
         }
     }
     //没有分组的，孤单的人
@@ -146,7 +146,8 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     NSArray *translateArr = (__bridge NSArray *)(peopleMutable);
     for (int i=0; i<translateArr.count; i++) {
         ABRecordRef contact = (__bridge ABRecordRef)([translateArr objectAtIndex:i]);
-        [arr addObject:[self contactFromRecordId:contact]];
+        NSDictionary *c = [self contactFromRecordId:contact];
+        if([self isContactValable:c])[arr addObject:c];
     }
     CFRelease(addressBook);
     CFRelease(people);
@@ -181,7 +182,8 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
 -(NSArray *)allContactsFor9WithStore:(CNContactStore *)store{
     NSMutableArray *arr = [NSMutableArray new];
     BOOL result = [store enumerateContactsWithFetchRequest:[[CNContactFetchRequest alloc] initWithKeysToFetch:kFetchedField] error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-        [arr addObject:[self contactFromCNRecode:contact]];
+        NSDictionary *c = [self contactFromCNRecode:contact];
+        if([self isContactValable:c])[arr addObject:c];
     }];
     if (result) {
         return arr;
@@ -206,14 +208,15 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
         [telArr addObject:[(CNPhoneNumber *)v.value stringValue]];
     }
     NSString *contactName = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
-    return @{kContactServiceName:contactName,@"tels":telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
+    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
 }
 -(NSDictionary *)groupFromCNRecode:(CNGroup *)group{
     
     NSMutableArray *arr = [NSMutableArray new];
     NSArray * contactsInGroup = [self contactsInGroup9:group];
     for (int i=0; i<contactsInGroup.count; i++) {
-        [arr addObject:[self contactFromCNRecode:contactsInGroup[i]]];
+        NSDictionary *c = [self contactFromCNRecode:contactsInGroup[i]];
+        if([self isContactValable:c])[arr addObject:c];
     }
     return @{kGroupServiceName:group.name,kServicePinyin:[group.name pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],@"data":arr};
 }
@@ -227,10 +230,14 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     CFArrayRef contactsInGroup = [self contactsInGroup9Minus:group];
     if (contactsInGroup) {
         for (int i=0; i<CFArrayGetCount(contactsInGroup); i++) {
-            [arr addObject:[self contactFromRecordId:CFArrayGetValueAtIndex(contactsInGroup, i)]];
+            NSDictionary *c = [self contactFromRecordId:CFArrayGetValueAtIndex(contactsInGroup, i)];
+            if([self isContactValable:c])[arr addObject:c];
         }
     }
     CFTypeRef groupName = ABRecordCopyValue(group, kABGroupNameProperty);
     return  @{kGroupServiceName:(__bridge NSString *)groupName,kServicePinyin:[(__bridge NSString *)groupName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],@"data":arr};
+}
+-(BOOL)isContactValable:(NSDictionary *)dic{
+    return (dic[kContactServiceName]&&dic[kServiceTels])&&([dic[kContactServiceName] length]>0||[dic[kServiceTels] count]>0);
 }
 @end
