@@ -9,6 +9,7 @@
 #import "TestViewController.h"
 #import "LoadingView.h"
 #import "testDatepickerView.h"
+#import "StarView.h"
 @interface TestViewController (){
     
     __weak IBOutlet UILabel *_label2;
@@ -55,6 +56,12 @@
 //    _label3.layer.
     float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     NSLog(@"%f",height);
+    
+    StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
+    starView.count = 4;
+    starView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:starView];
 }
 //-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
 //    CGContextSetLineWidth(ctx, 10.0f);

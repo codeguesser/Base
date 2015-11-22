@@ -15,6 +15,7 @@
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
 		4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */; };
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
+		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; settings = {ASSET_TAGS = (); }; };
 		4C959A981BFC078B009E276F /* CGAreaService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C959A971BFC078B009E276F /* CGAreaService.m */; };
 		4CA532C41BF0868800F9352E /* CGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA532C31BF0868800F9352E /* CGNetwork.m */; };
 		4CA871E51BE9A44B00DBF709 /* TestAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA871E31BE9A44B00DBF709 /* TestAnimateViewController.m */; };
@@ -138,6 +139,8 @@
 		4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchedCardViewController.xib; sourceTree = "<group>"; };
 		4C34D7F81BEB3A5B00632623 /* PunchedCardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchedCardButton.h; sourceTree = "<group>"; };
 		4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardButton.m; sourceTree = "<group>"; };
+		4C8F62551C016226007E22AC /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
+		4C8F62561C016226007E22AC /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarView.m; sourceTree = "<group>"; };
 		4C959A961BFC078B009E276F /* CGAreaService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAreaService.h; sourceTree = "<group>"; };
 		4C959A971BFC078B009E276F /* CGAreaService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGAreaService.m; sourceTree = "<group>"; };
 		4CA532C21BF0868800F9352E /* CGNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGNetwork.h; sourceTree = "<group>"; };
@@ -577,6 +580,8 @@
 				4CDBA4A71BCB8876004EC99D /* LoadingView.m */,
 				4C34D7F81BEB3A5B00632623 /* PunchedCardButton.h */,
 				4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */,
+				4C8F62551C016226007E22AC /* StarView.h */,
+				4C8F62561C016226007E22AC /* StarView.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1031,6 +1036,7 @@
 				4C3273CA1BFDC39A00E32A28 /* CGContactService.m in Sources */,
 				4CDC1D211BC79BDC00137D24 /* CGDelegate.m in Sources */,
 				4CDC1C331BC79A3D00137D24 /* CGAnimator.m in Sources */,
+				4C8F62571C016226007E22AC /* StarView.m in Sources */,
 				4CDC1CD31BC79AAB00137D24 /* TableViewCell.m in Sources */,
 				4CDC1C471BC79A3D00137D24 /* NSDate+Category.m in Sources */,
 				4CDC1C351BC79A3D00137D24 /* CGViewController.m in Sources */,

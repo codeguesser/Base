@@ -16,11 +16,11 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-#import "TableViewController.h"
+#import "TestViewController.h"
 #import "NSString+Pinyin.h"
-#import "TestContactManagerViewController.h"
+//#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
-#import "TestPayViewController.h"
+//#import "TestPayViewController.h"
 #import "CGContactService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
@@ -60,7 +60,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestPayViewController *vc = [[TestPayViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
