@@ -1,0 +1,37 @@
+{
+  "name": "CG-AlipaySDK",
+  "version": "2.1",
+  "summary": "CG-AlipaySDK.",
+  "description": "这里是阿里支付的sdk版本，也进行pod化了，真是不错的体验，just do it",
+  "homepage": "http://git.oschina.net/codeguesser/CG-AlipaySDK",
+  "license": "MIT",
+  "authors": {
+    "rsaif": "wangshuguan@gmail.com"
+  },
+  "source": {
+    "git": "https://git.oschina.net/codeguesser/CG-AlipaySDK.git",
+    "tag": "2.1"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "CG-AlipaySDK": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "vendored_frameworks": "AlipaySDK.framework",
+  "frameworks": [
+    "CFNetwork",
+    "SystemConfiguration",
+    "CoreMotion",
+    "CoreText",
+    "CoreTelephony"
+  ],
+  "libraries": [
+    "z",
+    "c++"
+  ]
+}

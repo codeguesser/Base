@@ -1,0 +1,33 @@
+{
+  "name": "openssl",
+  "version": "0.1.0",
+  "summary": "A short description of openssl.",
+  "description": "这里是阿里支付的openssl部分，当真不好用，怎么也出不来<>，所以这里也进行pod化了，真是不错的体验，just do it",
+  "homepage": "http://git.oschina.net/codeguesser/openssl",
+  "license": "MIT",
+  "authors": {
+    "wsg": "wangshuguan@gmail.com"
+  },
+  "source": {
+    "git": "https://git.oschina.net/codeguesser/openssl.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "openssl": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "libraries": [
+    "z",
+    "c++"
+  ],
+  "vendored_libraries": [
+    "Pod/Classes/libcrypto.a",
+    "Pod/Classes/libssl.a"
+  ]
+}
