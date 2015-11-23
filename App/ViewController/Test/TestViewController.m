@@ -57,9 +57,11 @@
     float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     NSLog(@"%f",height);
     
-    StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+    StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
     starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
-    starView.count = 4;
+    starView.count = 9;
+    starView.progress = 0.5;
+    starView.userInteractionEnabled = NO;
     starView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:starView];
 }
