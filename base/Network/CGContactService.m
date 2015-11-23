@@ -49,7 +49,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                                  @"group_title":groupDic[kGroupServiceName],
                                  @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                                  @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
-                                 @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:tels options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
+                                 @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
                                  }];
                 [arrForCheck addObject:contactDic.description];
             }
@@ -76,7 +76,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                              @"group_title":@"",
                              @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                              @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
-                             @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:tels options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
+                             @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
                              }];
         }
         
@@ -239,5 +239,10 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
 }
 -(BOOL)isContactValable:(NSDictionary *)dic{
     return (dic[kContactServiceName]&&dic[kServiceTels])&&([dic[kContactServiceName] length]>0||[dic[kServiceTels] count]>0);
+}
+-(NSArray *)withoutFirstObjectFromData:(NSArray *)arr{
+    NSMutableArray *arrNew = [[NSMutableArray alloc] initWithArray:arr];
+    if(arrNew.count>0)[arrNew removeObjectAtIndex:0];
+    return arrNew;
 }
 @end
