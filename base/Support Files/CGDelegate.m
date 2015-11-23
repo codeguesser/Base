@@ -12,8 +12,8 @@
 #import <XGPush.h>
 #import <XGSetting.h>
 #import "ShareHandle.h"
-#import "UserProtectViewController.h"
-#import "UserLoginViewController.h"
+//#import "UserProtectViewController.h"
+//#import "UserLoginViewController.h"
 
 #ifdef BuglyAppId
 NSString *const kBuglyAppId = BuglyAppId;
@@ -45,13 +45,13 @@ long long const kXingeAppId = XingeAppId;
     }];
     [[NSNotificationCenter defaultCenter] addObserverForName:kCGNotificationUserStatusChanged object:nil queue:nil usingBlock:^(NSNotification *note) {
         DDLogInfo(@"UserStatusChanged:%@",note);
-        if (![[ShareHandle shareHandle]me]) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                UserLoginViewController *userLoginController = [[UserLoginViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:userLoginController];
-                [[[application keyWindow] rootViewController] presentViewController:nav animated:NO completion:nil];
-            });
-        }
+//        if (![[ShareHandle shareHandle]me]) {
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                UserLoginViewController *userLoginController = [[UserLoginViewController alloc] init];
+//                UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:userLoginController];
+//                [[[application keyWindow] rootViewController] presentViewController:nav animated:NO completion:nil];
+//            });
+//        }
     }];
     
     return YES;
