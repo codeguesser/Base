@@ -207,7 +207,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     for (CNLabeledValue *v in contact.phoneNumbers) {
         [telArr addObject:[(CNPhoneNumber *)v.value stringValue]];
     }
-    NSString *contactName = [NSString stringWithFormat:@"%@%@",contact.familyName,contact.givenName];
+    NSString *contactName = [NSString stringWithFormat:@"%@%@%@",contact.familyName,contact.middleName,contact.givenName];
     return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
 }
 -(NSDictionary *)groupFromCNRecode:(CNGroup *)group{
@@ -221,11 +221,16 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     return @{kGroupServiceName:group.name,kServicePinyin:[group.name pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],@"data":arr};
 }
 -(NSDictionary *)contactFromRecordId:(ABRecordRef)contact{
-    CFTypeRef contactName = ABRecordCopyValue(contact, kABGroupNameProperty);
+    CFTypeRef contactName = ABRecordCopyValue(contact, kABPersonFirstNameProperty);
+    CFTypeRef contactMiddleName = ABRecordCopyValue(contact, kABPersonMiddleNameProperty);
+    CFTypeRef contactFamilyName = ABRecordCopyValue(contact, kABPersonLastNameProperty);
     ABMultiValueRef tels = ABRecordCopyValue(contact, kABPersonPhoneProperty);
     if(!contactName)contactName = @"";
+    if(!contactMiddleName)contactMiddleName = @"";
+    if(!contactFamilyName)contactFamilyName = @"";
+    NSString *finalName = [NSString stringWithFormat:@"%@%@%@",(__bridge NSString *)contactFamilyName,(__bridge NSString *)contactMiddleName,(__bridge NSString *)contactName];
     NSArray *targetArr = tels&&ABMultiValueGetCount(tels)>0?(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels):@[];
-    return @{kContactServiceName:(__bridge NSString *)contactName,kServiceTels:targetArr,kServicePinyin:[(__bridge NSString *)contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
+    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
 }
 -(NSDictionary *)groupFromRecordId:(ABRecordRef)group{
     NSMutableArray *arr = [NSMutableArray new];
