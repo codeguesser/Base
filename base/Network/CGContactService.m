@@ -223,7 +223,9 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
 -(NSDictionary *)contactFromRecordId:(ABRecordRef)contact{
     CFTypeRef contactName = ABRecordCopyValue(contact, kABGroupNameProperty);
     ABMultiValueRef tels = ABRecordCopyValue(contact, kABPersonPhoneProperty);
-    return @{kContactServiceName:(__bridge NSString *)contactName,kServiceTels:(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels),kServicePinyin:[(__bridge NSString *)contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
+    if(!contactName)contactName = @"";
+    NSArray *targetArr = tels&&ABMultiValueGetCount(tels)>0?(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels):@[];
+    return @{kContactServiceName:(__bridge NSString *)contactName,kServiceTels:targetArr,kServicePinyin:[(__bridge NSString *)contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
 }
 -(NSDictionary *)groupFromRecordId:(ABRecordRef)group{
     NSMutableArray *arr = [NSMutableArray new];
@@ -235,6 +237,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
         }
     }
     CFTypeRef groupName = ABRecordCopyValue(group, kABGroupNameProperty);
+    if (!groupName)groupName = @"";
     return  @{kGroupServiceName:(__bridge NSString *)groupName,kServicePinyin:[(__bridge NSString *)groupName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],@"data":arr};
 }
 -(BOOL)isContactValable:(NSDictionary *)dic{
