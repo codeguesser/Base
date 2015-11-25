@@ -104,6 +104,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>cg-weixinpay-cg-weixinpay.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>cg-weixinpay.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>openssl-openssl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -117,6 +127,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0E3E76181ACF9DA9642CB20EACBEA925</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>12E2BC28C62976C425F4B71C2723F0B1</key>
 		<dict>
 			<key>primary</key>
@@ -162,12 +177,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9644019FA898205C9DC7863352042CB1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A0AB6D1DB7E29D4BC7AA29B77CC7BAC7</key>
+		<key>99C19DF055BFFB227B0D4F43CA28D522</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,6 +207,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>DF0ADF14ABC7A89210DD0E4EDB5C728D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E3376A7A8E20490F0CBFE532031526C4</key>
 		<dict>
 			<key>primary</key>
@@ -218,6 +233,11 @@
 			<true/>
 		</dict>
 		<key>EEBDD070720F6BD8C3AD9EA4C76FA37B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE1F9A56F0EB323FD177954429678FD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

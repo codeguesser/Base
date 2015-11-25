@@ -15,7 +15,8 @@
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
 		4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */; };
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
-		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; settings = {ASSET_TAGS = (); }; };
+		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
+		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; };
 		4C959A981BFC078B009E276F /* CGAreaService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C959A971BFC078B009E276F /* CGAreaService.m */; };
 		4CA532C41BF0868800F9352E /* CGNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA532C31BF0868800F9352E /* CGNetwork.m */; };
 		4CA871E51BE9A44B00DBF709 /* TestAnimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA871E31BE9A44B00DBF709 /* TestAnimateViewController.m */; };
@@ -24,10 +25,10 @@
 		4CB183C41BE3431B00FCDF3B /* HomeContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB183C31BE3431B00FCDF3B /* HomeContactView.xib */; };
 		4CB183C81BE3495A00FCDF3B /* ContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB183C61BE3495A00FCDF3B /* ContactCell.m */; };
 		4CB183C91BE3495A00FCDF3B /* ContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB183C71BE3495A00FCDF3B /* ContactCell.xib */; };
-		4CB5E3B61BFE198B0087294C /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B31BFE198B0087294C /* Order.m */; settings = {ASSET_TAGS = (); }; };
-		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; settings = {ASSET_TAGS = (); }; };
-		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; settings = {ASSET_TAGS = (); }; };
-		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		4CB5E3B61BFE198B0087294C /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B31BFE198B0087294C /* Order.m */; };
+		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; };
+		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; };
+		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -139,6 +140,9 @@
 		4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchedCardViewController.xib; sourceTree = "<group>"; };
 		4C34D7F81BEB3A5B00632623 /* PunchedCardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchedCardButton.h; sourceTree = "<group>"; };
 		4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardButton.m; sourceTree = "<group>"; };
+		4C4B6B941C05B4B600ED4983 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		4C4B6B951C05B4B600ED4983 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		4C8F62551C016226007E22AC /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
 		4C8F62561C016226007E22AC /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarView.m; sourceTree = "<group>"; };
 		4C959A961BFC078B009E276F /* CGAreaService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGAreaService.h; sourceTree = "<group>"; };
@@ -396,6 +400,9 @@
 		4CDC1C071BC79A3D00137D24 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4C4B6B941C05B4B600ED4983 /* WXApiManager.m */,
+				4C4B6B951C05B4B600ED4983 /* WXApiManager.h */,
+				4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */,
 				4CB5E3B21BFE198B0087294C /* Order.h */,
 				4CB5E3B31BFE198B0087294C /* Order.m */,
 				4CB5E3B41BFE198B0087294C /* APAuthV2Info.h */,
@@ -1033,6 +1040,7 @@
 				4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */,
 				4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */,
 				4CB183C81BE3495A00FCDF3B /* ContactCell.m in Sources */,
+				4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */,
 				4C3273CA1BFDC39A00E32A28 /* CGContactService.m in Sources */,
 				4CDC1D211BC79BDC00137D24 /* CGDelegate.m in Sources */,
 				4CDC1C331BC79A3D00137D24 /* CGAnimator.m in Sources */,

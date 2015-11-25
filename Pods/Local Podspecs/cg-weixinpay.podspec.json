@@ -1,0 +1,37 @@
+{
+  "name": "cg-weixinpay",
+  "version": "0.1.0",
+  "summary": "cg-weixinpay.",
+  "description": "这里是对微信支付sdk的pod封装，以后比较容易使用",
+  "homepage": "https://git.oschina.net/codeguesser/cg-weixinpay",
+  "license": "MIT",
+  "authors": {
+    "rsaif": "wangshuguan@gmail.com"
+  },
+  "source": {
+    "git": "https://git.oschina.net/codeguesser/cg-weixinpay.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "cg-weixinpay": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "public_header_files": "Pod/Classes/*.h",
+  "frameworks": [
+    "SystemConfiguration",
+    "CoreTelephony",
+    "Security"
+  ],
+  "libraries": [
+    "z",
+    "sqlite3",
+    "sqlite3.0"
+  ],
+  "vendored_libraries": "Pod/Classes/libWeChatSDK.a"
+}

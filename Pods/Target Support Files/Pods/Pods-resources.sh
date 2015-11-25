@@ -61,12 +61,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${BUILT_PRODUCTS_DIR}/Appirater.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/CG-AlipaySDK.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/cg-libxg-sdk.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/cg-weixinpay.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/openssl.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${BUILT_PRODUCTS_DIR}/Appirater.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/CG-AlipaySDK.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/cg-libxg-sdk.bundle"
+  install_resource "${BUILT_PRODUCTS_DIR}/cg-weixinpay.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/openssl.bundle"
 fi
 

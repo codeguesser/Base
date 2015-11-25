@@ -28,21 +28,24 @@ NSString *const kXingeAppKey = XingeAppKey;
 long long const kXingeAppId = XingeAppId;
 #endif
 #endif
+#ifdef WeixinAppId
+#import "WXApiManager.h"
+NSString *const kWeixinAppId = WeixinAppId;
+#endif
+
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
+#import <AlipaySDK/AlipaySDK.h>
+#endif
+#endif
+#endif
 @implementation CGDelegate
 #pragma mark - System Hook
 -(BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     [self setupSpecialSdksWithOptions:(NSDictionary *)launchOptions];
     [self setViewControllerSettings];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsSourceApplicationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
-        DDLogInfo(@"ApplicationLaunchSourceApplication:%@",note);
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsSourceApplicationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
-        DDLogInfo(@"ApplicationLaunchSourceApplication:%@",note);
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationLaunchOptionsRemoteNotificationKey object:nil queue:nil usingBlock:^(NSNotification *note) {
-        DDLogInfo(@"ApplicationRemoteNotification:%@",note);
-    }];
     [[NSNotificationCenter defaultCenter] addObserverForName:kCGNotificationUserStatusChanged object:nil queue:nil usingBlock:^(NSNotification *note) {
         DDLogInfo(@"UserStatusChanged:%@",note);
 //        if (![[ShareHandle shareHandle]me]) {
@@ -89,7 +92,9 @@ long long const kXingeAppId = XingeAppId;
     [self setupXingeSdkWithOptions:launchOptions];
 #endif
 #endif
-    
+#ifdef WeixinAppId
+    [WXApi registerApp:kWeixinAppId withDescription:@"demo 2.0"];
+#endif
     [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         DDLogInfo(@"ApplicationDidFinishLaunching:%@",note);
     }];
@@ -177,5 +182,89 @@ long long const kXingeAppId = XingeAppId;
     
     NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
     DDLogInfo(@"[XGPush Demo] deviceTokenStr is %@",deviceTokenStr);
+}
+
+#ifdef WeixinAppId
+-(BOOL)weixinPayCallBackWithUrl:(NSURL *)url{
+    if([url.host isEqualToString:@"pay"]){
+        return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+    }
+    return NO;
+}
+#endif
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
+-(BOOL)alipayCallBackWithUrl:(NSURL *)url{
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url
+                                                  standbyCallback:^(NSDictionary *resultDic) {
+                                                      NSLog(@"result = %@",resultDic);
+                                                      NSString *resultStr = resultDic[@"result"];
+                                                      NSLog(@"reslut = %@",resultStr);
+                                                      if (resultDic&&[resultDic isKindOfClass:[NSDictionary class]]&&resultDic[@"resultStatus"]&&[resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                                                          [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipaySuccessNotification object:nil];
+                                                      }else{
+                                                          
+                                                          [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipayFalseNotification object:nil];
+                                                      }
+                                                  }];
+        return YES;
+    }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            NSString *resultStr = resultDic[@"result"];
+            NSLog(@"reslut = %@",resultStr);
+            if (resultDic&&[resultDic isKindOfClass:[NSDictionary class]]&&resultDic[@"resultStatus"]&&[resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipaySuccessNotification object:nil];
+            }else{
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipayFalseNotification object:nil];
+            }
+        }];
+        return YES;
+    }
+    return NO;
+}
+#endif
+#endif
+#endif
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+#ifdef WeixinAppId
+    if ([self weixinPayCallBackWithUrl:url]) {
+        return [self weixinPayCallBackWithUrl:url];
+    };
+#endif
+    
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
+    if([self alipayCallBackWithUrl:url]){
+        return [self alipayCallBackWithUrl:url];
+    }
+#endif
+#endif
+#endif
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+#ifdef WeixinAppId
+    if ([self weixinPayCallBackWithUrl:url]) {
+        return [self weixinPayCallBackWithUrl:url];
+    };
+#endif
+    
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
+    if([self alipayCallBackWithUrl:url]){
+        return [self alipayCallBackWithUrl:url];
+    }
+#endif
+#endif
+#endif
+    return YES;
 }
 @end

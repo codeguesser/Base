@@ -11,6 +11,10 @@
 #import "Order.h"
 #import <DataSigner.h>
 #import <AlipaySDK/AlipaySDK.h>
+
+#import "WXApi.h"
+#import "WechatAuthSDK.h"
+#import "WXApiObject.h"
 @interface TestPayViewController ()
 
 @end
@@ -21,7 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self pay];
+//        [self payByzhifubao];
+        [self payByzhifubao];
     });
 }
 
@@ -39,16 +44,16 @@
     // Pass the selected object to the new view controller.
 }
 */
--(void)pay{
-    NSString *partner = @"2088611280436463";
-    NSString *seller = @"hnrsaif6688@126.com";
-    NSString *privateKey = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAL67LG+ca+qD/IlRpgv/den/2GyzEede86Wj22PvUxxF+PeEKGK1Dz4HDbIu2Q20PL4H/ufgrSnu0oa/MZvtWBjTrqdYy7b7WLBxiS4mAuK8Q4eFZqjrDZrYD/x9Flqw34tg1w1tH7PtEljWyYD78gxRzmWoL526cLfiHHyNDSDHAgMBAAECgYBoXlgEgx3yaGMKaWlpa1MExwGRCbQkXasJ2s40s0NRV2DTYLgQu28pzAZMmKIhg50xh4KPNDzNk2gUYA8vegMYMLmOo2Xi5MxkmPrKU01s5vNCdOabkNbuLAoFj3DZs0tPjZ13q/ElZzSlglw0AhOwOkXYiuJYKlN6I5vuiqvBEQJBAOcko3lLA5kvi81jzr6eynpNbDgQF/4A5Zmb5NNdMicZdnNrQFwbUfZXKcmAxKI9kqzoUwyWR6f8OYyVUijuyqMCQQDTPf6yrwNYACiHbNVx7d2pkWphiE2+Gn4HL59/avDqBZC3XHyptAljF8dsL2CTgA/zv/KJXGiy35iJ8Cvmb7eNAkA4sCKrl7stMZz+5XCKDZWpAx38be4EbKHi13n6YIvxTOxhCDfDnyut19i2w671/1XetCfSGXU/fLt8gA6jXVUzAkEAlQEh68Bvx181N3GZjeePd9DPDUUsMXBWfZMmGqbAkRKj5fMjLEGGbZOUY8d3hBPNLM60shew8put6X60OLOM8QJAG3hIbDTtJ3pUHy4gBZ1pMRu0vjh7fqune/N1kat9qjEhx5DN563+sBttuz06EPWR/MQBddpOJYfwk/YEIoepsw==";
+-(void)payByzhifubao{
+    NSString *partner = AlipayPartner;
+    NSString *seller = AlipaySeller;
+    NSString *privateKey = AlipayPrivateKey;
     
     
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = @"tm_1231231231"; //订单ID（由商家自行制定）
+    order.tradeNO = @"tm_1231"; //订单ID（由商家自行制定）
     order.productName = @"动本的支付"; //商品标题
     order.productDescription = @"动本的支付描述"; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",100.0]; //商品价格
@@ -88,6 +93,53 @@
                 [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipayFalseNotification object:nil];
             }
         }];
+    }
+}
+- (void)payByweixin {
+    
+    //============================================================
+    // V3&V4支付流程实现
+    // 注意:参数配置请查看服务器端Demo
+    // 更新时间：2015年11月20日
+    //============================================================
+    NSString *urlString   = @"http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=ios";
+    //解析服务端返回json数据
+    NSError *error;
+    //加载一个NSURL对象
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    //将请求的url数据放到NSData对象中
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if ( response != nil) {
+        NSMutableDictionary *dict = NULL;
+        //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
+        dict = [NSJSONSerialization JSONObjectWithData:response options:NSJSONReadingMutableLeaves error:&error];
+        
+        NSLog(@"url:%@",urlString);
+        if(dict != nil){
+            NSMutableString *retcode = [dict objectForKey:@"retcode"];
+            if (retcode.intValue == 0){
+                NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+                
+                //调起微信支付
+                PayReq* req             = [[PayReq alloc] init];
+                req.partnerId           = [dict objectForKey:@"partnerid"];
+                req.prepayId            = [dict objectForKey:@"prepayid"];
+                req.nonceStr            = [dict objectForKey:@"noncestr"];
+                req.timeStamp           = stamp.intValue;
+                req.package             = [dict objectForKey:@"package"];
+                req.sign                = [dict objectForKey:@"sign"];
+                [WXApi sendReq:req];
+                //日志输出
+                DDLogInfo(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+                
+            }else{
+                DDLogInfo(@"%@",[dict objectForKey:@"retmsg"]);
+            }
+        }else{
+            DDLogInfo(@"%@",@"服务器返回错误，未获取到json对象");
+        }
+    }else{
+        DDLogInfo(@"%@",@"服务器返回错误");
     }
 }
 @end

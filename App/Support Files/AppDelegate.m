@@ -16,7 +16,7 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-#import "TestViewController.h"
+#import "TestPayViewController.h"
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
@@ -60,7 +60,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
+    TestPayViewController *vc = [[TestPayViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

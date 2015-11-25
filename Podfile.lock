@@ -4,6 +4,7 @@ PODS:
   - Bugly (1.3.2)
   - CG-AlipaySDK (2.1)
   - cg-libxg-sdk (2.4.4)
+  - cg-weixinpay (0.1.0)
   - CocoaAsyncSocket (7.4.2)
   - CocoaLumberjack (2.2.0):
     - CocoaLumberjack/Default (= 2.2.0)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - Bugly
   - CG-AlipaySDK (from `https://git.oschina.net/codeguesser/CG-AlipaySDK.git`)
   - cg-libxg-sdk (from `https://git.oschina.net/codeguesser/cg-libxg-sdk.git`)
+  - cg-weixinpay (from `https://git.oschina.net/codeguesser/cg-weixinpay.git`)
   - CocoaAsyncSocket
   - CocoaLumberjack
   - DZNEmptyDataSet
@@ -56,6 +58,8 @@ EXTERNAL SOURCES:
     :git: https://git.oschina.net/codeguesser/CG-AlipaySDK.git
   cg-libxg-sdk:
     :git: https://git.oschina.net/codeguesser/cg-libxg-sdk.git
+  cg-weixinpay:
+    :git: https://git.oschina.net/codeguesser/cg-weixinpay.git
   openssl:
     :git: https://git.oschina.net/codeguesser/openssl.git
 
@@ -66,6 +70,9 @@ CHECKOUT OPTIONS:
   cg-libxg-sdk:
     :commit: 044ed8fcdf6c919a192aa8023533343c597636a1
     :git: https://git.oschina.net/codeguesser/cg-libxg-sdk.git
+  cg-weixinpay:
+    :commit: 5805bd517736493cf13eae4f439b5fb682bea62b
+    :git: https://git.oschina.net/codeguesser/cg-weixinpay.git
   openssl:
     :commit: e7ede6fbe2de04a24e4240945ae9f7e434d2f9b3
     :git: https://git.oschina.net/codeguesser/openssl.git
@@ -76,6 +83,7 @@ SPEC CHECKSUMS:
   Bugly: dba622a7c10bf4688d2577148d861c72e270becb
   CG-AlipaySDK: da7f00c520bb81102001b30af34ce1b5a04382f4
   cg-libxg-sdk: 5d60b36092ed869a29c41c5fd2dd063399282f9b
+  cg-weixinpay: 94f9f85cdeca6a13c417ce7346fa8d7e82c3bd82
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6

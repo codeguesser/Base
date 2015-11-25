@@ -1,0 +1,1 @@
+../../../cg-weixinpay/Pod/Classes/WXApiObject.h
