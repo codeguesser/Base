@@ -56,7 +56,7 @@
 //    _label3.layer.
     float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     NSLog(@"%f",height);
-    
+    //星星控件的使用
     StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
     starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
     starView.count = 9;
@@ -64,6 +64,11 @@
     starView.userInteractionEnabled = NO;
     starView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:starView];
+    
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 80, 300, 0.5)];
+    view.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:view];
 }
 //-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
 //    CGContextSetLineWidth(ctx, 10.0f);

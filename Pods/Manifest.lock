@@ -1,7 +1,7 @@
 PODS:
   - Appirater (2.0.5)
   - Aspects (1.4.1)
-  - Bugly (1.3.2)
+  - Bugly (1.4.3)
   - CG-AlipaySDK (2.1)
   - cg-libxg-sdk (2.4.4)
   - cg-weixinpay (0.1.0)
@@ -16,7 +16,7 @@ PODS:
     - CocoaLumberjack/Default
   - DZNEmptyDataSet (1.7.2)
   - FXBlurView (1.6.4)
-  - JazzHands (2.0.7)
+  - JazzHands (2.0.8)
   - MagicalRecord (2.3.0)
   - Masonry (0.6.3)
   - MBProgressHUD (0.9.1)
@@ -80,7 +80,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Appirater: e7c0a47fb67ee5041ce8479e6ba960927fb40264
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  Bugly: dba622a7c10bf4688d2577148d861c72e270becb
+  Bugly: b8d350be5047a468adf037cb016ab22762bc287c
   CG-AlipaySDK: da7f00c520bb81102001b30af34ce1b5a04382f4
   cg-libxg-sdk: 5d60b36092ed869a29c41c5fd2dd063399282f9b
   cg-weixinpay: 94f9f85cdeca6a13c417ce7346fa8d7e82c3bd82
@@ -88,7 +88,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
-  JazzHands: 13b2930840957cdbb830e1d52434fc2342b050d8
+  JazzHands: 355dc5c2b6fc38ee460d0ed7836c69539263f477
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad

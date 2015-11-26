@@ -15,6 +15,7 @@
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
 		4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */; };
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
+		4C35E6D41C06D5B600E22C95 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
 		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; };
 		4C959A981BFC078B009E276F /* CGAreaService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C959A971BFC078B009E276F /* CGAreaService.m */; };
@@ -140,6 +141,7 @@
 		4C34D7F51BEB35EB00632623 /* PunchedCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PunchedCardViewController.xib; sourceTree = "<group>"; };
 		4C34D7F81BEB3A5B00632623 /* PunchedCardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PunchedCardButton.h; sourceTree = "<group>"; };
 		4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardButton.m; sourceTree = "<group>"; };
+		4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4C4B6B941C05B4B600ED4983 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		4C4B6B951C05B4B600ED4983 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C35E6D41C06D5B600E22C95 /* CoreFoundation.framework in Frameworks */,
 				4CDC1C431BC79A3D00137D24 /* Reveal.framework in Frameworks */,
 				62E62F4E822F86F2BE8A3E27 /* libPods.a in Frameworks */,
 			);
@@ -347,6 +350,7 @@
 		1EA4013F4C6F7F062A3EED81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */,
 				52440523C06C1282A288B449 /* libPods.a */,
 			);
 			name = Frameworks;

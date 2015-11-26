@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '23C2649298F8D83B7A218190'
+               BlueprintIdentifier = 'E419201059FD204860060384'
                BlueprintName = 'cg-libxg-sdk'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libcg-libxg-sdk.a'>

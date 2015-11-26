@@ -40,6 +40,9 @@ extern void __setDeviceId(const char *deviceId);
 
 extern void __setCrashAutoThrow(bool autoThrow);
     
+extern void __buglySetSceneTag(int tag);
+    
+extern void __buglySetSceneKeyValue(const char * key, const char * value);
 #ifdef __cplusplus
 }
 #endif

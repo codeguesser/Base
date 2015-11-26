@@ -1,5 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, "9.0"
+platform :ios, "9.1"
 deployment_target = '7.0'
 pod 'Aspects'
 pod 'MagicalRecord'
