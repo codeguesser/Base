@@ -8,6 +8,7 @@
 
 #import "WXApiManager.h"
 
+#ifdef WeixinAppId
 @implementation WXApiManager
 
 #pragma mark - LifeCycle
@@ -88,3 +89,4 @@
 }
 
 @end
+#endif

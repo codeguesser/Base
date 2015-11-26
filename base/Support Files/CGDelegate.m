@@ -199,28 +199,10 @@ NSString *const kWeixinAppId = WeixinAppId;
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-                                                      NSLog(@"result = %@",resultDic);
-                                                      NSString *resultStr = resultDic[@"result"];
-                                                      NSLog(@"reslut = %@",resultStr);
-                                                      if (resultDic&&[resultDic isKindOfClass:[NSDictionary class]]&&resultDic[@"resultStatus"]&&[resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                                                          [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipaySuccessNotification object:nil];
-                                                      }else{
-                                                          
-                                                          [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipayFalseNotification object:nil];
-                                                      }
                                                   }];
         return YES;
     }else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
-            NSString *resultStr = resultDic[@"result"];
-            NSLog(@"reslut = %@",resultStr);
-            if (resultDic&&[resultDic isKindOfClass:[NSDictionary class]]&&resultDic[@"resultStatus"]&&[resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipaySuccessNotification object:nil];
-            }else{
-                
-                [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipayFalseNotification object:nil];
-            }
         }];
         return YES;
     }
@@ -233,7 +215,7 @@ NSString *const kWeixinAppId = WeixinAppId;
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 #ifdef WeixinAppId
     if ([self weixinPayCallBackWithUrl:url]) {
-        return [self weixinPayCallBackWithUrl:url];
+        return YES;
     };
 #endif
     
@@ -241,7 +223,7 @@ NSString *const kWeixinAppId = WeixinAppId;
 #ifdef AlipaySeller
 #ifdef AlipayPrivateKey
     if([self alipayCallBackWithUrl:url]){
-        return [self alipayCallBackWithUrl:url];
+        return YES;
     }
 #endif
 #endif
@@ -252,7 +234,7 @@ NSString *const kWeixinAppId = WeixinAppId;
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 #ifdef WeixinAppId
     if ([self weixinPayCallBackWithUrl:url]) {
-        return [self weixinPayCallBackWithUrl:url];
+        return YES;
     };
 #endif
     
@@ -260,7 +242,7 @@ NSString *const kWeixinAppId = WeixinAppId;
 #ifdef AlipaySeller
 #ifdef AlipayPrivateKey
     if([self alipayCallBackWithUrl:url]){
-        return [self alipayCallBackWithUrl:url];
+        return YES;
     }
 #endif
 #endif

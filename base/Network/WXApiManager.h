@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#ifdef WeixinAppId
 #import "WXApi.h"
 
 @protocol WXApiManagerDelegate <NSObject>
@@ -34,3 +35,4 @@
 + (instancetype)sharedManager;
 
 @end
+#endif

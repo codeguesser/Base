@@ -5,16 +5,26 @@
 //  Created by wsg on 15/11/19.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
+// pod 'cg-weixinpay', :git => 'https://git.oschina.net/codeguesser/cg-weixinpay.git'#如果有了sharesdk，就要去掉这个，这个和sharesdk的微信是冲突的
+// pod 'openssl', :git => 'https://git.oschina.net/codeguesser/openssl.git'#支付宝专用openssl
+// pod 'CG-AlipaySDK', :git => 'https://git.oschina.net/codeguesser/CG-AlipaySDK.git'#支付宝
 
 #import "TestPayViewController.h"
 
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
 #import "Order.h"
 #import <DataSigner.h>
 #import <AlipaySDK/AlipaySDK.h>
-
+#endif
+#endif
+#endif
+#ifdef WeixinAppId
 #import "WXApi.h"
 #import "WechatAuthSDK.h"
 #import "WXApiObject.h"
+#endif
 @interface TestPayViewController ()
 
 @end
@@ -44,6 +54,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+#ifdef AlipayPartner
+#ifdef AlipaySeller
+#ifdef AlipayPrivateKey
 -(void)payByzhifubao{
     NSString *partner = AlipayPartner;
     NSString *seller = AlipaySeller;
@@ -53,10 +66,10 @@
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = @"tm_1231"; //订单ID（由商家自行制定）
+    order.tradeNO = @"tm_1231123"; //订单ID（由商家自行制定）
     order.productName = @"动本的支付"; //商品标题
     order.productDescription = @"动本的支付描述"; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2f",100.0]; //商品价格
+    order.amount = [NSString stringWithFormat:@"%.2f",0.01]; //商品价格
     order.notifyURL =  [NSString stringWithFormat:@"http://www.dongben.cc"]; //回调URL
     
     order.service = @"mobile.securitypay.pay";
@@ -83,9 +96,9 @@
         orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                        orderSpec, signedString, @"RSA"];
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            DDLogInfo(@"result = %@",resultDic);
             NSString *resultStr = resultDic[@"result"];
-            NSLog(@"reslut = %@",resultStr);
+            DDLogInfo(@"reslut = %@",resultStr);
             if (resultDic&&[resultDic isKindOfClass:[NSDictionary class]]&&resultDic[@"resultStatus"]&&[resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:CGAlipaySuccessNotification object:nil];
             }else{
@@ -95,6 +108,11 @@
         }];
     }
 }
+
+#endif
+#endif
+#endif
+#ifdef WeixinAppId
 - (void)payByweixin {
     
     //============================================================
@@ -142,4 +160,5 @@
         DDLogInfo(@"%@",@"服务器返回错误");
     }
 }
+#endif
 @end

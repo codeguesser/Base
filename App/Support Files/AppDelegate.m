@@ -42,6 +42,7 @@
     [[UIAlertView appearance]setTintColor:[UIColor greenColor]];
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
+    //entity的测试，以及拼音的使用
 //    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
 //    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
 //    formatter.numberStyle = NSNumberFormatterNoStyle;
@@ -49,10 +50,11 @@
 //    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
-//    NSInteger
+//   调用地理位置
     //    CGAreaService *service = [CGAreaService service];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
-    service = [CGContactService service];
+    //调用本地联系人
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+//    service = [CGContactService service];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
