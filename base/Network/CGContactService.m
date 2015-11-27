@@ -12,6 +12,7 @@ NSString *const kContactServiceName = @"kContactServiceName";
 NSString *const kGroupServiceName = @"kGroupServiceName";
 NSString *const kServicePinyin = @"kServicePinyin";
 NSString *const kServiceTels = @"kServiceTels";
+NSString *const kServiceContactId = @"kServiceContactId";
 
 NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
 #define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey]
@@ -51,7 +52,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                                  @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
                                  @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
                                  }];
-                [arrForCheck addObject:contactDic.description];
+                [arrForCheck addObject:contactDic[kServiceContactId]];
             }
         }else{
             //改组没人
@@ -65,9 +66,9 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     //没有分组的，孤单的人
     for (NSDictionary *contactDic in self.contacts) {
         NSInteger originCount = arrForCheck.count;
-        [arrForCheck addObject:contactDic.description];
+        [arrForCheck addObject:contactDic[kServiceContactId]];
         if (originCount < arrForCheck.count) {
-            //没有重复的(属于没分组的)，添加
+//            没有重复的(属于没分组的)，添加
             NSMutableArray *tels = [NSMutableArray new];
             for (NSString *tel in contactDic[kServiceTels]) {
                 [tels addObject:@{@"type":@"mobile",@"type_title":@"手机",@"content":tel}];
@@ -204,11 +205,12 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
 }
 -(NSDictionary *)contactFromCNRecode:(CNContact *)contact{
     NSMutableArray *telArr = [NSMutableArray new];
+    NSString *identifier = contact.identifier;
     for (CNLabeledValue *v in contact.phoneNumbers) {
         [telArr addObject:[(CNPhoneNumber *)v.value stringValue]];
     }
     NSString *contactName = [NSString stringWithFormat:@"%@%@%@",contact.familyName,contact.middleName,contact.givenName];
-    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
+    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier};
 }
 -(NSDictionary *)groupFromCNRecode:(CNGroup *)group{
     
@@ -225,12 +227,13 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     CFTypeRef contactMiddleName = ABRecordCopyValue(contact, kABPersonMiddleNameProperty);
     CFTypeRef contactFamilyName = ABRecordCopyValue(contact, kABPersonLastNameProperty);
     ABMultiValueRef tels = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    NSString *identifier = [NSString stringWithFormat:@"%d",ABRecordGetRecordID(contact)];
     if(!contactName)contactName = @"";
     if(!contactMiddleName)contactMiddleName = @"";
     if(!contactFamilyName)contactFamilyName = @"";
     NSString *finalName = [NSString stringWithFormat:@"%@%@%@",(__bridge NSString *)contactFamilyName,(__bridge NSString *)contactMiddleName,(__bridge NSString *)contactName];
     NSArray *targetArr = tels&&ABMultiValueGetCount(tels)>0?(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels):@[];
-    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]};
+    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier};
 }
 -(NSDictionary *)groupFromRecordId:(ABRecordRef)group{
     NSMutableArray *arr = [NSMutableArray new];

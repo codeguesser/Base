@@ -56,19 +56,22 @@
 //    _label3.layer.
     float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     NSLog(@"%f",height);
-    //星星控件的使用
-    StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
-    starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
-    starView.count = 9;
-    starView.progress = 0.5;
-    starView.userInteractionEnabled = NO;
-    starView.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:starView];
+//    //星星控件的使用
+//    StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
+//    starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
+//    starView.count = 9;
+//    starView.progress = 0.5;
+//    starView.userInteractionEnabled = NO;
+//    starView.backgroundColor = [UIColor lightGrayColor];
+//    [self.view addSubview:starView];
     
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 80, 300, 0.5)];
-    view.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:view];
+//    //重置光标
+//    UITextField *field = [[UITextField alloc]initWithFrame:CGRectMake(10, 30, 200, 55)];
+//    field.backgroundColor = [UIColor greenColor];
+//    [self.view addSubview:field];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [field setSelectedTextRange:[field textRangeFromPosition:[field beginningOfDocument] toPosition:[field beginningOfDocument]]];
+//    });
 }
 //-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
 //    CGContextSetLineWidth(ctx, 10.0f);

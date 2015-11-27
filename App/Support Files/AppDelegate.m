@@ -53,8 +53,8 @@
 //   调用地理位置
     //    CGAreaService *service = [CGAreaService service];
     //调用本地联系人
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
-//    service = [CGContactService service];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+    service = [CGContactService service];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
