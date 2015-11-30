@@ -63,18 +63,15 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="KUQ-3t-cZv" secondAttribute="trailing" id="2qs-82-fTI"/>
                         <constraint firstItem="bDR-7v-uIA" firstAttribute="leading" secondItem="4I9-BG-yva" secondAttribute="leading" id="46a-ci-guW"/>
+                        <constraint firstAttribute="bottom" secondItem="KUQ-3t-cZv" secondAttribute="bottom" id="5ME-TO-FxG"/>
                         <constraint firstItem="bDR-7v-uIA" firstAttribute="top" secondItem="4I9-BG-yva" secondAttribute="top" id="9TV-tu-HxO"/>
                         <constraint firstItem="KUQ-3t-cZv" firstAttribute="top" secondItem="4I9-BG-yva" secondAttribute="top" id="AwC-Kt-2nf"/>
                         <constraint firstItem="KUQ-3t-cZv" firstAttribute="leading" secondItem="9J4-If-bKl" secondAttribute="trailing" constant="8" id="QN1-1L-s4U"/>
                         <constraint firstItem="9J4-If-bKl" firstAttribute="leading" secondItem="bDR-7v-uIA" secondAttribute="trailing" constant="8" id="hgm-dG-Jgp"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="j1U-yA-woL"/>
                         <constraint firstItem="9J4-If-bKl" firstAttribute="top" secondItem="4I9-BG-yva" secondAttribute="top" id="pKY-Jp-V4k"/>
                     </constraints>
                 </view>
-                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6hq-pZ-yif">
-                    <rect key="frame" x="8" y="77" width="320" height="44"/>
-                    <animations/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -68,13 +68,13 @@ CHECKOUT OPTIONS:
     :commit: 35be7fe414f3f82d449498e74c66c786a6101975
     :git: https://git.oschina.net/codeguesser/CG-AlipaySDK.git
   cg-libxg-sdk:
-    :commit: 044ed8fcdf6c919a192aa8023533343c597636a1
+    :commit: a2c6f14eead2db11af34886bd2fb776ddebb2671
     :git: https://git.oschina.net/codeguesser/cg-libxg-sdk.git
   cg-weixinpay:
-    :commit: 5805bd517736493cf13eae4f439b5fb682bea62b
+    :commit: accb76c1a6ecc9102b87810877912ec9a8a9a77f
     :git: https://git.oschina.net/codeguesser/cg-weixinpay.git
   openssl:
-    :commit: e7ede6fbe2de04a24e4240945ae9f7e434d2f9b3
+    :commit: 7dc757878a64f5b74420ae354a519f8928c1f200
     :git: https://git.oschina.net/codeguesser/openssl.git
 
 SPEC CHECKSUMS:
@@ -82,8 +82,8 @@ SPEC CHECKSUMS:
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   Bugly: b8d350be5047a468adf037cb016ab22762bc287c
   CG-AlipaySDK: da7f00c520bb81102001b30af34ce1b5a04382f4
-  cg-libxg-sdk: 5d60b36092ed869a29c41c5fd2dd063399282f9b
-  cg-weixinpay: 94f9f85cdeca6a13c417ce7346fa8d7e82c3bd82
+  cg-libxg-sdk: f6eac8afbec2eb8004844bf63007c263891165d2
+  cg-weixinpay: d64d6ca2967a50e5e36d32e15c23b8ccda06f042
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
@@ -94,7 +94,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MKNetworkKit: 60ad3c83b62183e40ba75ce772c9427c25b520de
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
-  openssl: 816df5bb5b18cefb78ee4587e16e04d139da0d89
+  openssl: d08818c46fca65ffe2288b95067f955ae3184a9d
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 

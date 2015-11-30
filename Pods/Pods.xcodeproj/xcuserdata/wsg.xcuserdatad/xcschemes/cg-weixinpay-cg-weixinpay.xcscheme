@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '35AF468A41DE5307279D6A6F'
+               BlueprintIdentifier = 'B801194BBC584D5593CB75E5'
                BlueprintName = 'cg-weixinpay-cg-weixinpay'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'cg-weixinpay.bundle'>
