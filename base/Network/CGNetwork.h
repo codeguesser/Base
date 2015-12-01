@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/*!
+ @brief  监听整个app的网络连接情况
+ */
+@interface CGNetworkConnect :NSURLProtocol
+@end
 @interface CGNetwork : NSObject
 
 @end

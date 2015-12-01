@@ -16,7 +16,7 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-#import "TestViewController.h"
+#import "WebViewController.h"
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
@@ -42,6 +42,7 @@
     [[UIAlertView appearance]setTintColor:[UIColor greenColor]];
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
+
     //entity的测试，以及拼音的使用
 //    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
 //    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
@@ -53,8 +54,8 @@
 //   调用地理位置
     //    CGAreaService *service = [CGAreaService service];
     //调用本地联系人
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
-    service = [CGContactService service];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+//    service = [CGContactService service];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
@@ -62,7 +63,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
+    WebViewController *vc = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

@@ -11,6 +11,7 @@
 #import <NJKWebViewProgressView.h>
 #import <FXBlurView.h>
 #import "ContactViewController.h"
+#import "CGNetwork.h"
 @interface WebViewController ()<UIWebViewDelegate>{
     NJKWebViewProgress *_progressProxy;
     NJKWebViewProgressView *_progressView;
@@ -25,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [CGNetworkConnect registerClass:[CGNetworkConnect class]];
     self.navigationItem.title = @" web 测试页";
     _progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
     _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
@@ -56,7 +57,7 @@
     [self transformViewControllerWithMethod:ITransformMethodPush fromController:self.navigationController targetController:[ContactViewController new]];
 }
 -(IBAction)startLoadWeb{
-    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.baidu.com"]]];
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://dongbenmall.2dian.cc:81/mobile/"]]];
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     resultView.hidden = NO;
