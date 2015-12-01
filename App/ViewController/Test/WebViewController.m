@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [CGNetworkConnect registerClass:[CGNetworkConnect class]];
     self.navigationItem.title = @" web 测试页";
     _progressProxy = [[NJKWebViewProgress alloc] init]; // instance variable
     _progressView = [[NJKWebViewProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
@@ -54,7 +53,13 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)rightItemClicked:(UIBarButtonItem *)item{
-    [self transformViewControllerWithMethod:ITransformMethodPush fromController:self.navigationController targetController:[ContactViewController new]];
+    
+    if (![CGNetworkConnect isClassRegisted]) {
+        [CGNetworkConnect registerClass:[CGNetworkConnect class]];
+    }else{
+        [CGNetworkConnect unregisterClass:[CGNetworkConnect class]];
+    }
+//    [self transformViewControllerWithMethod:ITransformMethodPush fromController:self.navigationController targetController:[ContactViewController new]];
 }
 -(IBAction)startLoadWeb{
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://dongbenmall.2dian.cc:81/mobile/"]]];

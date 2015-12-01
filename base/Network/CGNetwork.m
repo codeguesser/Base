@@ -7,11 +7,27 @@
 //
 
 #import "CGNetwork.h"
+
 @implementation CGNetworkConnect
+static CGNetworkConnect *nc;
 + (BOOL)canInitWithRequest:(NSURLRequest * _Nonnull)request{
     //这里写你监听到的事情
-    DDLogInfo(@"%@",request.URL.absoluteString);
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCGNetworkConnectNotification object:nil];
+    DDLogInfo(@"%@,%@",request.URL.absoluteString,[[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
     return NO;
+}
++(BOOL)registerClass:(Class)protocolClass{
+    nc = [CGNetworkConnect new];
+    return [super registerClass:protocolClass];
+}
++(void)unregisterClass:(Class)protocolClass{
+    if (nc) {
+        nc = nil;
+    }
+    [super unregisterClass:protocolClass];
+}
++(BOOL)isClassRegisted{
+    return nc?YES:NO;
 }
 + (NSURLRequest * _Nonnull)canonicalRequestForRequest:(NSURLRequest * _Nonnull)request{
     //这里写你要重新处理的request

@@ -14,7 +14,9 @@
 #import "ShareHandle.h"
 //#import "UserProtectViewController.h"
 //#import "UserLoginViewController.h"
-
+#ifdef U_NETWORK_TRACERT
+#import "CGNetwork.h"
+#endif
 #ifdef BuglyAppId
 NSString *const kBuglyAppId = BuglyAppId;
 #endif
@@ -73,6 +75,9 @@ NSString *const kWeixinAppId = WeixinAppId;
 }
 #pragma mark - 设置特别的sdk，包括crash日志工具和提醒评价工具
 -(void)setupSpecialSdksWithOptions:(NSDictionary *)launchOptions{
+#ifdef U_NETWORK_TRACERT
+    [CGNetworkConnect registerClass:[CGNetworkConnect class]];
+#endif
     [ShareHandle shareHandle].appStartDate = [NSDate date];
 #ifdef BuglyAppId
     [[CrashReporter sharedInstance] setUserId:@"100"];

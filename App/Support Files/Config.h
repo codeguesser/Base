@@ -54,6 +54,7 @@ UIKIT_EXTERN NSString *const kCGFalseTag;
 #pragma mark -
 #if DEBUG == 1
 #define U_CHANNEL_TAG @"DEVELOP"
+//#define U_NETWORK_TRACERT YES
 #else
 #define U_CHANNEL_TAG @"RELEASE"
 #endif
