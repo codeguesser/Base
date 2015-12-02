@@ -11,7 +11,7 @@
 #import "Network.h"
 #import "NSNotification+CGCategory.h"
 @interface ShareHandle(){
-    MKNetworkEngine *_networkEngine;
+    MKNetworkHost *_networkEngine;
     NSMutableArray *_networkOperationArray;
     NSDictionary *_pinyinSourceDic;
 }
@@ -38,8 +38,8 @@
         _me = [Prefrence me];
         NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
         [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
-        _networkEngine = [[MKNetworkEngine alloc] initWithHostName:@"dlsw.baidu.com"
-                                                         customHeaderFields:headerFields];
+        _networkEngine = [[MKNetworkHost alloc] initWithHostName:@"dlsw.baidu.com"];
+        
         _networkOperationArray = [NSMutableArray new];
         cachedLastTaskIndex = @(1);
     }
@@ -62,24 +62,24 @@
     return _networkOperationArray;
 }
 -(void)cancelAllTask{
-    for (MKNetworkOperation *op in _networkOperationArray) {
+    for (MKNetworkRequest *op in _networkOperationArray) {
         [op cancel];
         [_networkOperationArray removeObject:op];
     }
 }
--(MKNetworkOperation *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method completeClass:(NSString *)classString operateRule:(NSString *)rule{
+-(MKNetworkRequest *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method completeClass:(NSString *)classString operateRule:(NSString *)rule{
 #warning 任务暂时搁置，嗯，需要考虑存储规则和添加依赖
     NSAssert(YES, @"任务暂时搁置，嗯，需要考虑存储规则和添加依赖");
-    MKNetworkOperation *op = [[MKNetworkOperation alloc]initWithURLString:url params:para httpMethod:method];
-    __weak MKNetworkOperation *weakOp = op;
+    MKNetworkRequest *op = [[MKNetworkRequest alloc]initWithURLString:url params:para bodyData:nil httpMethod:method];
+    __weak MKNetworkRequest *weakOp = op;
     [_networkOperationArray addObject:weakOp];
     Network *networkTask = [Network MR_createEntityInContext:[NSManagedObjectContext MR_defaultContext]];
     networkTask.nid = [NSString stringWithFormat:@"%f-%@",[[ShareHandle shareHandle].appStartDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:0]],cachedLastTaskIndex];
-    networkTask.url = op.url;
-    [weakOp setCompletionBlock:^{
-        [_networkOperationArray removeObject:op];
+    networkTask.url = op.request.URL.absoluteString;
+    [weakOp addCompletionHandler:^(MKNetworkRequest *completedRequest) {
+        [_networkOperationArray removeObject:completedRequest];
     }];
-    [_networkEngine enqueueOperation:op];
+    [_networkEngine startRequest:op];
     cachedLastTaskIndex = @(cachedLastTaskIndex.integerValue+1);
     return op;
 }

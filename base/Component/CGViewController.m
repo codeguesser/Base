@@ -13,7 +13,7 @@
 #define ROTATION_ANGLE 10
 #define PERSPECTIVE 0.1
 @interface CGViewController (){
-    MKNetworkEngine *_networkEngine;
+    MKNetworkHost *_networkEngine;
     NSMutableArray *_networkOperationArray;
     UIView *userNotLoginView;
     CGAnimator *animator;
@@ -54,20 +54,19 @@
     return _networkOperationArray;
 }
 -(void)cancelAllTask{
-    for (MKNetworkOperation *op in _networkOperationArray) {
+    for (MKNetworkRequest *op in _networkOperationArray) {
         [op cancel];
         [_networkOperationArray removeObject:op];
     }
 }
--(MKNetworkOperation *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method{
-    MKNetworkOperation *op = [[MKNetworkOperation alloc]initWithURLString:url params:para httpMethod:method];
-    __weak MKNetworkOperation *weakOp = op;
+-(MKNetworkRequest *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method{
+    MKNetworkRequest *op = [[MKNetworkRequest alloc]initWithURLString:url params:para bodyData:nil httpMethod:method];
+    __weak MKNetworkRequest *weakOp = op;
     [_networkOperationArray addObject:weakOp];
-    [weakOp setCompletionBlock:^{
-        weakOp.completionBlock();
-        [_networkOperationArray removeObject:op];
+    [weakOp addCompletionHandler:^(MKNetworkRequest *completedRequest) {
+        [_networkOperationArray removeObject:completedRequest];
     }];
-    [_networkEngine enqueueOperation:op];
+    [_networkEngine startRequest:op];
     return op;
 }
 -(void)transformViewControllerWithMethod:(ITransformMethod)method fromController:(UIViewController *)fromController targetController:(UIViewController *)targetController{

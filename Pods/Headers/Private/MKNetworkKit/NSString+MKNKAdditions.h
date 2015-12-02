@@ -1,0 +1,1 @@
+../../../MKNetworkKit/MKNetworkKit/Extensions/NSString+MKNKAdditions.h

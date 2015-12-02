@@ -1,0 +1,1 @@
+../../../MKNetworkKit/MKNetworkKit/Extensions/NSHTTPURLResponse+MKNKAdditions.h

@@ -182,7 +182,7 @@ NSString *const kWeixinAppId = WeixinAppId;
     
     //注册设备
     XGSetting *setting = (XGSetting *)[XGSetting getInstance];
-    [setting setChannel:@"appstore"];
+    [setting setChannel:U_CHANNEL_TAG];
     [setting setGameServer:@"巨神峰"];
     
     NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];

@@ -22,6 +22,7 @@
 #import "CGAreaService.h"
 //#import "TestPayViewController.h"
 #import "CGContactService.h"
+#import "TestGameViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
 }
@@ -56,6 +57,7 @@
     //调用本地联系人
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
 //    service = [CGContactService service];
+    [self setupNetworkDemo2];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
@@ -63,7 +65,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    WebViewController *vc = [[WebViewController alloc] init];
+    TestGameViewController *vc = [[TestGameViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
@@ -106,21 +108,14 @@
 -(void)setupHTTPSNetworkDemo{
     NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
     [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"www.codeguesser.cn"
-                                     customHeaderFields:headerFields];
-    MKNetworkOperation *op = [engine operationWithPath:@"/"
-                                              params:nil
-                                          httpMethod:@"GET" ssl:YES];
+    MKNetworkHost *engine = [[MKNetworkHost alloc] initWithHostName:@"www.codeguesser.cn"];
+    MKNetworkRequest *op = [engine requestWithPath:@"/" params:nil httpMethod:@"GET" body:nil ssl:YES];
     op.clientCertificate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"client.p12"];
     op.clientCertificatePassword = @"1234";
-    op.shouldContinueWithInvalidCertificate = YES;
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        
-        DDLogInfo(@"%@",completedOperation.responseJSON);
-    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        DDLogInfo(@"%@",error);
+    [op addCompletionHandler:^(MKNetworkRequest *completedRequest) {
+        DDLogInfo(@"%@",completedRequest.responseAsJSON);
     }];
-    [engine enqueueOperation:op];
+    [engine startRequest:op];
 }
  
 
@@ -132,21 +127,15 @@
 -(void)setupNetworkDemo{
     NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
     [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"dlsw.baidu.com"
-                                                     customHeaderFields:headerFields];
+    MKNetworkHost *engine = [[MKNetworkHost alloc] initWithHostName:@"dlsw.baidu.com"];
     
     
     
-    MKNetworkOperation *op = [engine operationWithPath:@"sw-search-sp/soft/3a/12350/QQ_V7.5.15456.0_setup.1438225942.exe"
-                                                params:nil
-                                            httpMethod:@"GET"];
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        
-        DDLogInfo(@"%@",completedOperation.responseData);
-    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        DDLogInfo(@"%@",error);
+    MKNetworkRequest *op = [engine requestWithPath:@"sw-search-sp/soft/3a/12350/QQ_V7.5.15456.0_setup.1438225942.exe" params:nil httpMethod:@"GET"];
+    [op addCompletionHandler:^(MKNetworkRequest *completedRequest) {
+        DDLogInfo(@"%@",completedRequest.responseAsJSON);
     }];
-    [engine enqueueOperation:op];
+    [engine startRequest:op];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [op cancel];
     });
@@ -154,18 +143,13 @@
 -(void)setupNetworkDemo2{
     NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
     [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
-    MKNetworkEngine *engine = [[MKNetworkEngine alloc] initWithHostName:@"192.168.2.36:9100"
-                                                     customHeaderFields:headerFields];
+    MKNetworkHost *engine = [[MKNetworkHost alloc] initWithHostName:@"192.168.2.36:9100"];
     
-    MKNetworkOperation *op = [engine operationWithPath:@"/dongbenservice.asmx/book_print_base_info"
-                                                params:@{@"token":@"string",@"book_id":@"123"}
-                                            httpMethod:@"GET"];
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        DDLogInfo(@"%@",completedOperation.responseJSON);
-    } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        DDLogInfo(@"%@",error);
+    MKNetworkRequest *op = [engine requestWithPath:@"/dongbenservice.asmx/book_print_base_info" params:@{@"token":@"string",@"book_id":@"123"} httpMethod:@"GET"];
+    [op addCompletionHandler:^(MKNetworkRequest *completedRequest) {
+        DDLogInfo(@"%@",completedRequest.responseAsJSON);
     }];
-    [engine enqueueOperation:op];
+    [engine startRequest:op];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [op cancel];
     });

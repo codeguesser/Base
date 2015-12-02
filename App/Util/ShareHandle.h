@@ -43,13 +43,13 @@ typedef NS_ENUM(NSUInteger, ITransformMethod){
  
  @return 网络操作对象
  */
--(MKNetworkOperation *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method completeClass:(NSString *)classString operateRule:(NSString *)rule;
+-(MKNetworkRequest *)addTaskWithUrl:(NSString *)url para:(NSDictionary *)para method:(NSString *)method completeClass:(NSString *)classString operateRule:(NSString *)rule;
 /*!
  @brief  添加前台任务，use ONLY in cgviewcontroller，如果需要启用后台任务请使用addTaskWithUrl:para:method:complete:
  
  @param op 网络操作
  */
--(void)addTask:(MKNetworkOperation *)op;
+-(void)addTask:(MKNetworkRequest *)op;
 @end
 /*!
  @brief  场景切换器
