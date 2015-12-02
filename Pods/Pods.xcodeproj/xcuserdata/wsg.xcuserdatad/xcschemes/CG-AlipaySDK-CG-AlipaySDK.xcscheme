@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BFB21148228F796C58703DF8'
+               BlueprintIdentifier = 'B92F62950B857FF32BFE92ED'
                BlueprintName = 'CG-AlipaySDK-CG-AlipaySDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'CG-AlipaySDK.bundle'>

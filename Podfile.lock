@@ -65,7 +65,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CG-AlipaySDK:
-    :commit: 35be7fe414f3f82d449498e74c66c786a6101975
+    :commit: 333aec1ee77f13f48a9c413db86a4789187c7290
     :git: https://git.oschina.net/codeguesser/CG-AlipaySDK.git
   cg-libxg-sdk:
     :commit: a2c6f14eead2db11af34886bd2fb776ddebb2671
