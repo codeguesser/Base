@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frj-Ru-jQ5">
+                                <rect key="frame" x="16" y="34" width="32" height="32"/>
+                                <animations/>
+                                <state key="normal" image="打卡icon4.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhG-v0-vhg">
+                                <rect key="frame" x="144" y="34" width="32" height="32"/>
+                                <animations/>
+                                <state key="normal" image="打卡icon4.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF8-Db-rYF">
+                                <rect key="frame" x="272" y="34" width="32" height="32"/>
+                                <animations/>
+                                <state key="normal" image="打卡icon4.png"/>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <constraints>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="hhG-v0-vhg" secondAttribute="bottom" constant="34" id="7ob-qx-NSg"/>
+                            <constraint firstItem="hhG-v0-vhg" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="34" id="8pE-iY-MPc"/>
+                            <constraint firstItem="ZF8-Db-rYF" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="9Si-BP-Pey"/>
+                            <constraint firstItem="ZF8-Db-rYF" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="FX8-ya-3K0"/>
+                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="JCx-Bq-qge"/>
+                            <constraint firstItem="hhG-v0-vhg" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="OsS-7U-gTB"/>
+                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="aql-5I-0Ih"/>
+                            <constraint firstItem="hhG-v0-vhg" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="kxX-Lr-Nxb"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="100"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="516" y="285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="打卡icon4.png" width="32" height="32"/>
+    </resources>
+</document>
