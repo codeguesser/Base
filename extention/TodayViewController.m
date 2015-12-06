@@ -34,5 +34,26 @@
 
     completionHandler(NCUpdateResultNewData);
 }
+- (IBAction)buttonClicked:(UIButton *)sender {
+    NSURL *containerURL = [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.com.rsaif.base"];
+    NSLog(@"%@",[[NSBundle mainBundle] infoDictionary]);
+    NSLog(@"app group:\n%@",containerURL.path);
+    
+    
+    
+    //打印可执行文件路径
+    
+    NSLog(@"bundle:\n%@",[[NSBundle mainBundle] bundlePath]);
+    
+    
+    
+    //打印documents
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString *path = [paths objectAtIndex:0];
+    
+    NSLog(@"documents:\n%@",path);
+}
 
 @end

@@ -35,6 +35,7 @@
 		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; };
 		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; };
 		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; };
+		4CC0BB5D1C1334EA004BE777 /* 打卡icon4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C891BC79AAB00137D24 /* 打卡icon4@3x.png */; settings = {ASSET_TAGS = (); }; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -984,6 +985,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1DC2C61C117B10007701E4 /* MainInterface.storyboard in Resources */,
+				4CC0BB5D1C1334EA004BE777 /* 打卡icon4@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1478,6 +1480,7 @@
 				4C1DC2CC1C117B10007701E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4CDC1BD61BC799DA00137D24 /* Build configuration list for PBXProject "base" */ = {
 			isa = XCConfigurationList;

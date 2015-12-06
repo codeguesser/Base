@@ -14,36 +14,27 @@
                         <viewControllerLayoutGuide type="top" id="Ft6-oW-KC0"/>
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" layoutMarginsFollowReadableWidth="YES" id="S3S-Oj-5AN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frj-Ru-jQ5">
                                 <rect key="frame" x="16" y="34" width="32" height="32"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="h6n-fT-Ytz"/>
+                                    <constraint firstAttribute="width" constant="32" id="lh3-yz-2PU"/>
+                                </constraints>
                                 <state key="normal" image="打卡icon4.png"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hhG-v0-vhg">
-                                <rect key="frame" x="144" y="34" width="32" height="32"/>
-                                <animations/>
-                                <state key="normal" image="打卡icon4.png"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF8-Db-rYF">
-                                <rect key="frame" x="272" y="34" width="32" height="32"/>
-                                <animations/>
-                                <state key="normal" image="打卡icon4.png"/>
+                                <connections>
+                                    <action selector="buttonClicked:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="17G-oy-nU0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
                         <constraints>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="hhG-v0-vhg" secondAttribute="bottom" constant="34" id="7ob-qx-NSg"/>
-                            <constraint firstItem="hhG-v0-vhg" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="34" id="8pE-iY-MPc"/>
-                            <constraint firstItem="ZF8-Db-rYF" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="9Si-BP-Pey"/>
-                            <constraint firstItem="ZF8-Db-rYF" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="FX8-ya-3K0"/>
                             <constraint firstItem="Frj-Ru-jQ5" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="JCx-Bq-qge"/>
-                            <constraint firstItem="hhG-v0-vhg" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="OsS-7U-gTB"/>
-                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="aql-5I-0Ih"/>
-                            <constraint firstItem="hhG-v0-vhg" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="kxX-Lr-Nxb"/>
+                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="34" id="LJu-d2-7hO"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
