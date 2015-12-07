@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TodayViewController : UIViewController
-
+@interface TodayViewController : UIViewController{
+    
+    __weak IBOutlet UIButton *touchIconButton;
+}
 @end

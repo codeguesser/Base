@@ -11,7 +11,7 @@
 		4C0DAEB61BDA22A400E208EA /* TableViewCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0DAEB41BDA22A400E208EA /* TableViewCell2.xib */; };
 		4C0DAEB81BDA32C500E208EA /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C0DAEB71BDA32C500E208EA /* TestViewController.xib */; };
 		4C1DC2BF1C117B10007701E4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1DC2BE1C117B10007701E4 /* NotificationCenter.framework */; };
-		4C1DC2C31C117B10007701E4 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DC2C21C117B10007701E4 /* TodayViewController.m */; };
+		4C1DC2C31C117B10007701E4 /* TodayViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DC2C21C117B10007701E4 /* TodayViewController.mm */; };
 		4C1DC2C61C117B10007701E4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1DC2C41C117B10007701E4 /* MainInterface.storyboard */; };
 		4C1DC2CA1C117B10007701E4 /* extention.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4C1DC2BD1C117B10007701E4 /* extention.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CB81BC79AAB00137D24 /* TestContactManagerViewController.m */; };
@@ -35,7 +35,6 @@
 		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; };
 		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; };
 		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; };
-		4CC0BB5D1C1334EA004BE777 /* 打卡icon4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C891BC79AAB00137D24 /* 打卡icon4@3x.png */; settings = {ASSET_TAGS = (); }; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -130,6 +129,13 @@
 		4CDC1D291BC79BF500137D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D251BC79BF500137D24 /* AppDelegate.m */; };
 		4CDC1D2E1BC79CA300137D24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */; };
 		4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */; };
+		4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7E1BC79AAB00137D24 /* phone2icon2@3x.png */; };
+		4CF707291C153340008B17A7 /* phone1icon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7C1BC79AAB00137D24 /* phone1icon1@3x.png */; };
+		4CF7072A1C154CE4008B17A7 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
+		4CF7072C1C154D73008B17A7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072B1C154D73008B17A7 /* CFNetwork.framework */; };
+		4CF7072E1C154DCC008B17A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */; };
+		4CF707301C154E3D008B17A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */; };
+		4CF707321C154F6C008B17A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF707311C154F6C008B17A7 /* UIKit.framework */; };
 		62E62F4E822F86F2BE8A3E27 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52440523C06C1282A288B449 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -166,7 +172,7 @@
 		4C1DC2BD1C117B10007701E4 /* extention.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = extention.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C1DC2BE1C117B10007701E4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		4C1DC2C11C117B10007701E4 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
-		4C1DC2C21C117B10007701E4 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		4C1DC2C21C117B10007701E4 /* TodayViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TodayViewController.mm; sourceTree = "<group>"; };
 		4C1DC2C51C117B10007701E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4C1DC2C71C117B10007701E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C1DC2CF1C117BAD007701E4 /* base.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = base.entitlements; sourceTree = "<group>"; };
@@ -366,6 +372,10 @@
 		4CDC1D261BC79BF500137D24 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4CDC1D2D1BC79CA300137D24 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4CF7072B1C154D73008B17A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4CF707311C154F6C008B17A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		52440523C06C1282A288B449 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EB3F5F4B15DCB147D739740 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,6 +385,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CF707321C154F6C008B17A7 /* UIKit.framework in Frameworks */,
+				4CF707301C154E3D008B17A7 /* CoreLocation.framework in Frameworks */,
+				4CF7072E1C154DCC008B17A7 /* SystemConfiguration.framework in Frameworks */,
+				4CF7072C1C154D73008B17A7 /* CFNetwork.framework in Frameworks */,
+				4CF7072A1C154CE4008B17A7 /* BaiduMapAPI.framework in Frameworks */,
 				4C1DC2BF1C117B10007701E4 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +410,10 @@
 		1EA4013F4C6F7F062A3EED81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CF707311C154F6C008B17A7 /* UIKit.framework */,
+				4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */,
+				4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */,
+				4CF7072B1C154D73008B17A7 /* CFNetwork.framework */,
 				4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */,
 				52440523C06C1282A288B449 /* libPods.a */,
 				4C1DC2BE1C117B10007701E4 /* NotificationCenter.framework */,
@@ -407,7 +426,7 @@
 			children = (
 				4C1DC2D01C117BC7007701E4 /* extention.entitlements */,
 				4C1DC2C11C117B10007701E4 /* TodayViewController.h */,
-				4C1DC2C21C117B10007701E4 /* TodayViewController.m */,
+				4C1DC2C21C117B10007701E4 /* TodayViewController.mm */,
 				4C1DC2C41C117B10007701E4 /* MainInterface.storyboard */,
 				4C1DC2C71C117B10007701E4 /* Info.plist */,
 			);
@@ -985,7 +1004,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1DC2C61C117B10007701E4 /* MainInterface.storyboard in Resources */,
-				4CC0BB5D1C1334EA004BE777 /* 打卡icon4@3x.png in Resources */,
+				4CF707291C153340008B17A7 /* phone1icon1@3x.png in Resources */,
+				4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1110,7 +1130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C1DC2C31C117B10007701E4 /* TodayViewController.m in Sources */,
+				4C1DC2C31C117B10007701E4 /* TodayViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,6 +1234,11 @@
 				CODE_SIGN_ENTITLEMENTS = extention/extention.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/base/Tools",
+				);
 				INFOPLIST_FILE = extention/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1230,6 +1255,11 @@
 				CODE_SIGN_ENTITLEMENTS = extention/extention.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/base/Tools",
+				);
 				INFOPLIST_FILE = extention/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

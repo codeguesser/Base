@@ -19,22 +19,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frj-Ru-jQ5">
-                                <rect key="frame" x="16" y="34" width="32" height="32"/>
+                                <rect key="frame" x="24" y="20" width="32" height="32"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="h6n-fT-Ytz"/>
                                     <constraint firstAttribute="width" constant="32" id="lh3-yz-2PU"/>
                                 </constraints>
-                                <state key="normal" image="打卡icon4.png"/>
+                                <state key="normal" image="phone2icon2.png"/>
                                 <connections>
                                     <action selector="buttonClicked:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="17G-oy-nU0"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定位打卡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xU2-fW-xQN">
+                                <rect key="frame" x="18" y="60" width="44" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <constraints>
-                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="JCx-Bq-qge"/>
-                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="34" id="LJu-d2-7hO"/>
+                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="8" id="JCx-Bq-qge"/>
+                            <constraint firstItem="Frj-Ru-jQ5" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="20" id="LJu-d2-7hO"/>
+                            <constraint firstItem="xU2-fW-xQN" firstAttribute="top" secondItem="Frj-Ru-jQ5" secondAttribute="bottom" constant="8" id="So2-rL-iX4"/>
+                            <constraint firstItem="xU2-fW-xQN" firstAttribute="centerX" secondItem="Frj-Ru-jQ5" secondAttribute="centerX" id="q5q-Oo-vWV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -43,6 +52,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="100"/>
+                    <connections>
+                        <outlet property="touchIconButton" destination="Frj-Ru-jQ5" id="h4I-kk-S5E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -50,6 +62,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="打卡icon4.png" width="32" height="32"/>
+        <image name="phone2icon2.png" width="40" height="40"/>
     </resources>
 </document>
