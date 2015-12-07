@@ -27,12 +27,8 @@
     if (!ret) {
         NSLog(@"manager start failed!");
     }
-    
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = self;
-    
-    
-    
 }
 -(CGSize)preferredContentSize{
     return CGSizeMake([[UIScreen mainScreen]bounds].size.width, 100);
@@ -56,13 +52,16 @@
     completionHandler(NCUpdateResultNewData);
 
 }
-- (IBAction)buttonClicked:(UIButton *)sender {
-    [_locService startUserLocationService];
-}
+
 - (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets
 {
     return UIEdgeInsetsZero;
 }
+#pragma mark - custom methods
+- (IBAction)buttonClicked:(UIButton *)sender {
+    [_locService startUserLocationService];
+}
+#pragma mark - for baidu map
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (result) {
         NSLog(@"%@",result.address);
