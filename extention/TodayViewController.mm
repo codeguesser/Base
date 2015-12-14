@@ -8,12 +8,16 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
+#ifdef U_BAIDU_KEY
 #import <BaiduMapAPI/BMapKit.h>
-@interface TodayViewController () <NCWidgetProviding,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
+#endif
+@interface TodayViewController ()
+#ifdef U_BAIDU_KEY
+<NCWidgetProviding,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
     BMKMapManager* _mapManager;
     BMKLocationService *_locService;
 }
-
+#endif
 @end
 
 @implementation TodayViewController
@@ -22,13 +26,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+#ifdef U_BAIDU_KEY
     _mapManager = [[BMKMapManager alloc]init];
-    BOOL ret = [_mapManager start:@"G08ss0xZSWL0B4yk00FfTeWm"  generalDelegate:nil];
+    BOOL ret = [_mapManager start:U_BAIDU_KEY  generalDelegate:nil];
     if (!ret) {
         NSLog(@"manager start failed!");
     }
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = self;
+#endif
 }
 -(CGSize)preferredContentSize{
     return CGSizeMake([[UIScreen mainScreen]bounds].size.width, 100);
@@ -59,8 +65,11 @@
 }
 #pragma mark - custom methods
 - (IBAction)buttonClicked:(UIButton *)sender {
+#ifdef U_BAIDU_KEY
     [_locService startUserLocationService];
+#endif
 }
+#ifdef U_BAIDU_KEY
 #pragma mark - for baidu map
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (result) {
@@ -77,4 +86,5 @@
     [_geoCodeSearch reverseGeoCode:reverseGeoCodeSearchOption];
     [_locService stopUserLocationService];
 }
+#endif
 @end

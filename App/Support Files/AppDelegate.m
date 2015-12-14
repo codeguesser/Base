@@ -20,9 +20,9 @@
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
-//#import "TestPayViewController.h"
+#import "WebViewController.h"
 #import "CGContactService.h"
-#import "TestGameViewController.h"
+#import "TestViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
 }
@@ -65,7 +65,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestGameViewController *vc = [[TestGameViewController alloc] init];
+    WebViewController *vc = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

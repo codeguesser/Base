@@ -7,6 +7,7 @@
 //
 
 #import "TestGameViewController.h"
+#import "ScrollHeaderView.h"
 @import NotificationCenter;
 @interface TestGameViewController ()
 
@@ -24,6 +25,12 @@
     [bt setTitle:@"这是个按钮" forState:0];
     [self.view addSubview:bt];
     [bt addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    ScrollHeaderView *view1 = [[NSBundle mainBundle] loadNibNamed:@"ScrollHeaderView" owner:nil options:nil][0];
+    view1.frame = CGRectMake(0, 100, self.view.frame.size.width, 100);
+    view1.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:view1];
+    view1.images = @[[UIImage imageNamed:@"phone1"],[UIImage imageNamed:@"phone1"],[UIImage imageNamed:@"phone1"],[UIImage imageNamed:@"phone1"]];
 }
 
 - (void)didReceiveMemoryWarning {
