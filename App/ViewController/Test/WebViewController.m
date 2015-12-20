@@ -19,6 +19,7 @@
     NJKWebViewProgress *_progressProxy;
     NJKWebViewProgressView *_progressView;
     __weak IBOutlet UIWebView *_webView;
+    __weak IBOutlet NSLayoutConstraint *_layout;
 }
 
 @end
@@ -78,11 +79,17 @@
  */
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
+    CGRect frame = webView.frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+//    _layout.constant = fittingSize.width;
+}
+-(void)testJSContextWithWebView:(UIWebView *)webView{
     JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     context[@"webShell"] = self;
     NSData *data = [NSJSONSerialization dataWithJSONObject:@{@"mm":@"xx"} options:0 error:nil];
     [context evaluateScript:[NSString stringWithFormat:@"show(%@)",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]]];
-    
 }
 -(void)log:(NSString *)txt{
     

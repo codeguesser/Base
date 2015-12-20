@@ -23,6 +23,7 @@
 		4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */; };
 		4C35E6D41C06D5B600E22C95 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4C401BC41C1EBE430091899B /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C401BC31C1EBE430091899B /* test.html */; };
+		4C4908481C2546FA00D4244F /* CGGetWebpageHeightService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */; };
 		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
 		4C8CDE921C0EC1A200665E0B /* TestGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */; };
 		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; };
@@ -38,6 +39,11 @@
 		4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B51BFE198B0087294C /* APAuthV2Info.m */; };
 		4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB5E3B91BFE1A910087294C /* TestPayViewController.m */; };
 		4CB5E3BC1BFE1A910087294C /* TestPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */; };
+		4CBBA1951C2695FC0047955F /* test 2.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1901C2695FC0047955F /* test 2.html */; };
+		4CBBA1961C2695FC0047955F /* test 3.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1911C2695FC0047955F /* test 3.html */; };
+		4CBBA1971C2695FC0047955F /* test 4.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1921C2695FC0047955F /* test 4.html */; };
+		4CBBA1981C2695FC0047955F /* test 5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1931C2695FC0047955F /* test 5.html */; };
+		4CBBA1991C2695FC0047955F /* test 6.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1941C2695FC0047955F /* test 6.html */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -192,6 +198,8 @@
 		4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PunchedCardButton.m; sourceTree = "<group>"; };
 		4C35E6D31C06D5B600E22C95 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		4C401BC31C1EBE430091899B /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		4C4908461C2546FA00D4244F /* CGGetWebpageHeightService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGetWebpageHeightService.h; sourceTree = "<group>"; };
+		4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGetWebpageHeightService.m; sourceTree = "<group>"; };
 		4C4B6B941C05B4B600ED4983 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		4C4B6B951C05B4B600ED4983 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -219,6 +227,11 @@
 		4CB5E3B81BFE1A910087294C /* TestPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPayViewController.h; sourceTree = "<group>"; };
 		4CB5E3B91BFE1A910087294C /* TestPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPayViewController.m; sourceTree = "<group>"; };
 		4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestPayViewController.xib; sourceTree = "<group>"; };
+		4CBBA1901C2695FC0047955F /* test 2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 2.html"; sourceTree = "<group>"; };
+		4CBBA1911C2695FC0047955F /* test 3.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 3.html"; sourceTree = "<group>"; };
+		4CBBA1921C2695FC0047955F /* test 4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 4.html"; sourceTree = "<group>"; };
+		4CBBA1931C2695FC0047955F /* test 5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 5.html"; sourceTree = "<group>"; };
+		4CBBA1941C2695FC0047955F /* test 6.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 6.html"; sourceTree = "<group>"; };
 		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
@@ -506,6 +519,8 @@
 				4CA532C31BF0868800F9352E /* CGNetwork.m */,
 				4C959A961BFC078B009E276F /* CGAreaService.h */,
 				4C959A971BFC078B009E276F /* CGAreaService.m */,
+				4C4908461C2546FA00D4244F /* CGGetWebpageHeightService.h */,
+				4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */,
 				4C3273C81BFDC39A00E32A28 /* CGContactService.h */,
 				4C3273C91BFDC39A00E32A28 /* CGContactService.m */,
 			);
@@ -723,6 +738,11 @@
 		4CDC1C711BC79AAB00137D24 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4CBBA1901C2695FC0047955F /* test 2.html */,
+				4CBBA1911C2695FC0047955F /* test 3.html */,
+				4CBBA1921C2695FC0047955F /* test 4.html */,
+				4CBBA1931C2695FC0047955F /* test 5.html */,
+				4CBBA1941C2695FC0047955F /* test 6.html */,
 				4C401BC31C1EBE430091899B /* test.html */,
 				4CDC1C721BC79AAB00137D24 /* 372.txt */,
 				4CDC1C731BC79AAB00137D24 /* client.p12 */,
@@ -1026,6 +1046,7 @@
 			files = (
 				4CDC1CEF1BC79AAB00137D24 /* 名片icon3.png in Resources */,
 				4CDC1CEB1BC79AAB00137D24 /* tit3.png in Resources */,
+				4CBBA1971C2695FC0047955F /* test 4.html in Resources */,
 				4CDC1D181BC79AAB00137D24 /* WebViewController.xib in Resources */,
 				4CDC1CF01BC79AAB00137D24 /* 名片icon4.png in Resources */,
 				4CDC1CE01BC79AAB00137D24 /* background@3x.png in Resources */,
@@ -1051,7 +1072,9 @@
 				4C2F9E291C17DE0500367CD0 /* ScrollHeaderView.xib in Resources */,
 				4CDC1CDE1BC79AAB00137D24 /* client.pfx in Resources */,
 				4CDC1D0F1BC79AAB00137D24 /* TestLayoutViewController.xib in Resources */,
+				4CBBA1991C2695FC0047955F /* test 6.html in Resources */,
 				4CDC1CF71BC79AAB00137D24 /* myimage.jpeg in Resources */,
+				4CBBA1951C2695FC0047955F /* test 2.html in Resources */,
 				4CDC1CD41BC79AAB00137D24 /* TableViewCell.xib in Resources */,
 				4CDC1CD01BC79AAB00137D24 /* Cell.xib in Resources */,
 				4CDC1D081BC79AAB00137D24 /* TableViewController.xib in Resources */,
@@ -1067,8 +1090,10 @@
 				4CDC1CF11BC79AAB00137D24 /* 打卡icon4@3x.png in Resources */,
 				4CDC1CE51BC79AAB00137D24 /* phone2@3x.png in Resources */,
 				4CDC1CDD1BC79AAB00137D24 /* client.p12 in Resources */,
+				4CBBA1981C2695FC0047955F /* test 5.html in Resources */,
 				4CDC1D0C1BC79AAB00137D24 /* TestAttributeViewController.xib in Resources */,
 				4CB183C41BE3431B00FCDF3B /* HomeContactView.xib in Resources */,
+				4CBBA1961C2695FC0047955F /* test 3.html in Resources */,
 				4C0DAEB81BDA32C500E208EA /* TestViewController.xib in Resources */,
 				4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */,
 				4CDC1CE21BC79AAB00137D24 /* circle2.png in Resources */,
@@ -1184,6 +1209,7 @@
 				4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */,
 				4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */,
 				4CDC1CD71BC79AAB00137D24 /* ItemEntity.m in Sources */,
+				4C4908481C2546FA00D4244F /* CGGetWebpageHeightService.m in Sources */,
 				4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */,
 				4CDC1D161BC79AAB00137D24 /* UserProtectViewController.m in Sources */,
 				4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */,

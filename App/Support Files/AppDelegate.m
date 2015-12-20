@@ -23,6 +23,7 @@
 #import "WebViewController.h"
 #import "CGContactService.h"
 #import "TestViewController.h"
+#import "CGGetWebpageHeightService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
 }
@@ -58,6 +59,14 @@
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
 //    service = [CGContactService service];
     [self setupNetworkDemo2];
+    CGGetWebpageHeightService *whs = [[CGGetWebpageHeightService alloc]init];
+    whs.size = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+    whs.htmls = @[
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test 2" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test 3" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test 4" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test 5" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test 6" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil],
+                  ];
+    whs.finishLoading = ^(NSArray<NSDictionary<NSString *,NSNumber *> *> *arr) {
+        NSLog(@"%@",arr);
+    };
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
