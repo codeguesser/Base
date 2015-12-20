@@ -131,6 +131,9 @@ static UIWebView *serverWebView;
                     }
                 }
                 if (isAllSuccessed) {
+                    [_taskList sortedArrayUsingComparator:^NSComparisonResult(WebHeightOperation * obj1, WebHeightOperation *  obj2) {
+                        return [obj1.tag compare:obj2.tag];
+                    }];
                     self.finishLoading(_taskList);
                 }
             }];
