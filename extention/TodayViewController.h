@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-//#define U_BAIDU_KEY @"G08ss0xZSWL0B4yk00FfTeWm"
 @interface TodayViewController : UIViewController{
     
+    __weak IBOutlet UILabel *resultlabel;
     __weak IBOutlet UIButton *touchIconButton;
 }
 @end

@@ -11,6 +11,7 @@
 #import "Micro.h"
 #import "ShareHandle.h"
 #pragma mark - notification const
+UIKIT_EXTERN NSString *const kCGNotificationUserStatusChanged;
 UIKIT_EXTERN NSString *const CGTestNotification;
 /*!
  @brief  支付宝的支付成功消息
@@ -60,7 +61,6 @@ UIKIT_EXTERN NSString *const kCGFalseTag;
 #endif
 #define U_BAIDU_KEY @"ImZ1b3Kyc0c9QsuGold6RED6"
 #ifdef U_BAIDU_KEY
-UIKIT_EXTERN NSString *const CGBaiduGetLocationNotification;
 UIKIT_EXTERN NSString *const CGBaiduGetLocationAttributeNotification;
 #endif
 //#define BuglyAppId @"900005994"//Bugly App ID 上传crash信息用的，注释掉即是不上传

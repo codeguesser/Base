@@ -7,8 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
+@interface CGLocationData:NSObject
+@property(nonatomic,strong)NSString *address;
+@property(nonatomic,strong)CLLocation *location;
++(id)locationDataWithAddress:(NSString *)address location:(CLLocation *)location;
+@end
 @interface CGLocationService : NSObject
 @property(nonatomic,strong)void(^clickAction)();
 -(void)startLocation;
+- (instancetype)initWithoutGetLocation;
 @end

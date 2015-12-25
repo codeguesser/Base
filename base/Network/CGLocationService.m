@@ -10,6 +10,14 @@
 #ifdef U_BAIDU_KEY
 #import <BaiduMapAPI/BMapKit.h>
 #endif
+@implementation CGLocationData
++(id)locationDataWithAddress:(NSString *)address location:(CLLocation *)location{
+    CGLocationData *d = [[CGLocationData alloc]init];
+    d.address =  address;
+    d.location = location;
+    return d;
+}
+@end
 
 @interface CGLocationService()
 #ifdef U_BAIDU_KEY
@@ -24,26 +32,52 @@
 {
     self = [super init];
     if (self) {
+        
+#ifdef U_BAIDU_KEY
+        _mapManager = [[BMKMapManager alloc]init];
+        // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+        BOOL ret = [_mapManager start:U_BAIDU_KEY  generalDelegate:nil];
+        if (!ret) {
+            NSLog(@"manager start failed!");
+        }
+        //设置定位精确度，默认：kCLLocationAccuracyBest
+        [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        //指定最小距离更新(米)，默认：kCLDistanceFilterNone
+        [BMKLocationService setLocationDistanceFilter:50.f];
+        
+        //初始化BMKLocationService
+        _locService = [[BMKLocationService alloc]init];
+        _locService.delegate = self;
+#endif
         [self startLocation];
+    }
+    return self;
+}
+- (instancetype)initWithoutGetLocation
+{
+    self = [super init];
+    if (self) {
+#ifdef U_BAIDU_KEY
+        _mapManager = [[BMKMapManager alloc]init];
+        // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+        BOOL ret = [_mapManager start:U_BAIDU_KEY  generalDelegate:nil];
+        if (!ret) {
+            NSLog(@"manager start failed!");
+        }
+        //设置定位精确度，默认：kCLLocationAccuracyBest
+        [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        //指定最小距离更新(米)，默认：kCLDistanceFilterNone
+        [BMKLocationService setLocationDistanceFilter:50.f];
+        
+        //初始化BMKLocationService
+        _locService = [[BMKLocationService alloc]init];
+        _locService.delegate = self;
+#endif
     }
     return self;
 }
 -(void)startLocation{
 #ifdef U_BAIDU_KEY
-    _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
-    BOOL ret = [_mapManager start:U_BAIDU_KEY  generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
-    //设置定位精确度，默认：kCLLocationAccuracyBest
-    [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
-    //指定最小距离更新(米)，默认：kCLDistanceFilterNone
-    [BMKLocationService setLocationDistanceFilter:50.f];
-    
-    //初始化BMKLocationService
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
     [_locService startUserLocationService];
 #endif
 }
@@ -58,11 +92,10 @@
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     [self geocodeLocation:userLocation];
-    [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationNotification object:userLocation];
     [_locService stopUserLocationService];
 }
 -(void)didFailToLocateUserWithError:(NSError *)error{
-    [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationAttributeNotification object:nil];
     [_locService stopUserLocationService];
 }
 - (void)geocodeLocation:(BMKUserLocation *)userLocation
@@ -71,16 +104,14 @@
     _geoCodeSearch.delegate = self;
     BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeoCodeSearchOption.reverseGeoPoint = userLocation.location.coordinate;
-    BOOL seachSendSucess = [_geoCodeSearch reverseGeoCode:reverseGeoCodeSearchOption];
-    if (!seachSendSucess) {
-        
-    }
+    [_geoCodeSearch reverseGeoCode:reverseGeoCodeSearchOption];
 }
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (result) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationAttributeNotification object:result];
+        [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationAttributeNotification object:[CGLocationData locationDataWithAddress:result.address location:[[CLLocation alloc] initWithLatitude:result.location.latitude longitude:result.location.longitude]]];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationAttributeNotification object:nil];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:CGBaiduGetLocationAttributeNotification object:nil];
 }
 #endif
 @end

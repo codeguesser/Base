@@ -8,14 +8,12 @@
 
 #import "TodayViewController.h"
 #import <NotificationCenter/NotificationCenter.h>
-#ifdef U_BAIDU_KEY
-#import <BaiduMapAPI/BMapKit.h>
-#endif
+#import "CGLocationService.h"
+#import <UIKit/UIKit.h>
 @interface TodayViewController ()
 #ifdef U_BAIDU_KEY
-<NCWidgetProviding,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
-    BMKMapManager* _mapManager;
-    BMKLocationService *_locService;
+<NCWidgetProviding>{
+    CGLocationService *service;
 }
 #endif
 @end
@@ -25,16 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-#ifdef U_BAIDU_KEY
-    _mapManager = [[BMKMapManager alloc]init];
-    BOOL ret = [_mapManager start:U_BAIDU_KEY  generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
-    _locService = [[BMKLocationService alloc]init];
-    _locService.delegate = self;
-#endif
+    resultlabel.adjustsFontSizeToFitWidth = YES;
+    service = [[CGLocationService alloc]initWithoutGetLocation];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
 }
 -(CGSize)preferredContentSize{
     return CGSizeMake([[UIScreen mainScreen]bounds].size.width, 100);
@@ -65,26 +56,20 @@
 }
 #pragma mark - custom methods
 - (IBAction)buttonClicked:(UIButton *)sender {
-#ifdef U_BAIDU_KEY
-    [_locService startUserLocationService];
-#endif
+    [service startLocation];
 }
+-(void)getLocation:(NSNotification *)no{
 #ifdef U_BAIDU_KEY
-#pragma mark - for baidu map
--(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
+    CGLocationData *result = no.object;
     if (result) {
-        NSLog(@"%@",result.address);
+        NSLog(@"%@,%f,%f",result.address,result.location.coordinate.latitude,result.location.coordinate.longitude);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [resultlabel setText:[[NSDate date].description stringByAppendingString:result.address]];
+        });
+    }else{
+        
     }
-}
-- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
-{
-    NSLog(@"%f,%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-    BMKGeoCodeSearch *_geoCodeSearch = [[BMKGeoCodeSearch alloc]init];
-    _geoCodeSearch.delegate = self;
-    BMKReverseGeoCodeOption *reverseGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
-    reverseGeoCodeSearchOption.reverseGeoPoint = userLocation.location.coordinate;
-    [_geoCodeSearch reverseGeoCode:reverseGeoCodeSearchOption];
-    [_locService stopUserLocationService];
-}
 #endif
+    
+}
 @end

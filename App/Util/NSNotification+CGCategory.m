@@ -25,7 +25,6 @@ NSString *const CGAlipayFalseNotification = @"CGAlipayFalseNotification";
 
 
 
-NSString *const CGBaiduGetLocationNotification = @"CGBaiduGetLocationNotification";
 NSString *const CGBaiduGetLocationAttributeNotification = @"CGBaiduGetLocationAttributeNotification";
 
 @implementation NSNotificationCenter(CGCategory)

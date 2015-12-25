@@ -46,6 +46,8 @@
 		4CBBA1991C2695FC0047955F /* test 6.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1941C2695FC0047955F /* test 6.html */; };
 		4CD2FD6D1C2CCD9C008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
 		4CD2FD6E1C2CF5F8008A8B4F /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
+		4CD2FD6F1C2D1598008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
+		4CD2FD711C2D1866008A8B4F /* NSNotification+CGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C931BC79AAB00137D24 /* NSNotification+CGCategory.m */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -140,6 +142,7 @@
 		4CDC1D291BC79BF500137D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D251BC79BF500137D24 /* AppDelegate.m */; };
 		4CDC1D2E1BC79CA300137D24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */; };
 		4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */; };
+		4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4CF46B0A1C2D2F0D008AD7FF /* ca.cer */; };
 		4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7E1BC79AAB00137D24 /* phone2icon2@3x.png */; };
 		4CF707291C153340008B17A7 /* phone1icon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7C1BC79AAB00137D24 /* phone1icon1@3x.png */; };
 		4CF7072A1C154CE4008B17A7 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
@@ -236,6 +239,7 @@
 		4CBBA1941C2695FC0047955F /* test 6.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 6.html"; sourceTree = "<group>"; };
 		4CD2FD6B1C2CCD9C008A8B4F /* CGLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLocationService.h; sourceTree = "<group>"; };
 		4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGLocationService.m; sourceTree = "<group>"; };
+		4CD2FD701C2D17CD008A8B4F /* base-extention-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "base-extention-Prefix.pch"; sourceTree = "<group>"; };
 		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 		4CDC1D261BC79BF500137D24 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4CDC1D2D1BC79CA300137D24 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4CF46B0A1C2D2F0D008AD7FF /* ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cer; sourceTree = "<group>"; };
 		4CF7072B1C154D73008B17A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -452,6 +457,7 @@
 				4C1DC2C21C117B10007701E4 /* TodayViewController.mm */,
 				4C1DC2C41C117B10007701E4 /* MainInterface.storyboard */,
 				4C1DC2C71C117B10007701E4 /* Info.plist */,
+				4CD2FD701C2D17CD008A8B4F /* base-extention-Prefix.pch */,
 			);
 			path = extention;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				4CBBA1931C2695FC0047955F /* test 5.html */,
 				4CBBA1941C2695FC0047955F /* test 6.html */,
 				4C401BC31C1EBE430091899B /* test.html */,
+				4CF46B0A1C2D2F0D008AD7FF /* ca.cer */,
 				4CDC1C721BC79AAB00137D24 /* 372.txt */,
 				4CDC1C731BC79AAB00137D24 /* client.p12 */,
 				4CDC1C741BC79AAB00137D24 /* client.pfx */,
@@ -926,8 +933,8 @@
 				4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */,
 				4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */,
 				4CDC1D241BC79BF500137D24 /* AppDelegate.h */,
-				4CDC1D261BC79BF500137D24 /* Config.h */,
 				4CDC1D251BC79BF500137D24 /* AppDelegate.m */,
+				4CDC1D261BC79BF500137D24 /* Config.h */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1107,6 +1114,7 @@
 				4CDC1D131BC79AAB00137D24 /* ContactViewController.xib in Resources */,
 				4CDC1C3D1BC79A3D00137D24 /* color_green@2x.png in Resources */,
 				4CDC1CEC1BC79AAB00137D24 /* tit4.png in Resources */,
+				4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */,
 				4CDC1CF41BC79AAB00137D24 /* 通讯录icon3.png in Resources */,
 				4CDC1C3B1BC79A3D00137D24 /* 37x-Checkmark.png in Resources */,
 				4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */,
@@ -1171,7 +1179,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CD2FD6F1C2D1598008A8B4F /* CGLocationService.m in Sources */,
 				4C1DC2C31C117B10007701E4 /* TodayViewController.mm in Sources */,
+				4CD2FD711C2D1866008A8B4F /* NSNotification+CGCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1283,6 +1293,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/base/Tools",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "extention/base-extention-Prefix.pch";
 				INFOPLIST_FILE = extention/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1304,6 +1316,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/base/Tools",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "extention/base-extention-Prefix.pch";
 				INFOPLIST_FILE = extention/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

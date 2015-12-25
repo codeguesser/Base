@@ -7,6 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-UIKIT_EXTERN NSString *const kCGNotificationUserStatusChanged;
+
 @interface NSNotificationCenter(CGCategory)
 @end

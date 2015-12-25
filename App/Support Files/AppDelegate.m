@@ -55,9 +55,10 @@
 //    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        service2 = [[CGLocationService alloc]init];
-    });
+//    //地图服务
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        service2 = [[CGLocationService alloc]init];
+//    });
 //    [service2 startLocation];
 //   调用地理位置
     //    CGAreaService *service = [CGAreaService service];
@@ -73,7 +74,7 @@
 //    whs.finishLoading = ^(NSArray<NSDictionary<NSString *,NSNumber *> *> *arr) {
 //        NSLog(@"%@",arr);
 //    };
-    [self setupNetworkDemo2];
+    [self setupHTTPSNetworkDemo];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
@@ -126,8 +127,8 @@
     [headerFields setValue:@"iOS" forKey:@"x-client-identifier"];
     MKNetworkHost *engine = [[MKNetworkHost alloc] initWithHostName:@"www.codeguesser.cn"];
     MKNetworkRequest *op = [engine requestWithPath:@"/" params:nil httpMethod:@"GET" body:nil ssl:YES];
-    op.clientCertificate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"client.p12"];
-    op.clientCertificatePassword = @"1234";
+    op.clientCertificate = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"ca.cer"];
+    op.clientCertificatePassword = @"";
     [op addCompletionHandler:^(MKNetworkRequest *completedRequest) {
         DDLogInfo(@"%@",completedRequest.responseAsJSON);
     }];
