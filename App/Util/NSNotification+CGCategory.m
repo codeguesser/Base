@@ -23,6 +23,11 @@ NSString *const CGTestNotification = @"CGTestNotification";
 NSString *const CGAlipaySuccessNotification = @"CGAlipaySuccessNotification";
 NSString *const CGAlipayFalseNotification = @"CGAlipayFalseNotification";
 
+
+
+NSString *const CGBaiduGetLocationNotification = @"CGBaiduGetLocationNotification";
+NSString *const CGBaiduGetLocationAttributeNotification = @"CGBaiduGetLocationAttributeNotification";
+
 @implementation NSNotificationCenter(CGCategory)
 
 @end

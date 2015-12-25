@@ -16,16 +16,18 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-#import "WebViewController.h"
+//#import "WebViewController.h"
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
+#import "CGLocationService.h"
 #import "WebViewController.h"
 #import "CGContactService.h"
 #import "TestViewController.h"
 #import "CGGetWebpageHeightService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
+    CGLocationService *service2;
 }
 #warning 什么东西来的
 @property NSString<UIDataSourceModelAssociation> *xx;
@@ -53,6 +55,10 @@
 //    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
 //    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        service2 = [[CGLocationService alloc]init];
+    });
+//    [service2 startLocation];
 //   调用地理位置
     //    CGAreaService *service = [CGAreaService service];
     //调用本地联系人
@@ -75,7 +81,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    WebViewController *vc = [[WebViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

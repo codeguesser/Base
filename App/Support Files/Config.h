@@ -58,7 +58,11 @@ UIKIT_EXTERN NSString *const kCGFalseTag;
 #else
 #define U_CHANNEL_TAG @"RELEASE"
 #endif
-
+#define U_BAIDU_KEY @"ImZ1b3Kyc0c9QsuGold6RED6"
+#ifdef U_BAIDU_KEY
+UIKIT_EXTERN NSString *const CGBaiduGetLocationNotification;
+UIKIT_EXTERN NSString *const CGBaiduGetLocationAttributeNotification;
+#endif
 //#define BuglyAppId @"900005994"//Bugly App ID 上传crash信息用的，注释掉即是不上传
 //#define AppStoreAppId @"1231231231"//AppStore里的应用程序ID，提醒用户评分使用，注释即是不提示
 #define XingeAppId 2200165541//信鸽推送需要的id，下面的key不写都不行，注释任意一行就表示不支持信鸽

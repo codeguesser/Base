@@ -44,6 +44,8 @@
 		4CBBA1971C2695FC0047955F /* test 4.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1921C2695FC0047955F /* test 4.html */; };
 		4CBBA1981C2695FC0047955F /* test 5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1931C2695FC0047955F /* test 5.html */; };
 		4CBBA1991C2695FC0047955F /* test 6.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1941C2695FC0047955F /* test 6.html */; };
+		4CD2FD6D1C2CCD9C008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
+		4CD2FD6E1C2CF5F8008A8B4F /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -232,6 +234,8 @@
 		4CBBA1921C2695FC0047955F /* test 4.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 4.html"; sourceTree = "<group>"; };
 		4CBBA1931C2695FC0047955F /* test 5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 5.html"; sourceTree = "<group>"; };
 		4CBBA1941C2695FC0047955F /* test 6.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "test 6.html"; sourceTree = "<group>"; };
+		4CD2FD6B1C2CCD9C008A8B4F /* CGLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGLocationService.h; sourceTree = "<group>"; };
+		4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGLocationService.m; sourceTree = "<group>"; };
 		4CD5E9411BC8A7AF00E04EEB /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
@@ -343,8 +347,6 @@
 		4CDC1CA11BC79AAB00137D24 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		4CDC1CA21BC79AAB00137D24 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4CDC1CA31BC79AAB00137D24 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		4CDC1CA51BC79AAB00137D24 /* BaiduMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMapViewController.h; sourceTree = "<group>"; };
-		4CDC1CA61BC79AAB00137D24 /* BaiduMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduMapViewController.m; sourceTree = "<group>"; };
 		4CDC1CA71BC79AAB00137D24 /* LoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingViewController.h; sourceTree = "<group>"; };
 		4CDC1CA81BC79AAB00137D24 /* LoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingViewController.m; sourceTree = "<group>"; };
 		4CDC1CA91BC79AAB00137D24 /* LoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingViewController.xib; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			files = (
 				4C35E6D41C06D5B600E22C95 /* CoreFoundation.framework in Frameworks */,
 				4CDC1C431BC79A3D00137D24 /* Reveal.framework in Frameworks */,
+				4CD2FD6E1C2CF5F8008A8B4F /* BaiduMapAPI.framework in Frameworks */,
 				62E62F4E822F86F2BE8A3E27 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,6 +526,8 @@
 				4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */,
 				4C3273C81BFDC39A00E32A28 /* CGContactService.h */,
 				4C3273C91BFDC39A00E32A28 /* CGContactService.m */,
+				4CD2FD6B1C2CCD9C008A8B4F /* CGLocationService.h */,
+				4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -843,8 +848,6 @@
 		4CDC1CA41BC79AAB00137D24 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				4CDC1CA51BC79AAB00137D24 /* BaiduMapViewController.h */,
-				4CDC1CA61BC79AAB00137D24 /* BaiduMapViewController.m */,
 				4CDC1CA71BC79AAB00137D24 /* LoadingViewController.h */,
 				4CDC1CA81BC79AAB00137D24 /* LoadingViewController.m */,
 				4CDC1CA91BC79AAB00137D24 /* LoadingViewController.xib */,
@@ -923,8 +926,8 @@
 				4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */,
 				4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */,
 				4CDC1D241BC79BF500137D24 /* AppDelegate.h */,
-				4CDC1D251BC79BF500137D24 /* AppDelegate.m */,
 				4CDC1D261BC79BF500137D24 /* Config.h */,
+				4CDC1D251BC79BF500137D24 /* AppDelegate.m */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -1234,6 +1237,7 @@
 				4C2F9E271C17DDF500367CD0 /* ScrollHeaderView.m in Sources */,
 				4CDC1CFC1BC79AAB00137D24 /* BookDetailViewController.m in Sources */,
 				4CDC1C481BC79A3D00137D24 /* NSDateFormatter+Category.m in Sources */,
+				4CD2FD6D1C2CCD9C008A8B4F /* CGLocationService.m in Sources */,
 				4CDC1CCF1BC79AAB00137D24 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
