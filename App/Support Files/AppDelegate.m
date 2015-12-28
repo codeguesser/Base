@@ -25,6 +25,7 @@
 #import "CGContactService.h"
 #import "TestViewController.h"
 #import "CGGetWebpageHeightService.h"
+#import "TestImageMemoryViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
     CGLocationService *service2;
@@ -46,6 +47,7 @@
     [[UIAlertView appearance]setTintColor:[UIColor greenColor]];
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
+    
 
     //entity的测试，以及拼音的使用
 //    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
@@ -82,7 +84,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
+    TestImageMemoryViewController *vc = [[TestImageMemoryViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

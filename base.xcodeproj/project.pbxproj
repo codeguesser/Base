@@ -16,6 +16,7 @@
 		4C1DC2CA1C117B10007701E4 /* extention.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4C1DC2BD1C117B10007701E4 /* extention.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4C2F9E271C17DDF500367CD0 /* ScrollHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F9E261C17DDF500367CD0 /* ScrollHeaderView.m */; };
 		4C2F9E291C17DE0500367CD0 /* ScrollHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F9E281C17DE0500367CD0 /* ScrollHeaderView.xib */; };
+		4C2FF3841C30C14200CC60C4 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
 		4C3266A41BFAD16B00AD5F7B /* TestContactManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CB81BC79AAB00137D24 /* TestContactManagerViewController.m */; };
 		4C3273CA1BFDC39A00E32A28 /* CGContactService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C3273C91BFDC39A00E32A28 /* CGContactService.m */; };
 		4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34D7F41BEB35EB00632623 /* PunchedCardViewController.m */; };
@@ -25,6 +26,8 @@
 		4C401BC41C1EBE430091899B /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C401BC31C1EBE430091899B /* test.html */; };
 		4C4908481C2546FA00D4244F /* CGGetWebpageHeightService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */; };
 		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
+		4C8A71591C30D64900729EF2 /* TestImageMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */; };
+		4C8A715A1C30D64900729EF2 /* TestImageMemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */; };
 		4C8CDE921C0EC1A200665E0B /* TestGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */; };
 		4C8F62571C016226007E22AC /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8F62561C016226007E22AC /* StarView.m */; };
 		4C959A981BFC078B009E276F /* CGAreaService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C959A971BFC078B009E276F /* CGAreaService.m */; };
@@ -44,8 +47,6 @@
 		4CBBA1971C2695FC0047955F /* test 4.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1921C2695FC0047955F /* test 4.html */; };
 		4CBBA1981C2695FC0047955F /* test 5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1931C2695FC0047955F /* test 5.html */; };
 		4CBBA1991C2695FC0047955F /* test 6.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1941C2695FC0047955F /* test 6.html */; };
-		4CD2FD6D1C2CCD9C008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
-		4CD2FD6E1C2CF5F8008A8B4F /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
 		4CD2FD6F1C2D1598008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
 		4CD2FD711C2D1866008A8B4F /* NSNotification+CGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C931BC79AAB00137D24 /* NSNotification+CGCategory.m */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
@@ -145,7 +146,6 @@
 		4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4CF46B0A1C2D2F0D008AD7FF /* ca.cer */; };
 		4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7E1BC79AAB00137D24 /* phone2icon2@3x.png */; };
 		4CF707291C153340008B17A7 /* phone1icon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7C1BC79AAB00137D24 /* phone1icon1@3x.png */; };
-		4CF7072A1C154CE4008B17A7 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
 		4CF7072C1C154D73008B17A7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072B1C154D73008B17A7 /* CFNetwork.framework */; };
 		4CF7072E1C154DCC008B17A7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */; };
 		4CF707301C154E3D008B17A7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */; };
@@ -208,6 +208,9 @@
 		4C4B6B941C05B4B600ED4983 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		4C4B6B951C05B4B600ED4983 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
 		4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		4C8A71561C30D64900729EF2 /* TestImageMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestImageMemoryViewController.h; sourceTree = "<group>"; };
+		4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestImageMemoryViewController.m; sourceTree = "<group>"; };
+		4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestImageMemoryViewController.xib; sourceTree = "<group>"; };
 		4C8CDE901C0EC1A200665E0B /* TestGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestGameViewController.h; sourceTree = "<group>"; };
 		4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestGameViewController.m; sourceTree = "<group>"; };
 		4C8F62551C016226007E22AC /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
@@ -414,9 +417,9 @@
 			files = (
 				4CF707321C154F6C008B17A7 /* UIKit.framework in Frameworks */,
 				4CF707301C154E3D008B17A7 /* CoreLocation.framework in Frameworks */,
+				4C2FF3841C30C14200CC60C4 /* BaiduMapAPI.framework in Frameworks */,
 				4CF7072E1C154DCC008B17A7 /* SystemConfiguration.framework in Frameworks */,
 				4CF7072C1C154D73008B17A7 /* CFNetwork.framework in Frameworks */,
-				4CF7072A1C154CE4008B17A7 /* BaiduMapAPI.framework in Frameworks */,
 				4C1DC2BF1C117B10007701E4 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +430,6 @@
 			files = (
 				4C35E6D41C06D5B600E22C95 /* CoreFoundation.framework in Frameworks */,
 				4CDC1C431BC79A3D00137D24 /* Reveal.framework in Frameworks */,
-				4CD2FD6E1C2CF5F8008A8B4F /* BaiduMapAPI.framework in Frameworks */,
 				62E62F4E822F86F2BE8A3E27 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -897,6 +899,9 @@
 				4CB5E3BA1BFE1A910087294C /* TestPayViewController.xib */,
 				4C8CDE901C0EC1A200665E0B /* TestGameViewController.h */,
 				4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */,
+				4C8A71561C30D64900729EF2 /* TestImageMemoryViewController.h */,
+				4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */,
+				4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -1117,6 +1122,7 @@
 				4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */,
 				4CDC1CF41BC79AAB00137D24 /* 通讯录icon3.png in Resources */,
 				4CDC1C3B1BC79A3D00137D24 /* 37x-Checkmark.png in Resources */,
+				4C8A715A1C30D64900729EF2 /* TestImageMemoryViewController.xib in Resources */,
 				4C34D7F71BEB35EB00632623 /* PunchedCardViewController.xib in Resources */,
 				4CDC1C3E1BC79A3D00137D24 /* area.plist in Resources */,
 				4CDC1CF21BC79AAB00137D24 /* 通讯录icon1.png in Resources */,
@@ -1210,6 +1216,7 @@
 				4CDC1C391BC79A3D00137D24 /* CGResult.m in Sources */,
 				4CDC1C441BC79A3D00137D24 /* MBProgressHUD+CGCategory.m in Sources */,
 				4CA532C41BF0868800F9352E /* CGNetwork.m in Sources */,
+				4C8A71591C30D64900729EF2 /* TestImageMemoryViewController.m in Sources */,
 				4CDC1D111BC79AAB00137D24 /* TestViewController.m in Sources */,
 				4CB5E3B61BFE198B0087294C /* Order.m in Sources */,
 				4C8CDE921C0EC1A200665E0B /* TestGameViewController.m in Sources */,
@@ -1247,7 +1254,6 @@
 				4C2F9E271C17DDF500367CD0 /* ScrollHeaderView.m in Sources */,
 				4CDC1CFC1BC79AAB00137D24 /* BookDetailViewController.m in Sources */,
 				4CDC1C481BC79A3D00137D24 /* NSDateFormatter+Category.m in Sources */,
-				4CD2FD6D1C2CCD9C008A8B4F /* CGLocationService.m in Sources */,
 				4CDC1CCF1BC79AAB00137D24 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -59,7 +59,7 @@ UIKIT_EXTERN NSString *const kCGFalseTag;
 #else
 #define U_CHANNEL_TAG @"RELEASE"
 #endif
-#define U_BAIDU_KEY @"ImZ1b3Kyc0c9QsuGold6RED6"
+//#define U_BAIDU_KEY @"ImZ1b3Kyc0c9QsuGold6RED6"
 #ifdef U_BAIDU_KEY
 UIKIT_EXTERN NSString *const CGBaiduGetLocationAttributeNotification;
 #endif
