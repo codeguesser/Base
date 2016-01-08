@@ -16,7 +16,7 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
-//#import "WebViewController.h"
+#import "WebViewController.h"
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
 #import "CGAreaService.h"
@@ -26,6 +26,7 @@
 #import "TestViewController.h"
 #import "CGGetWebpageHeightService.h"
 #import "TestImageMemoryViewController.h"
+#import "CGNetwork.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
     CGLocationService *service2;
@@ -76,7 +77,7 @@
 //    whs.finishLoading = ^(NSArray<NSDictionary<NSString *,NSNumber *> *> *arr) {
 //        NSLog(@"%@",arr);
 //    };
-    [self setupHTTPSNetworkDemo];
+//    [self setupHTTPSNetworkDemo];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{
@@ -84,7 +85,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestImageMemoryViewController *vc = [[TestImageMemoryViewController alloc] init];
+    WebViewController *vc = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
