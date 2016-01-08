@@ -47,6 +47,11 @@
     UILongPressGestureRecognizer *press = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressAction:)];
     [imageView addGestureRecognizer:press];
     
+    
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, 100, 100);
+    layer.backgroundColor = [[UIColor redColor] CGColor];
+    [imageView.layer addSublayer:layer];
 }
 -(void)longPressAction:(UILongPressGestureRecognizer *)sender{
     if (sender.state == UIGestureRecognizerStateBegan) {
@@ -55,13 +60,18 @@
         
         UIMenuController *menu = [UIMenuController sharedMenuController];
         [menu setTargetRect:CGRectMake(0, 0, 200, 200) inView:imageView];
-        [menu setMenuItems:@[[[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copyAction:)]]];
+        [menu setMenuItems:@[[[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(copyAction:)],[[UIMenuItem alloc] initWithTitle:@"分享.." action:@selector(shareAction:)]]];
         [menu setMenuVisible:YES animated:YES];
     }
     
 }
 -(void)copyAction:(UIMenuItem *)item{
-    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+}
+-(void)shareAction:(UIMenuItem *)item{
+    UIActivityViewController *avc = [[UIActivityViewController alloc]initWithActivityItems:@[[NSURL URLWithString:@"http://www.baidu.com"],@"title",@"contentcontent",[UIImage imageNamed:@"打卡icon4"]] applicationActivities:nil];
+    avc.excludedActivityTypes = @[UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,UIActivityTypePostToWeibo,UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo];
+    [self presentViewController:avc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

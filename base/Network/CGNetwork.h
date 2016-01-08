@@ -5,7 +5,14 @@
 //  Created by wsg on 15/11/9.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
-
+//  *********how to use it***********
+//
+//  if (![CGNetworkConnect isClassRegisted]) {
+//      [CGNetworkConnect registerClass:[CGNetworkConnect class]];
+//  }else{
+//      [CGNetworkConnect unregisterClass:[CGNetworkConnect class]];
+//  }
+//
 #import <Foundation/Foundation.h>
 #define kCGNetworkConnectNotification @"kCGNetworkConnectNotification"
 /*!
