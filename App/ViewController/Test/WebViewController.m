@@ -100,14 +100,14 @@
                     }];
                 }];
 //                DDLogInfo(@"%@",webHtml);
-                /*
-                NSRegularExpression *expression2 = [NSRegularExpression regularExpressionWithPattern:@"<td valign=\"TOP\"><input type=\"text\"(.*?)value=\"(.*?)\"(.*?)</td>"
+                
+                NSRegularExpression *expression3 = [NSRegularExpression regularExpressionWithPattern:@"<td valign=\"TOP\"><input type=\"text\"(.*?)value=\"(.*?)\"(.*?)</td>"
                                                                                              options:0
                                                                                                error:nil];
-                [expression2 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-                    NSLog(@"%@:%@",[webHtml substringWithRange:[result rangeAtIndex:2]],[webHtml substringWithRange:[result rangeAtIndex:6]]);
+                [expression3 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+                    NSLog(@"%@",[webHtml substringWithRange:[result rangeAtIndex:2]]);
                 }];
-                */
+                
                 webExcuteState = @"computed";
             }
         }
