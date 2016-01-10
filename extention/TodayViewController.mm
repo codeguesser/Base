@@ -24,8 +24,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     resultlabel.adjustsFontSizeToFitWidth = YES;
+#ifdef  U_BAIDU_KEY
     service = [[CGLocationService alloc]initWithoutGetLocation];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
+#endif
 }
 -(CGSize)preferredContentSize{
     return CGSizeMake([[UIScreen mainScreen]bounds].size.width, 100);
@@ -56,7 +58,9 @@
 }
 #pragma mark - custom methods
 - (IBAction)buttonClicked:(UIButton *)sender {
+#ifdef U_BAIDU_KEY
     [service startLocation];
+#endif
 }
 -(void)getLocation:(NSNotification *)no{
 #ifdef U_BAIDU_KEY
