@@ -90,11 +90,10 @@ static UIWebView *serverWebView;
 {
     self = [super init];
     if (self) {
-        UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-        [[[UIApplication sharedApplication] keyWindow]addSubview:view];
-        view.hidden = YES;
-        
         if(!serverWebView){
+            UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+            [[[UIApplication sharedApplication] keyWindow]addSubview:view];
+            view.hidden = YES;
             serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.size.width, self.size.height)];
             serverWebView.delegate = self;
             
