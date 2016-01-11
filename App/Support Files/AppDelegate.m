@@ -27,6 +27,7 @@
 #import "CGGetWebpageHeightService.h"
 #import "TestImageMemoryViewController.h"
 #import "CGNetwork.h"
+#import "CGGetProvidentFundService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
     CGLocationService *service2;
@@ -77,6 +78,8 @@
 //    whs.finishLoading = ^(NSArray<NSDictionary<NSString *,NSNumber *> *> *arr) {
 //        NSLog(@"%@",arr);
 //    };
+    //获取公积金内容
+    CGGetProvidentFundService *service = [CGGetProvidentFundService service];
 //    [self setupHTTPSNetworkDemo];
     return YES;
 }
@@ -85,7 +88,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    WebViewController *vc = [[WebViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];

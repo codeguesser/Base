@@ -144,6 +144,7 @@
 		4CDC1D2E1BC79CA300137D24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */; };
 		4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */; };
 		4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4CF46B0A1C2D2F0D008AD7FF /* ca.cer */; };
+		4CF528EB1C437CEB00AABB09 /* CGGetProvidentFundService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF528EA1C437CEB00AABB09 /* CGGetProvidentFundService.m */; };
 		4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7E1BC79AAB00137D24 /* phone2icon2@3x.png */; };
 		4CF707291C153340008B17A7 /* phone1icon1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7C1BC79AAB00137D24 /* phone1icon1@3x.png */; };
 		4CF7072C1C154D73008B17A7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF7072B1C154D73008B17A7 /* CFNetwork.framework */; };
@@ -402,6 +403,8 @@
 		4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4CDC1D2D1BC79CA300137D24 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4CF46B0A1C2D2F0D008AD7FF /* ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cer; sourceTree = "<group>"; };
+		4CF528E91C437CEB00AABB09 /* CGGetProvidentFundService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGetProvidentFundService.h; sourceTree = "<group>"; };
+		4CF528EA1C437CEB00AABB09 /* CGGetProvidentFundService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGetProvidentFundService.m; sourceTree = "<group>"; };
 		4CF7072B1C154D73008B17A7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4CF7072D1C154DCC008B17A7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4CF7072F1C154E3D008B17A7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -530,6 +533,8 @@
 				4CA532C31BF0868800F9352E /* CGNetwork.m */,
 				4C959A961BFC078B009E276F /* CGAreaService.h */,
 				4C959A971BFC078B009E276F /* CGAreaService.m */,
+				4CF528E91C437CEB00AABB09 /* CGGetProvidentFundService.h */,
+				4CF528EA1C437CEB00AABB09 /* CGGetProvidentFundService.m */,
 				4C4908461C2546FA00D4244F /* CGGetWebpageHeightService.h */,
 				4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */,
 				4C3273C81BFDC39A00E32A28 /* CGContactService.h */,
@@ -1231,6 +1236,7 @@
 				4CDC1CD71BC79AAB00137D24 /* ItemEntity.m in Sources */,
 				4C4908481C2546FA00D4244F /* CGGetWebpageHeightService.m in Sources */,
 				4C34D7F61BEB35EB00632623 /* PunchedCardViewController.m in Sources */,
+				4CF528EB1C437CEB00AABB09 /* CGGetProvidentFundService.m in Sources */,
 				4CDC1D161BC79AAB00137D24 /* UserProtectViewController.m in Sources */,
 				4CB5E3B71BFE198B0087294C /* APAuthV2Info.m in Sources */,
 				4CDC1C341BC79A3D00137D24 /* CGTableViewCell.m in Sources */,
