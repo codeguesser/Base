@@ -12,6 +12,17 @@
 @import JavaScriptCore;
 #import "ContactViewController.h"
 #import "CGNetwork.h"
+NS_ENUM(NSUInteger,IProvidentFundtype){
+    IProvidentFundtypeIndex=0,
+    IProvidentFundtypeAddTime=1,
+    IProvidentFundtypeCategory=2,
+    IProvidentFundtypeAddAmount=3,
+    IProvidentFundtypeMinAmount=4,
+    IProvidentFundtypeBalance=5,
+    IProvidentFundtypeMonth=6,
+};
+const NSString* IProvidentFundtypeNames[7]  = {@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"};
+
 @protocol TESTPROTO <JSExport>
 -(void)log:(NSString *)txt;
 @end
@@ -21,6 +32,7 @@
     __weak IBOutlet UIWebView *_webView;
     __weak IBOutlet NSLayoutConstraint *_layout;
     NSString * webExcuteState;
+    NSMutableArray *datas;
 }
 
 @end
@@ -35,6 +47,7 @@
     [self startLoadWeb];
     _webView.delegate = self;
     webExcuteState = @"unload";
+    datas = [NSMutableArray new];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(rightItemClicked:)];
 }
 -(void)addProgressView{
@@ -99,14 +112,36 @@
                         DDLogInfo(@"======%@,%@",[[targetStr2 substringWithRange:[result rangeAtIndex:2]] stringByReplacingOccurrencesOfString:@" " withString:@""],[[targetStr2 substringWithRange:[result rangeAtIndex:6]] stringByReplacingOccurrencesOfString:@" " withString:@""]);
                     }];
                 }];
-//                DDLogInfo(@"%@",webHtml);
                 
-                NSRegularExpression *expression3 = [NSRegularExpression regularExpressionWithPattern:@"<td valign=\"TOP\"><input type=\"text\"(.*?)value=\"(.*?)\"(.*?)</td>"
-                                                                                             options:0
-                                                                                               error:nil];
+                NSRegularExpression *expression3 = [NSRegularExpression regularExpressionWithPattern:@"<td(.*?)class=\"objWebDataWindowControl(.*?)>(.*?)</td>" options:0 error:nil];
+                __block int idIndex = 0;
                 [expression3 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-                    NSLog(@"%@",[webHtml substringWithRange:[result rangeAtIndex:2]]);
+                    if(![[webHtml substringWithRange:[result rangeAtIndex:3]] hasSuffix:@">"]){
+                        NSLog(@"%@\n\n\n",[webHtml substringWithRange:[result rangeAtIndex:3]]);
+                        if (idIndex%7==0) {
+                            [datas addObject:[@{@"0":[webHtml substringWithRange:[result rangeAtIndex:3]]} mutableCopy]];
+                        }else{
+                            datas[idIndex/7][[NSString stringWithFormat:@"%d",idIndex%7]] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                        }
+                        idIndex++;
+                    }
                 }];
+                
+                idIndex = 0;
+                
+                NSRegularExpression *expression4 = [NSRegularExpression regularExpressionWithPattern:@"<input(.*?)name=\"compute_(.*?)value=\"(.*?)\" class=\"objWebDataWindowControl(.*?)>" options:0 error:nil];
+                [expression4 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+                    NSLog(@"%@\n\n\n",[webHtml substringWithRange:[result rangeAtIndex:3]]);
+                    if (idIndex%2==0) {
+                        datas[idIndex/2][@"3"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                    }else{
+                        datas[idIndex/2][@"4"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                    }
+                    idIndex++;
+                }];
+
+                
+                NSLog(@"%@",[[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:datas options:0 error:nil] encoding:NSUTF8StringEncoding]);
                 
                 webExcuteState = @"computed";
             }
