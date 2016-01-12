@@ -79,7 +79,14 @@
 //        NSLog(@"%@",arr);
 //    };
     //获取公积金内容
-    CGGetProvidentFundService *service = [CGGetProvidentFundService service];
+    CGGetProvidentFundService *service3 = [CGGetProvidentFundService service];
+    [service3 setFinishedHandler:^(NSArray *result,NSArray *keys) {
+        for (NSDictionary *dic in result) {
+            for (int i=0; i<dic.count; i++) {
+                NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
+            }
+        }
+    }];
 //    [self setupHTTPSNetworkDemo];
     return YES;
 }

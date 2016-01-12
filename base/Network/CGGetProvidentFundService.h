@@ -10,20 +10,17 @@
 //  如何使用 How to use it!!!!!!
 //
 //  CGGetProvidentFundService *service = [CGGetProvidentFundService service];
+//  [service3 setFinishedHandler:^(NSArray *result,NSArray *keys) {
+//      for (NSDictionary *dic in result) {
+//          for (int i=0; i<dic.count; i++) {
+//              NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
+//          }
+//      }
+//  }];
 //
 //
 #import <Foundation/Foundation.h>
 
-NS_ENUM(NSUInteger,IProvidentFundtype){
-    IProvidentFundtypeIndex=0,
-    IProvidentFundtypeAddTime=1,
-    IProvidentFundtypeCategory=2,
-    IProvidentFundtypeAddAmount=3,
-    IProvidentFundtypeMinAmount=4,
-    IProvidentFundtypeBalance=5,
-    IProvidentFundtypeMonth=6,
-};
-const NSString* IProvidentFundtypeNames[7]  = {@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"};
 @interface CGGetProvidentFundService : NSObject
 
 /*!
@@ -32,5 +29,8 @@ const NSString* IProvidentFundtypeNames[7]  = {@"序号",@"交易日期",@"业�
  @return 服务的对象，仅用此做服务
  */
 + (id)service;
-
+/*!
+ @brief 结束时获取结果
+ */
+@property(nonatomic,strong)void(^finishedHandler)(NSArray *historyList,NSArray *keys);
 @end
