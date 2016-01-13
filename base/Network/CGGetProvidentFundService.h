@@ -10,13 +10,13 @@
 //  如何使用 How to use it!!!!!!
 //
 //  CGGetProvidentFundService *service = [CGGetProvidentFundService service];
-//  [service3 setFinishedHandler:^(NSArray *result,NSArray *keys) {
-//      for (NSDictionary *dic in result) {
-//          for (int i=0; i<dic.count; i++) {
-//              NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
-//          }
-//      }
-//  }];
+//    [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys) {
+//        for (NSDictionary *dic in historyList) {
+//            for (int i=0; i<dic.count; i++) {
+//                NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
+//            }
+//        }
+//    }];
 //
 //
 #import <Foundation/Foundation.h>

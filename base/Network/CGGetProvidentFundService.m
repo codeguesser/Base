@@ -7,22 +7,17 @@
 //
 
 #import "CGGetProvidentFundService.h"
-#import "CGNetwork.h"
 static UIWebView *serverWebView;
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
-    NSString * webExcuteState;
-    NSMutableArray *datas;
+    NSString * _webExcuteState;
+    NSMutableArray *_datas;
+    NSString *_year;
 }
 
 @end
 @implementation CGGetProvidentFundService
 + (id)service{
     CGGetProvidentFundService *service = [[CGGetProvidentFundService alloc]init];
-//    if (![CGNetworkConnect isClassRegisted]) {
-//        [CGNetworkConnect registerClass:[CGNetworkConnect class]];
-//    }else{
-//        [CGNetworkConnect unregisterClass:[CGNetworkConnect class]];
-//    }
     return service;
 }
 - (instancetype)init
@@ -34,8 +29,9 @@ static UIWebView *serverWebView;
     return self;
 }
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys))completion{
-    webExcuteState = @"unload";
-    datas = [NSMutableArray new];
+    _webExcuteState = @"unload";
+    _year = year;
+    _datas = [NSMutableArray new];
     if (!serverWebView) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
@@ -47,7 +43,7 @@ static UIWebView *serverWebView;
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 [serverWebView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%E7%8E%8B%E4%B9%A6%E5%80%8C&sfz=410311199002021538&lmk="]]];
                 
-                while (![webExcuteState isEqualToString: @"computed"]) {
+                while (![_webExcuteState isEqualToString: @"computed"]) {
                     [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
                 }
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -64,15 +60,17 @@ static UIWebView *serverWebView;
     }
 }
 -(void)testJSContextWithWebView2:(UIWebView *)webView{
-    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"2015-10-01\");document.getElementById(\"dtpick1\").value = \"2015-10-01\";document.getElementById(\"ImageButton1\").click()"];
-    webExcuteState = @"excuted";
+    NSString *startDate = [_year stringByAppendingString:@"-01-01"];
+    NSString *endDate = [_year stringByAppendingString:@"-12-31"];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick1\").value = \"%@\";document.getElementById(\"dtpick2\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick2\").value = \"%@\";document.getElementById(\"ImageButton1\").click()",startDate,startDate,endDate,endDate]];
+    _webExcuteState = @"excuted";
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    if([webExcuteState isEqualToString:@"unload"]){
-        webExcuteState = @"excuting";
+    if([_webExcuteState isEqualToString:@"unload"]){
+        _webExcuteState = @"excuting";
         [self testJSContextWithWebView2:webView];
     } else {
-        if([webExcuteState isEqualToString:@"excuted"]){
+        if([_webExcuteState isEqualToString:@"excuted"]){
             NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
             if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"objWebDataWindowControl1_datawindow"])) {
                 webHtml = [[webHtml stringByReplacingOccurrencesOfString:@"\r\n" withString:@""]  stringByReplacingOccurrencesOfString:@"\n" withString:@""];
@@ -93,9 +91,9 @@ static UIWebView *serverWebView;
                 [expression3 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
                     if(![[webHtml substringWithRange:[result rangeAtIndex:3]] hasSuffix:@">"]){
                         if (idIndex%7==0) {
-                            [datas addObject:[@{@"0":[webHtml substringWithRange:[result rangeAtIndex:3]]} mutableCopy]];
+                            [_datas addObject:[@{@"0":[webHtml substringWithRange:[result rangeAtIndex:3]]} mutableCopy]];
                         }else{
-                            datas[idIndex/7][[NSString stringWithFormat:@"%d",idIndex%7]] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                            _datas[idIndex/7][[NSString stringWithFormat:@"%d",idIndex%7]] = [webHtml substringWithRange:[result rangeAtIndex:3]];
                         }
                         idIndex++;
                     }
@@ -106,20 +104,20 @@ static UIWebView *serverWebView;
                 NSRegularExpression *expression4 = [NSRegularExpression regularExpressionWithPattern:@"<input(.*?)name=\"compute_(.*?)value=\"(.*?)\" class=\"objWebDataWindowControl(.*?)>" options:0 error:nil];
                 [expression4 enumerateMatchesInString:webHtml options:0 range:NSMakeRange(0, webHtml.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
                     if (idIndex%2==0) {
-                        datas[idIndex/2][@"3"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                        _datas[idIndex/2][@"3"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
                     }else{
-                        datas[idIndex/2][@"4"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
+                        _datas[idIndex/2][@"4"] = [webHtml substringWithRange:[result rangeAtIndex:3]];
                     }
                     idIndex++;
                 }];
-                webExcuteState = @"computed";
+                _webExcuteState = @"computed";
             }
         }
     }
 }
 - (NSArray *)historyList{
-    if ([webExcuteState isEqualToString:@"computed"]) {
-        return datas;
+    if ([_webExcuteState isEqualToString:@"computed"]) {
+        return _datas;
     }
     return @[];
 }
