@@ -30,7 +30,10 @@
  */
 + (id)service;
 /*!
- @brief 结束时获取结果
+ @brief 根据年份获取数据列表
+ 
+ @param year       年份
+ @param completion 数据的详情，数据集和key的列表
  */
-@property(nonatomic,strong)void(^finishedHandler)(NSArray *historyList,NSArray *keys);
+-(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys))completion;
 @end

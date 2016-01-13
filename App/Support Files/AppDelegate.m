@@ -80,8 +80,8 @@
 //    };
     //获取公积金内容
     CGGetProvidentFundService *service3 = [CGGetProvidentFundService service];
-    [service3 setFinishedHandler:^(NSArray *result,NSArray *keys) {
-        for (NSDictionary *dic in result) {
+    [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys) {
+        for (NSDictionary *dic in historyList) {
             for (int i=0; i<dic.count; i++) {
                 NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
             }

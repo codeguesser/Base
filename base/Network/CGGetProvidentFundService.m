@@ -7,57 +7,64 @@
 //
 
 #import "CGGetProvidentFundService.h"
+#import "CGNetwork.h"
 static UIWebView *serverWebView;
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
     NSString * webExcuteState;
     NSMutableArray *datas;
-    
 }
+
 @end
 @implementation CGGetProvidentFundService
 + (id)service{
     CGGetProvidentFundService *service = [[CGGetProvidentFundService alloc]init];
-    
+//    if (![CGNetworkConnect isClassRegisted]) {
+//        [CGNetworkConnect registerClass:[CGNetworkConnect class]];
+//    }else{
+//        [CGNetworkConnect unregisterClass:[CGNetworkConnect class]];
+//    }
     return service;
 }
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        webExcuteState = @"unload";
-        datas = [NSMutableArray new];
-        if (!serverWebView) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-                    [[[UIApplication sharedApplication] keyWindow]addSubview:view];
-                    view.hidden = YES;
-                    serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
-                    serverWebView.delegate = self;
-                    [view addSubview:serverWebView];
-                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                        [serverWebView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%E7%8E%8B%E4%B9%A6%E5%80%8C&sfz=410311199002021538&lmk="]]];
-                        
-                        while (![webExcuteState isEqualToString: @"computed"]) {
-                            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-                        }
-                        dispatch_sync(dispatch_get_main_queue(), ^{
-                            serverWebView.delegate = nil;
-                            [serverWebView removeFromSuperview];
-                            [view removeFromSuperview];
-                            if (self.finishedHandler) {
-                                self.finishedHandler([self historyList],@[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]);
-                            }
-                        });
-                    });
-                    
-                });
-        }
+        
     }
     return self;
 }
-
+-(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys))completion{
+    webExcuteState = @"unload";
+    datas = [NSMutableArray new];
+    if (!serverWebView) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+            [[[UIApplication sharedApplication] keyWindow]addSubview:view];
+            view.hidden = YES;
+            serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
+            serverWebView.delegate = self;
+            [view addSubview:serverWebView];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [serverWebView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%E7%8E%8B%E4%B9%A6%E5%80%8C&sfz=410311199002021538&lmk="]]];
+                
+                while (![webExcuteState isEqualToString: @"computed"]) {
+                    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+                }
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    serverWebView.delegate = nil;
+                    [serverWebView removeFromSuperview];
+                    [view removeFromSuperview];
+                    if (completion) {
+                        completion([self historyList],@[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]);
+                    }
+                });
+            });
+            
+        });
+    }
+}
 -(void)testJSContextWithWebView2:(UIWebView *)webView{
-    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"ImageButton1\").click()"];
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"2015-10-01\");document.getElementById(\"dtpick1\").value = \"2015-10-01\";document.getElementById(\"ImageButton1\").click()"];
     webExcuteState = @"excuted";
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
