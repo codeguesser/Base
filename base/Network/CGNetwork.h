@@ -18,13 +18,14 @@
 /*!
  @brief  监听整个app的网络连接情况
  */
-@interface CGNetworkConnect :NSURLProtocol
+@interface CGNetworkConnect :NSURLProtocol<NSURLConnectionDelegate>
 /*!
  @brief  检测网络监听类是否起作用
  
  @return 如果registed就返回YES，否则返回NO
  */
 +(BOOL)isClassRegisted;
+@property (nonatomic, strong) NSURLConnection *connection;
 @end
 @interface CGNetwork : NSObject
 
