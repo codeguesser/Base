@@ -80,14 +80,20 @@
 //    };
     //获取公积金内容
     CGGetProvidentFundService *service3 = [CGGetProvidentFundService service];
-    [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys) {
+    service3.name = @"名字";
+    service3.cardId = @"身份证号码";
+    [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys,NSDictionary *otherInfo) {
+        int j=0;
         for (NSDictionary *dic in historyList) {
-            for (int i=0; i<dic.count; i++) {
+            NSLog(@"%@:%d",keys[0],j);
+            for (int i=1; i<dic.count; i++) {
                 NSLog(@"%@:%@",keys[i],dic[[NSString stringWithFormat:@"%d",i]]);
             }
+            j++;
         }
+        NSLog(@"%@",otherInfo);
     }];
-//    [self setupHTTPSNetworkDemo];
+    [self setupHTTPSNetworkDemo];
     return YES;
 }
 -(void)sthComming:(NSNotification *)no{

@@ -12,6 +12,7 @@ static UIWebView *serverWebView;
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
     NSString * _webExcuteState;//web的执行状态   unload （excuted excuting stillExcuting） computed
     NSMutableArray *_datas;//最终获取的全部数据
+    NSMutableDictionary *_summaryData;//汇总信息
     NSString *_startDate;//开始日期
     NSString *_endDate;//结束日期
 }
@@ -22,18 +23,14 @@ static UIWebView *serverWebView;
     CGGetProvidentFundService *service = [[CGGetProvidentFundService alloc]init];
     return service;
 }
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
--(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys))completion{
-    //    _startDate = year;
+-(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary* otherInfo))completion{
     _webExcuteState = @"unload";
+    _summaryData = [NSMutableDictionary new];
+    _startDate = [year stringByAppendingString:@"-01-01"];
+    _endDate = [year stringByAppendingString:@"-12-31"];
     _datas = [NSMutableArray new];
+    NSString *urlStr = [[NSString stringWithFormat:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%@&sfz=%@&lmk=",self.name,self.cardId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL  URLWithString:urlStr];
     if (!serverWebView) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UIView *view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
@@ -43,17 +40,18 @@ static UIWebView *serverWebView;
             serverWebView.delegate = self;
             [view addSubview:serverWebView];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [serverWebView loadRequest:[NSURLRequest requestWithURL:[NSURL  URLWithString:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%E4%BD%95%E6%99%B6&sfz=620103197911101913&lmk="]]];
+                [serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
                 
                 while (![_webExcuteState isEqualToString: @"computed"]) {
                     [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+                    sleep(1);
                 }
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     serverWebView.delegate = nil;
                     [serverWebView removeFromSuperview];
                     [view removeFromSuperview];
                     if (completion) {
-                        completion([self historyList],kCGGetProvidentFundServiceKeys);
+                        completion([self historyList],kCGGetProvidentFundServiceKeys,_summaryData);
                     }
                 });
             });
@@ -62,14 +60,13 @@ static UIWebView *serverWebView;
     }
 }
 -(void)testJSContextWithWebView2:(UIWebView *)webView withStartDate:(NSString *)startDate endDate:(NSString *)endDate{
+    //关键脚本，用于查询记录
     [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick1\").value = \"%@\";document.getElementById(\"dtpick2\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick2\").value = \"%@\";document.getElementById(\"ImageButton1\").click()",startDate,startDate,endDate,endDate]];
     _webExcuteState = @"excuted";
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     if([_webExcuteState isEqualToString:@"unload"]){
         //第一次，未曾执行javascript进行查询的时候，这时需要去执行并进行查询
-        _startDate = [@"2011" stringByAppendingString:@"-01-01"];
-        _endDate = [@"2016" stringByAppendingString:@"-12-31"];
         [self excuteScriptToGetDataWithWebView:webView];
     } else {
         //当目标代码被执行之后，进行的html获取，这时实际上获取到的值
@@ -85,6 +82,7 @@ static UIWebView *serverWebView;
 }
 -(void)analyseDataWithOriginHtml:(NSString *)webHtml{
     if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"objWebDataWindowControl1_datawindow"])) {
+        
         int pageCount = [serverWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(\"option\").length"].intValue;
         if (pageCount<=1) {
             //数据已经是最后一页，完全结束
@@ -101,14 +99,11 @@ static UIWebView *serverWebView;
                     _endDate = [_datas lastObject][@"1"];//实际上是kCGGetProvidentFundServiceKeys中的第1个对象，也就是交易日期，根据最后一个交易日期来压缩获取到的数据列表
                     [self testJSContextWithWebView2:serverWebView withStartDate:_startDate endDate:_endDate];
                 }
-            }else{
-                NSLog(@"no data ======%@",_endDate);
             }
         }
     }
 }
 -(NSArray *)analyseDataWithoutJudge:(NSString *)webHtml{
-    NSLog(@"----------------start");
     NSMutableArray *arr = [NSMutableArray new];
     webHtml = [[webHtml stringByReplacingOccurrencesOfString:@"\r\n" withString:@""]  stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSRegularExpression *expression1 = [NSRegularExpression regularExpressionWithPattern:@"<tr>(.*?)</tr>"
@@ -119,7 +114,11 @@ static UIWebView *serverWebView;
         NSString *targetStr2 = [webHtml substringWithRange:[result rangeAtIndex:1]];
         NSRegularExpression *expression2 = [NSRegularExpression regularExpressionWithPattern:@"<td(.*?)>(.*?)</td>(.*?)<td(.*?)<span id=\"Label(.*?)>(.*?)</span>(.*?)</td>" options:0 error:nil];
         [expression2 enumerateMatchesInString:targetStr2 options:0 range:NSMakeRange(0, targetStr2.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-            DDLogInfo(@"======%@,%@",[[targetStr2 substringWithRange:[result rangeAtIndex:2]] stringByReplacingOccurrencesOfString:@" " withString:@""],[[targetStr2 substringWithRange:[result rangeAtIndex:6]] stringByReplacingOccurrencesOfString:@" " withString:@""]);
+            NSString *key = [[targetStr2 substringWithRange:[result rangeAtIndex:2]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *value = [[targetStr2 substringWithRange:[result rangeAtIndex:6]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            if (key&&value&&key.length>0&&value.length>0) {
+                _summaryData[key]=value;
+            }
         }];
     }];
     
@@ -147,11 +146,10 @@ static UIWebView *serverWebView;
         }
         idIndex++;
     }];
-    NSLog(@"----------------end");
     return arr;
 }
 -(NSArray *)filterExistedDataWithData:(NSArray *)arr{
-    if ([_datas count]>=12) {
+    if ([_datas count]>0) {
         NSMutableArray *arrNew = [NSMutableArray new];
         NSMutableSet *checkSet = [NSMutableSet new];
         for (int i=(int)arr.count-12; i<arr.count; i++) {
