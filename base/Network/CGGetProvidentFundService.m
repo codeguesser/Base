@@ -67,6 +67,11 @@ static UIWebView *serverWebView;
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     if([_webExcuteState isEqualToString:@"unload"]){
         //第一次，未曾执行javascript进行查询的时候，这时需要去执行并进行查询
+        //检验是否获取到正确的账号和名字配对
+        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+        if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"操作失败信息"])) {
+            _webExcuteState = @"computed";
+        }
         [self excuteScriptToGetDataWithWebView:webView];
     } else {
         //当目标代码被执行之后，进行的html获取，这时实际上获取到的值
