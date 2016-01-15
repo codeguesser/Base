@@ -24,6 +24,9 @@ static UIWebView *serverWebView;
     return service;
 }
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary* otherInfo))completion{
+    
+    NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
+
     _webExcuteState = @"unload";
     _summaryData = [NSMutableDictionary new];
     _startDate = [year stringByAppendingString:@"-01-01"];
