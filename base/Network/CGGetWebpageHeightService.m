@@ -32,9 +32,6 @@ static UIWebView *serverWebView;
         serverWebView.delegate = self;
         [serverWebView loadHTMLString:_html baseURL:nil];
         serverWebView.tag = self.tag.integerValue;
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        });
     });
 }
 -(void)start{
@@ -68,7 +65,6 @@ static UIWebView *serverWebView;
     frame.size = CGSizeMake(frame.size.width, [str floatValue]);
     webView.frame = frame;
     self.height = @(webView.scrollView.contentSize.height);
-    NSLog(@"%@",self.height);
     [self willChangeValueForKey:@"isExecuting"];
     executing = NO;
     [self didChangeValueForKey:@"isExecuting"];
@@ -121,7 +117,7 @@ static UIWebView *serverWebView;
         who.height = @0;
         [_taskList addObject:who];
         [_queue addOperation:who];
-        if (index==self.htmls.count-1) {
+        if (index==self.htmls.count) {
             [who setCompletionBlock:^{
                 BOOL isAllSuccessed = YES;
                 for (WebHeightOperation *who in _taskList) {

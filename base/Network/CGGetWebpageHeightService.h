@@ -18,7 +18,7 @@
 
 
 #import <Foundation/Foundation.h>
-
+@class  WebHeightOperation;
 @interface CGGetWebpageHeightService : NSObject
 /*!
  @brief  网页的html代码
