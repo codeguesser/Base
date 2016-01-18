@@ -5,6 +5,8 @@
 //  Created by wsg on 15/11/9.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
+//  监听整个app的网络连接情况
+//
 //  *********how to use it***********
 //
 //  if (![CGNetworkConnect isClassRegisted]) {

@@ -1,6 +1,7 @@
 //
 //  CGContactService.h
 //  base
+//
 //  用来获取本地通讯录
 //
 //  Created by wsg on 15/11/19.

@@ -5,6 +5,8 @@
 //  Created by wsg on 15/11/18.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
+//  获取中国行政区的信息
+//
 //  如何使用 How to use it!!!!!!
 //
 //  CGAreaService *service = [CGAreaService service];

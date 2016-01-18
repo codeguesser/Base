@@ -2,6 +2,8 @@
 //  CGLocationService.h
 //  base
 //
+//  简化的获取百度地理信息服务
+//
 //  Created by wsg on 15/12/25.
 //  Copyright © 2015年 wsg. All rights reserved.
 //
