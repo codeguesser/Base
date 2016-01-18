@@ -15,6 +15,7 @@ static UIWebView *serverWebView;
     NSMutableDictionary *_summaryData;//汇总信息
     NSString *_startDate;//开始日期
     NSString *_endDate;//结束日期
+    dispatch_semaphore_t semaphore ;
 }
 
 @end
@@ -43,11 +44,11 @@ static UIWebView *serverWebView;
             serverWebView.delegate = self;
             [view addSubview:serverWebView];
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                semaphore = dispatch_semaphore_create(0);
                 [serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
-                
-                while (![_webExcuteState isEqualToString: @"computed"]) {
-                    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-                    sleep(1);
+                dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
+                if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
+                    DDLogInfo(@"time out");
                 }
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     serverWebView.delegate = nil;
@@ -73,6 +74,7 @@ static UIWebView *serverWebView;
         //检验是否获取到正确的账号和名字配对
         NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"操作失败信息"])) {
+            dispatch_semaphore_signal(semaphore);
             _webExcuteState = @"computed";
         }
         [self excuteScriptToGetDataWithWebView:webView];
@@ -96,6 +98,7 @@ static UIWebView *serverWebView;
             //数据已经是最后一页，完全结束
             [_datas addObjectsFromArray:[self filterExistedDataWithData:[self analyseDataWithoutJudge:webHtml]]];
             _webExcuteState = @"computed";
+            dispatch_semaphore_signal(semaphore);
         } else{
             _webExcuteState = @"stillExcuting";
             //数据不是最后一页，需要进行下一次的数据解析
