@@ -55,6 +55,7 @@ static UIWebView *serverWebView;
                 DDLogInfo(@"time out");
             }
             dispatch_sync(dispatch_get_main_queue(), ^{
+                serverWebView = nil;
                 serverWebView.delegate = nil;
                 [serverWebView removeFromSuperview];
                 [view removeFromSuperview];
