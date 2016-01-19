@@ -181,4 +181,11 @@ static UIWebView *serverWebView;
     _webExcuteState = @"excuting";
     [self testJSContextWithWebView2:webView withStartDate:_startDate endDate:_endDate];
 }
+-(void)dealloc{
+    [serverWebView stopLoading];
+    [serverWebView removeFromSuperview];
+    [serverWebView.superview removeFromSuperview];
+    serverWebView = nil;
+    serverWebView.delegate = nil;
+}
 @end
