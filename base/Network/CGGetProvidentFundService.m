@@ -16,6 +16,7 @@ static UIWebView *serverWebView;
     NSString *_startDate;//开始日期
     NSString *_endDate;//结束日期
     dispatch_semaphore_t semaphore ;
+    dispatch_semaphore_t semaphore1 ;
 }
 
 @end
@@ -23,6 +24,52 @@ static UIWebView *serverWebView;
 + (id)service{
     CGGetProvidentFundService *service = [[CGGetProvidentFundService alloc]init];
     return service;
+}
+-(NSDictionary *)syncRequestResultWithYear:(NSString *)year{
+    NSAssert(![[NSThread currentThread] isMainThread], @"请在多线程下使用该方法");
+    NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
+    
+    _webExcuteState = @"unload";
+    _summaryData = [NSMutableDictionary new];
+    _startDate = [year stringByAppendingString:@"-01-01"];
+    _endDate = [year stringByAppendingString:@"-12-31"];
+    _datas = [NSMutableArray new];
+    NSString *urlStr = [[NSString stringWithFormat:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%@&sfz=%@&lmk=",self.name,self.cardId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL  URLWithString:urlStr];
+    semaphore1 = dispatch_semaphore_create(0);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view;
+        if (!serverWebView) {
+            view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+            [[[UIApplication sharedApplication] keyWindow]addSubview:view];
+            view.hidden = YES;
+            serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
+            serverWebView.delegate = self;
+            [view addSubview:serverWebView];
+        }else{
+            view = serverWebView.superview;
+        }
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            semaphore = dispatch_semaphore_create(0);
+            [serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
+            dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
+            if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
+                DDLogInfo(@"time out1");
+            }
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                serverWebView = nil;
+                serverWebView.delegate = nil;
+                [serverWebView removeFromSuperview];
+                [view removeFromSuperview];
+                
+                dispatch_semaphore_signal(semaphore1);
+            });
+        });
+    });
+    if (dispatch_semaphore_wait(semaphore1, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*20))) {
+        DDLogInfo(@"time out2");
+    }
+    return @{@"history":[self historyList],@"keys":kCGGetProvidentFundServiceKeys,@"summary":_summaryData};
 }
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary* otherInfo))completion{
     

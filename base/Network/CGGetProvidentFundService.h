@@ -23,6 +23,10 @@
 //        }
 //        NSLog(@"%@",otherInfo);
 //    }];
+//    //或者采用以下方法
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        NSLog(@"%@",[service3 requestResultWithYear:@"2015"]);
+//    });
 //
 //
 #import <Foundation/Foundation.h>
@@ -50,4 +54,12 @@
  @param completion 数据的详情，数据集和key的列表，other info 存储
  */
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary *otherInfo))completion;
+/*!
+ @brief 同步根据年份获取数据列表
+ 
+ @param year 年份
+ 
+ @return 默认为空数组
+ */
+-(NSDictionary *)syncRequestResultWithYear:(NSString *)year;
 @end
