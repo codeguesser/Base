@@ -49,39 +49,49 @@
     [[UIAlertView appearance]setTintColor:[UIColor greenColor]];
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
-    
-
-    //entity的测试，以及拼音的使用
-//    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
-//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
-//    formatter.numberStyle = NSNumberFormatterNoStyle;
-//    formatter.maximumFractionDigits = 20;
-//    NSString *str = [formatter stringFromNumber:@(253412312312311123.94)];
-//    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
     [self tableViewEmptyPageDemo];
-//    //地图服务
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        service2 = [[CGLocationService alloc]init];
-//    });
-//    [service2 startLocation];
-//   调用地理位置
-    //    CGAreaService *service = [CGAreaService service];
-    //调用本地联系人
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
-//    service = [CGContactService service];
-//    //获取html的高度
-//    CGGetWebpageHeightService *whs = [[CGGetWebpageHeightService alloc]init];
-//    whs.size = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
-//    whs.htmls = @[
-//                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil]
-//                  ];
-//    whs.finishLoading = ^(NSArray<NSDictionary<NSString *,NSNumber *> *> *arr) {
-//        NSLog(@"%@",arr);
-//    };
-    //获取公积金内容
+    return YES;
+}
+-(void)sthComming:(NSNotification *)no{
+    NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
+}
+//测试获取定位服务
+-(void)testGetLocation{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
+        service2 = [[CGLocationService alloc]initWithoutGetLocation];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
+        //        service2.warrantAction =^(CGLocationError error){
+        //
+        //        };
+        [service2 startLocation];
+    });
+
+}
+//测试获取中国行政区
+-(void)testGetChinaArea{
+    [CGAreaService service];
+}
+//调用本地联系人
+-(void)testContact{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+    service = [CGContactService service];
+}
+//获取html的高度
+-(void)testWebpageHeight{
+    CGGetWebpageHeightService *whs = [[CGGetWebpageHeightService alloc]init];
+    whs.size = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+    whs.htmls = @[
+                  [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"html"] encoding:NSUTF8StringEncoding error:nil]
+                  ];
+    whs.finishLoading = ^(NSArray<WebHeightOperation *> *arr) {
+        NSLog(@"%@",arr);
+    };
+}
+//获取公积金内容
+-(void)testProvidentFund{
     CGGetProvidentFundService *service3 = [CGGetProvidentFundService service];
-    service3.name = @"名字";
-    service3.cardId = @"身份证号码";
+    service3.name = @"王书倌";
+    service3.cardId = @"410311199002021538";
     [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys,NSDictionary *otherInfo) {
         int j=0;
         for (NSDictionary *dic in historyList) {
@@ -93,13 +103,31 @@
         }
         NSLog(@"%@",otherInfo);
     }];
-    [self setupHTTPSNetworkDemo];
-    return YES;
-}
--(void)sthComming:(NSNotification *)no{
-    NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
 }
 
+//测试数字number的转换
+-(void)testNumber{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter.numberStyle = NSNumberFormatterNoStyle;
+    formatter.maximumFractionDigits = 20;
+    [formatter stringFromNumber:@(253412312312311123.94)];
+}
+//entity的测试，以及拼音的使用
+-(void)testPinyin{
+//    PartEntity *part = [PartEntity getObjectFromDic:@{@"pid":@(534.94)}];
+
+    NSLog(@"%@",[@"--" pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]]);
+}
+//线程分析
+-(void)testThread{
+    NSLog(@"1%@",[[NSThread currentThread] isMainThread]?@"主线程":@"分线程");
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            NSLog(@"%@",[[NSThread currentThread] isMainThread]?@"主线程":@"分线程");
+        });
+    });
+    NSLog(@"4%@",[[NSThread currentThread] isMainThread]?@"主线程":@"分线程");
+}
 -(void)tableViewEmptyPageDemo{
     TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
