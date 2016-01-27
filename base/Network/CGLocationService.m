@@ -24,6 +24,7 @@
 <BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>{
     BMKLocationService *_locService;
     BMKMapManager* _mapManager;
+    CLLocationManager *_service;
 }
 #endif
 @end
@@ -78,15 +79,40 @@
 }
 -(void)startLocation{
 #ifdef U_BAIDU_KEY
-    if (![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
-        if (self.warrantAction) {
-            self.warrantAction();
-        }else{
-            NSLog(@"权限不足，请重新取得权限之后再操作！！！");
+    
+    if (self.warrantAction) {
+        CGLocationError error = CGLocationErrorNormal;
+        if (![CLLocationManager locationServicesEnabled]) {
+            error = CGLocationErrorNoPermision;
+        }
+        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
+            error = CGLocationErrorDenied;
+        }else if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+            error = CGLocationErrorNoDetermined;
+        }
+        if(error!=CGLocationErrorNormal)self.warrantAction(error);
+    }else{
+        if (![CLLocationManager locationServicesEnabled]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许启用定位服务" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:@"", nil];
+            [alert show];
+        }
+        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许动本使用定位服务" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
+            [alert show];
+        }else if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+            _service = [[CLLocationManager alloc] init];
+            if ([_service respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                [_service requestWhenInUseAuthorization];
+            }
         }
     }
     [_locService startUserLocationService];
 #endif
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex!=alertView.cancelButtonIndex) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
 }
 #ifdef U_BAIDU_KEY
 //实现相关delegate 处理位置信息更新

@@ -11,8 +11,8 @@
 //
 //  service2 = [[CGLocationService alloc]initWithoutGetLocation];
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
-//  service2.warrantAction = ^{
-//      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//  service2.warrantAction =^(CGLocationError error){
+//
 //  };
 //  [service2 startLocation];
 //
@@ -20,17 +20,22 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
+typedef NS_ENUM(NSUInteger, CGLocationError){
+    CGLocationErrorNoPermision,
+    CGLocationErrorDenied,
+    CGLocationErrorNoDetermined,
+    CGLocationErrorNormal
+};
 @interface CGLocationData:NSObject
 @property(nonatomic,strong)NSString *address;
 @property(nonatomic,strong)CLLocation *location;
 +(id)locationDataWithAddress:(NSString *)address location:(CLLocation *)location;
 @end
-@interface CGLocationService : NSObject
+@interface CGLocationService : NSObject<UIAlertViewDelegate>
 -(void)startLocation;
 - (instancetype)initWithoutGetLocation;
 /*!
  @brief 获取授权事件
  */
-@property(nonatomic,strong)void(^warrantAction)();
+@property(nonatomic,strong)void(^warrantAction)(CGLocationError error);
 @end
