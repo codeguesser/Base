@@ -62,4 +62,10 @@
  @return 默认为空数组
  */
 -(NSDictionary *)syncRequestResultWithYear:(NSString *)year;
+/*!
+ @brief web的执行状态
+ 
+ @return unload(第一次加载) excuted(已经执行过了) excuting(正在执行) stillExcuting(数据较多需要多次执行) computed(执行完毕)
+ */
+-(NSString *)webExcuteState;
 @end

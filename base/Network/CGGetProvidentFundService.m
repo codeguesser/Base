@@ -10,7 +10,7 @@
 #define kCGGetProvidentFundServiceKeys @[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]
 static UIWebView *serverWebView;
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
-    NSString * _webExcuteState;//web的执行状态   unload （excuted excuting stillExcuting） computed
+    
     NSMutableArray *_datas;//最终获取的全部数据
     NSMutableDictionary *_summaryData;//汇总信息
     NSString *_startDate;//开始日期
@@ -18,18 +18,32 @@ static UIWebView *serverWebView;
     dispatch_semaphore_t semaphore ;
     dispatch_semaphore_t semaphore1 ;
 }
-
+@property(nonatomic,strong)NSString *webExcuteState;
 @end
 @implementation CGGetProvidentFundService
+#pragma mark - system methods
 + (id)service{
     CGGetProvidentFundService *service = [[CGGetProvidentFundService alloc]init];
     return service;
 }
+-(void)setWebExcuteState:(NSString *)webExcuteState{
+    _webExcuteState = webExcuteState;
+    DDLogInfo(@"%@",_webExcuteState);
+}
+-(void)dealloc{
+    [serverWebView stopLoading];
+    [serverWebView removeFromSuperview];
+    [serverWebView.superview removeFromSuperview];
+    serverWebView = nil;
+    serverWebView.delegate = nil;
+}
+
+#pragma mark - public methods
 -(NSDictionary *)syncRequestResultWithYear:(NSString *)year{
     NSAssert(![[NSThread currentThread] isMainThread], @"请在多线程下使用该方法");
     NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
     
-    _webExcuteState = @"unload";
+    self.webExcuteState = @"unload";
     _summaryData = [NSMutableDictionary new];
     _startDate = [year stringByAppendingString:@"-01-01"];
     _endDate = [year stringByAppendingString:@"-12-31"];
@@ -71,11 +85,12 @@ static UIWebView *serverWebView;
     }
     return @{@"history":[self historyList],@"keys":kCGGetProvidentFundServiceKeys,@"summary":_summaryData};
 }
+
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary* otherInfo))completion{
     
     NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
 
-    _webExcuteState = @"unload";
+    self.webExcuteState = @"unload";
     _summaryData = [NSMutableDictionary new];
     _startDate = [year stringByAppendingString:@"-01-01"];
     _endDate = [year stringByAppendingString:@"-12-31"];
@@ -113,32 +128,18 @@ static UIWebView *serverWebView;
         });
     });
 }
--(void)testJSContextWithWebView2:(UIWebView *)webView withStartDate:(NSString *)startDate endDate:(NSString *)endDate{
-    //关键脚本，用于查询记录
-    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick1\").value = \"%@\";document.getElementById(\"dtpick2\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick2\").value = \"%@\";document.getElementById(\"ImageButton1\").click()",startDate,startDate,endDate,endDate]];
-    _webExcuteState = @"excuted";
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    if([_webExcuteState isEqualToString:@"unload"]){
-        //第一次，未曾执行javascript进行查询的时候，这时需要去执行并进行查询
-        //检验是否获取到正确的账号和名字配对
-        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
-        if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"操作失败信息"])) {
-            dispatch_semaphore_signal(semaphore);
-            _webExcuteState = @"computed";
-        }
-        [self excuteScriptToGetDataWithWebView:webView];
-    } else {
-        //当目标代码被执行之后，进行的html获取，这时实际上获取到的值
-        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
-        [self analyseDataWithOriginHtml:webHtml];
-    }
-}
+
 - (NSArray *)historyList{
-    if ([_webExcuteState isEqualToString:@"computed"]) {
+    if ([self.webExcuteState isEqualToString:@"computed"]) {
         return _datas;
     }
     return @[];
+}
+#pragma mark - private methods
+-(void)testJSContextWithWebView2:(UIWebView *)webView withStartDate:(NSString *)startDate endDate:(NSString *)endDate{
+    //关键脚本，用于查询记录
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"document.getElementById(\"dtpick1\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick1\").value = \"%@\";document.getElementById(\"dtpick2\").setAttribute(\"realvalue\",\"%@\");document.getElementById(\"dtpick2\").value = \"%@\";document.getElementById(\"ImageButton1\").click()",startDate,startDate,endDate,endDate]];
+    self.webExcuteState = @"excuted";
 }
 -(void)analyseDataWithOriginHtml:(NSString *)webHtml{
     if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"objWebDataWindowControl1_datawindow"])) {
@@ -147,10 +148,10 @@ static UIWebView *serverWebView;
         if (pageCount<=1) {
             //数据已经是最后一页，完全结束
             [_datas addObjectsFromArray:[self filterExistedDataWithData:[self analyseDataWithoutJudge:webHtml]]];
-            _webExcuteState = @"computed";
+            self.webExcuteState = @"computed";
             dispatch_semaphore_signal(semaphore);
         } else{
-            _webExcuteState = @"stillExcuting";
+            self.webExcuteState = @"stillExcuting";
             //数据不是最后一页，需要进行下一次的数据解析
             NSArray *tempArr = [self analyseDataWithoutJudge:webHtml];
             //开始时间不变，更改结束时间，减少数据的返回数量，理论上不存在数据记录完全一致的record，暂时以此作为原始动力
@@ -225,14 +226,25 @@ static UIWebView *serverWebView;
     return arr;
 }
 -(void)excuteScriptToGetDataWithWebView:(UIWebView *)webView{
-    _webExcuteState = @"excuting";
+    self.webExcuteState = @"excuting";
     [self testJSContextWithWebView2:webView withStartDate:_startDate endDate:_endDate];
 }
--(void)dealloc{
-    [serverWebView stopLoading];
-    [serverWebView removeFromSuperview];
-    [serverWebView.superview removeFromSuperview];
-    serverWebView = nil;
-    serverWebView.delegate = nil;
+#pragma mark - methods for webview delegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    if([self.webExcuteState isEqualToString:@"unload"]){
+        //第一次，未曾执行javascript进行查询的时候，这时需要去执行并进行查询
+        //检验是否获取到正确的账号和名字配对
+        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+        if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"操作失败信息"])) {
+            dispatch_semaphore_signal(semaphore);
+            self.webExcuteState = @"computed";
+        }
+        [self excuteScriptToGetDataWithWebView:webView];
+    } else {
+        //当目标代码被执行之后，进行的html获取，这时实际上获取到的值
+        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+        [self analyseDataWithOriginHtml:webHtml];
+    }
 }
+
 @end
