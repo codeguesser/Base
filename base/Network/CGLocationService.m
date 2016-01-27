@@ -93,18 +93,24 @@
         if(error!=CGLocationErrorNormal)self.warrantAction(error);
     }else{
         if (![CLLocationManager locationServicesEnabled]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许启用定位服务" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:@"", nil];
-            [alert show];
-        }
-        if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许动本使用定位服务" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
-            [alert show];
-        }else if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
-            _service = [[CLLocationManager alloc] init];
-            if ([_service respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-                [_service requestWhenInUseAuthorization];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许启用定位服务" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                [alert show];
+            });
+        }else{
+            if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取定位" message:@"请在iPhone \"设置-隐私-定位服务\"中允许动本使用定位服务" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
+                    [alert show];
+                });
+            }else if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
+                _service = [[CLLocationManager alloc] init];
+                if ([_service respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+                    [_service requestWhenInUseAuthorization];
+                }
             }
         }
+        
     }
     [_locService startUserLocationService];
 #endif
