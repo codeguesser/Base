@@ -7,11 +7,25 @@
 //
 
 #import "Entity.h"
-
+@interface Entity(){
+    
+    NSNumberFormatter *formatter;
+}
+@end
 @implementation Entity
 +(id)getObjectFromDic:(NSDictionary *)dic{
     NSAssert(YES, @"请在子类里重写该方法！");
     return [Entity new];
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        formatter = [[NSNumberFormatter alloc]init];
+        formatter.numberStyle = NSNumberFormatterNoStyle;
+        formatter.maximumFractionDigits = 20;
+    }
+    return self;
 }
 -(NSDictionary *)toDictionary{
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -42,13 +56,14 @@
     NSString *var;
     if([target isKindOfClass:[NSString class]])var = target?target:@"";
     else if([target isKindOfClass:[NSNumber class]]){
-        if ([[NSString stringWithFormat:@"%s",[(NSNumber *)target objCType]] isEqualToString:@"q"]) {
-            var = target?[NSString stringWithFormat:@"%@",target]:@"";
-        }else if ([[NSString stringWithFormat:@"%s",[(NSNumber *)target objCType]] isEqualToString:@"d"]) {
-            var = target?[NSString stringWithFormat:@"%g",[target doubleValue]]:@"";
-        }else{
-            var = target?[NSString stringWithFormat:@"%@",target]:@"";
-        }
+        var = target?[formatter stringFromNumber:target]:@"";
+//        if ([[NSString stringWithFormat:@"%s",[(NSNumber *)target objCType]] isEqualToString:@"q"]) {
+//            var = target?[NSString stringWithFormat:@"%@",target]:@"";
+//        }else if ([[NSString stringWithFormat:@"%s",[(NSNumber *)target objCType]] isEqualToString:@"d"]) {
+//            var = target?[NSString stringWithFormat:@"%g",[target doubleValue]]:@"";
+//        }else{
+//            var = target?[NSString stringWithFormat:@"%@",target]:@"";
+//        }
         
     }
     else if (!target) {
