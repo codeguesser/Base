@@ -12,7 +12,7 @@
 //  service2 = [[CGLocationService alloc]initWithoutGetLocation];
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
 //  service2.warrantAction = ^{
-//    
+//      [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 //  };
 //  [service2 startLocation];
 //
