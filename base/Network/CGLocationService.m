@@ -78,6 +78,13 @@
 }
 -(void)startLocation{
 #ifdef U_BAIDU_KEY
+    if (![CLLocationManager locationServicesEnabled]||[CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
+        if (self.warrantAction) {
+            self.warrantAction();
+        }else{
+            NSLog(@"权限不足，请重新取得权限之后再操作！！！");
+        }
+    }
     [_locService startUserLocationService];
 #endif
 }
