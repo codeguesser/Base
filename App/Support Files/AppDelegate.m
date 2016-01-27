@@ -52,6 +52,17 @@
     [self tableViewEmptyPageDemo];
     return YES;
 }
+
+-(void)tableViewEmptyPageDemo{
+    TestViewController *vc = [[TestViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
+    
+    nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
+    UITabBarController *tbc = [[UITabBarController alloc]init];
+    tbc.viewControllers = @[nav];
+    
+    self.window.rootViewController = tbc;
+}
 -(void)sthComming:(NSNotification *)no{
     NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
 }
@@ -127,16 +138,6 @@
         });
     });
     NSLog(@"4%@",[[NSThread currentThread] isMainThread]?@"主线程":@"分线程");
-}
--(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
-    
-    nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
-    UITabBarController *tbc = [[UITabBarController alloc]init];
-    tbc.viewControllers = @[nav];
-    
-    self.window.rootViewController = tbc;
 }
 /*
 -(void)setupHTTPNetworkDemo{
