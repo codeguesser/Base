@@ -8,7 +8,6 @@
 
 #import "CGGetProvidentFundService.h"
 #define kCGGetProvidentFundServiceKeys @[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]
-static UIWebView *serverWebView;
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
     
     NSMutableArray *_datas;//最终获取的全部数据
@@ -17,6 +16,7 @@ static UIWebView *serverWebView;
     NSString *_endDate;//结束日期
     dispatch_semaphore_t semaphore ;
     dispatch_semaphore_t semaphore1 ;
+    UIWebView *serverWebView;
 }
 @property(nonatomic,strong)NSString *webExcuteState;
 @end
