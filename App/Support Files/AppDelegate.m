@@ -67,17 +67,18 @@
     NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
 }
 //测试获取定位服务
+#ifdef U_BAIDU_KEY
 -(void)testGetLocation{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_global_queue(0, 0), ^{
         service2 = [[CGLocationService alloc]initWithoutGetLocation];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLocation:) name:CGBaiduGetLocationAttributeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:NSSelectorFromString(@"getLocation:") name:CGBaiduGetLocationAttributeNotification object:nil];
         //        service2.warrantAction =^(CGLocationError error){
         //
         //        };
         [service2 startLocation];
     });
-
 }
+#endif
 //测试获取中国行政区
 -(void)testGetChinaArea{
     [CGAreaService service];
