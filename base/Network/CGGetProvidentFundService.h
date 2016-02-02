@@ -12,7 +12,7 @@
 //    CGGetProvidentFundService *service3 = [CGGetProvidentFundService service];
 //    service3.name = @"姓名";
 //    service3.cardId = @"身份证号";
-//    [service3 requestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys,NSDictionary *otherInfo) {
+//    [service3 asyncRequestResultWithYear:@"2015" completion:^(NSArray *historyList, NSArray *keys, NSDictionary *otherInfo, NSError *error){
 //        int j=0;
 //        for (NSDictionary *dic in historyList) {
 //            NSLog(@"%@:%d",keys[0],j);
@@ -30,7 +30,12 @@
 //
 //
 #import <Foundation/Foundation.h>
-
+NS_ENUM(NSInteger,ProvidentFundServiceError){
+    ProvidentFundServiceErrorTimeOut = 0,//访问网站自设置timeout超时
+    ProvidentFundServiceErrorTimeOut2 = 1,//异端超时
+    ProvidentFundServiceErrorRemoteNetworkConnect = 2,//远端网络访问失败
+    ProvidentFundServiceErrorAnalyse = 3,//解析错误
+};
 @interface CGGetProvidentFundService : NSObject
 
 /*!
@@ -54,6 +59,13 @@
  @param completion 数据的详情，数据集和key的列表，other info 存储
  */
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary *otherInfo))completion;
+/*!
+ @brief 对requestResultWithYear:completion:的补充，同样是异步方法，多加了一error，返回错误
+ 
+ @param year       年份
+ @param completion 数据的详情，数据集和key的列表，other info 存储，另外多了一个error接受错误，如果正常，则error为nil
+ */
+-(void)asyncRequestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary *otherInfo,NSError *error))completion;
 /*!
  @brief 同步根据年份获取数据列表
  

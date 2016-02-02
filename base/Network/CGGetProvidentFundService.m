@@ -8,15 +8,17 @@
 
 #import "CGGetProvidentFundService.h"
 #define kCGGetProvidentFundServiceKeys @[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]
+
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
     
     NSMutableArray *_datas;//最终获取的全部数据
     NSMutableDictionary *_summaryData;//汇总信息
     NSString *_startDate;//开始日期
     NSString *_endDate;//结束日期
-    dispatch_semaphore_t semaphore ;
-    dispatch_semaphore_t semaphore1 ;
-    UIWebView *serverWebView;
+    dispatch_semaphore_t semaphore ;//实际的等错信号
+    dispatch_semaphore_t semaphore1 ;//辅助信号
+    UIWebView *_serverWebView;//服务用webview
+    NSError *_error;//存储服务端错误
 }
 @property(nonatomic,strong)NSString *webExcuteState;
 @end
@@ -31,11 +33,11 @@
     DDLogInfo(@"%@",_webExcuteState);
 }
 -(void)dealloc{
-    [serverWebView stopLoading];
-    [serverWebView removeFromSuperview];
-    [serverWebView.superview removeFromSuperview];
-    serverWebView = nil;
-    serverWebView.delegate = nil;
+    [_serverWebView stopLoading];
+    [_serverWebView removeFromSuperview];
+    [_serverWebView.superview removeFromSuperview];
+    _serverWebView = nil;
+    _serverWebView.delegate = nil;
 }
 
 #pragma mark - public methods
@@ -53,27 +55,28 @@
     semaphore1 = dispatch_semaphore_create(0);
     dispatch_async(dispatch_get_main_queue(), ^{
         UIView *view;
-        if (!serverWebView) {
+        if (!_serverWebView) {
             view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
             [[[UIApplication sharedApplication] keyWindow]addSubview:view];
             view.hidden = YES;
-            serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
-            serverWebView.delegate = self;
-            [view addSubview:serverWebView];
+            _serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
+            _serverWebView.delegate = self;
+            [view addSubview:_serverWebView];
         }else{
-            view = serverWebView.superview;
+            view = _serverWebView.superview;
         }
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             semaphore = dispatch_semaphore_create(0);
-            [serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
+            [_serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
             dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
             if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
+                _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorTimeOut userInfo:@{@"msg":@"访问网站自设置timeout超时"}];
                 DDLogInfo(@"time out1");
             }
             dispatch_sync(dispatch_get_main_queue(), ^{
-                serverWebView = nil;
-                serverWebView.delegate = nil;
-                [serverWebView removeFromSuperview];
+                _serverWebView = nil;
+                _serverWebView.delegate = nil;
+                [_serverWebView removeFromSuperview];
                 [view removeFromSuperview];
                 
                 dispatch_semaphore_signal(semaphore1);
@@ -81,11 +84,55 @@
         });
     });
     if (dispatch_semaphore_wait(semaphore1, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*20))) {
+        _error = [NSError errorWithDomain:PROJECT_CANNEL code:ProvidentFundServiceErrorTimeOut2 userInfo:@{@"msg":@"异常超时"}];
         DDLogInfo(@"time out2");
     }
-    return @{@"history":[self historyList],@"keys":kCGGetProvidentFundServiceKeys,@"summary":_summaryData};
+//    NSArray *arr = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"history" ofType:@"plist"]];
+//    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"summary" ofType:@"plist"]];
+    return _error?@{@"history":[self historyList],@"keys":kCGGetProvidentFundServiceKeys,@"summary":_summaryData,@"error":_error}:@{@"history":[self historyList],@"keys":kCGGetProvidentFundServiceKeys,@"summary":_summaryData};
 }
-
+-(void)asyncRequestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary *otherInfo,NSError *error))completion{
+    NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
+    
+    self.webExcuteState = @"unload";
+    _summaryData = [NSMutableDictionary new];
+    _startDate = [year stringByAppendingString:@"-01-01"];
+    _endDate = [year stringByAppendingString:@"-12-31"];
+    _datas = [NSMutableArray new];
+    NSString *urlStr = [[NSString stringWithFormat:@"http://www.lyzfgjj.com/zxcx.aspx?userid=%@&sfz=%@&lmk=",self.name,self.cardId] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *url = [NSURL  URLWithString:urlStr];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIView *view;
+        if (!_serverWebView) {
+            view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+            [[[UIApplication sharedApplication] keyWindow]addSubview:view];
+            view.hidden = YES;
+            _serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
+            _serverWebView.delegate = self;
+            [view addSubview:_serverWebView];
+        }else{
+            view = _serverWebView.superview;
+        }
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            semaphore = dispatch_semaphore_create(0);
+            [_serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
+            dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
+            if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
+                _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorTimeOut userInfo:@{@"msg":@"访问网站自设置timeout超时"}];
+                DDLogInfo(@"time out");
+            }
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                _serverWebView = nil;
+                _serverWebView.delegate = nil;
+                [_serverWebView removeFromSuperview];
+                [view removeFromSuperview];
+                if (completion) {
+                    completion([self historyList],kCGGetProvidentFundServiceKeys,_summaryData,_error);
+                }
+            });
+        });
+    });
+}
 -(void)requestResultWithYear:(NSString *)year completion:(void(^)(NSArray *historyList,NSArray *keys,NSDictionary* otherInfo))completion{
     
     NSAssert(self.name&&self.cardId, @"请先执行object.name=@\"\"，还有object.cardId=@\"\"");
@@ -99,27 +146,28 @@
     NSURL *url = [NSURL  URLWithString:urlStr];
     dispatch_async(dispatch_get_main_queue(), ^{
         UIView *view;
-        if (!serverWebView) {
+        if (!_serverWebView) {
             view = [[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
             [[[UIApplication sharedApplication] keyWindow]addSubview:view];
             view.hidden = YES;
-            serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
-            serverWebView.delegate = self;
-            [view addSubview:serverWebView];
+            _serverWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 10,10)];
+            _serverWebView.delegate = self;
+            [view addSubview:_serverWebView];
         }else{
-            view = serverWebView.superview;
+            view = _serverWebView.superview;
         }
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             semaphore = dispatch_semaphore_create(0);
-            [serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
+            [_serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
             dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
             if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
+                _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorTimeOut userInfo:@{@"msg":@"访问网站自设置timeout超时"}];
                 DDLogInfo(@"time out");
             }
             dispatch_sync(dispatch_get_main_queue(), ^{
-                serverWebView = nil;
-                serverWebView.delegate = nil;
-                [serverWebView removeFromSuperview];
+                _serverWebView = nil;
+                _serverWebView.delegate = nil;
+                [_serverWebView removeFromSuperview];
                 [view removeFromSuperview];
                 if (completion) {
                     completion([self historyList],kCGGetProvidentFundServiceKeys,_summaryData);
@@ -144,7 +192,7 @@
 -(void)analyseDataWithOriginHtml:(NSString *)webHtml{
     if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"objWebDataWindowControl1_datawindow"])) {
         
-        int pageCount = [serverWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(\"option\").length"].intValue;
+        int pageCount = [_serverWebView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(\"option\").length"].intValue;
         if (pageCount<=1) {
             //数据已经是最后一页，完全结束
             [_datas addObjectsFromArray:[self filterExistedDataWithData:[self analyseDataWithoutJudge:webHtml]]];
@@ -159,7 +207,7 @@
                 if((![[tempArr lastObject][@"1"] isEqualToString:[_datas lastObject][@"1"]])||(![[tempArr lastObject][@"5"] isEqualToString:[_datas lastObject][@"5"]])){
                     [_datas addObjectsFromArray:[self filterExistedDataWithData:[self analyseDataWithoutJudge:webHtml]]];
                     _endDate = [_datas lastObject][@"1"];//实际上是kCGGetProvidentFundServiceKeys中的第1个对象，也就是交易日期，根据最后一个交易日期来压缩获取到的数据列表
-                    [self testJSContextWithWebView2:serverWebView withStartDate:_startDate endDate:_endDate];
+                    [self testJSContextWithWebView2:_serverWebView withStartDate:_startDate endDate:_endDate];
                 }
             }
         }
@@ -236,6 +284,8 @@
         //检验是否获取到正确的账号和名字配对
         NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
         if (!NSEqualRanges(NSMakeRange(NSNotFound, 0), [webHtml rangeOfString:@"操作失败信息"])) {
+            NSString *errorMsg = [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName(\"ul\")[0].childNodes[1].textContent"];
+            _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorAnalyse userInfo:@{@"msg":errorMsg}];
             dispatch_semaphore_signal(semaphore);
             self.webExcuteState = @"computed";
         }
@@ -246,5 +296,7 @@
         [self analyseDataWithOriginHtml:webHtml];
     }
 }
-
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorRemoteNetworkConnect userInfo:@{@"msg":@"远端网络访问失败"}];
+}
 @end
