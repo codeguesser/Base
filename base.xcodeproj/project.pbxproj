@@ -47,8 +47,6 @@
 		4CBBA1971C2695FC0047955F /* test 4.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1921C2695FC0047955F /* test 4.html */; };
 		4CBBA1981C2695FC0047955F /* test 5.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1931C2695FC0047955F /* test 5.html */; };
 		4CBBA1991C2695FC0047955F /* test 6.html in Resources */ = {isa = PBXBuildFile; fileRef = 4CBBA1941C2695FC0047955F /* test 6.html */; };
-		4CD2FD6F1C2D1598008A8B4F /* CGLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD2FD6C1C2CCD9C008A8B4F /* CGLocationService.m */; };
-		4CD2FD711C2D1866008A8B4F /* NSNotification+CGCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1C931BC79AAB00137D24 /* NSNotification+CGCategory.m */; };
 		4CD5E9401BC8A47D00E04EEB /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CAE1BC79AAB00137D24 /* TableViewController.m */; };
 		4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD5E9421BC8A7AF00E04EEB /* HeaderView.m */; };
 		4CD5E9451BC8A7BD00E04EEB /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CD5E9441BC8A7BD00E04EEB /* HeaderView.xib */; };
@@ -143,6 +141,7 @@
 		4CDC1D291BC79BF500137D24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D251BC79BF500137D24 /* AppDelegate.m */; };
 		4CDC1D2E1BC79CA300137D24 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */; };
 		4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1D2C1BC79CA300137D24 /* Model.xcdatamodeld */; };
+		4CE4497B1C6A2E6D00C9FDCA /* TestSocketUDPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE4497A1C6A2E6D00C9FDCA /* TestSocketUDPViewController.m */; };
 		4CF46B0B1C2D2F0D008AD7FF /* ca.cer in Resources */ = {isa = PBXBuildFile; fileRef = 4CF46B0A1C2D2F0D008AD7FF /* ca.cer */; };
 		4CF528EB1C437CEB00AABB09 /* CGGetProvidentFundService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF528EA1C437CEB00AABB09 /* CGGetProvidentFundService.m */; };
 		4CF707281C153005008B17A7 /* phone2icon2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CDC1C7E1BC79AAB00137D24 /* phone2icon2@3x.png */; };
@@ -402,6 +401,8 @@
 		4CDC1D261BC79BF500137D24 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		4CDC1D2B1BC79CA300137D24 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		4CDC1D2D1BC79CA300137D24 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		4CE449791C6A2E6D00C9FDCA /* TestSocketUDPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSocketUDPViewController.h; sourceTree = "<group>"; };
+		4CE4497A1C6A2E6D00C9FDCA /* TestSocketUDPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSocketUDPViewController.m; sourceTree = "<group>"; };
 		4CF46B0A1C2D2F0D008AD7FF /* ca.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cer; sourceTree = "<group>"; };
 		4CF528E91C437CEB00AABB09 /* CGGetProvidentFundService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGGetProvidentFundService.h; sourceTree = "<group>"; };
 		4CF528EA1C437CEB00AABB09 /* CGGetProvidentFundService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGGetProvidentFundService.m; sourceTree = "<group>"; };
@@ -862,6 +863,10 @@
 		4CDC1CA41BC79AAB00137D24 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				4CE449791C6A2E6D00C9FDCA /* TestSocketUDPViewController.h */,
+				4CE4497A1C6A2E6D00C9FDCA /* TestSocketUDPViewController.m */,
+				4CDC1CBC1BC79AAB00137D24 /* TestSocketViewController.h */,
+				4CDC1CBD1BC79AAB00137D24 /* TestSocketViewController.m */,
 				4CDC1CA71BC79AAB00137D24 /* LoadingViewController.h */,
 				4CDC1CA81BC79AAB00137D24 /* LoadingViewController.m */,
 				4CDC1CA91BC79AAB00137D24 /* LoadingViewController.xib */,
@@ -883,8 +888,6 @@
 				4CDC1CB91BC79AAB00137D24 /* TestLayoutViewController.h */,
 				4CDC1CBA1BC79AAB00137D24 /* TestLayoutViewController.m */,
 				4CDC1CBB1BC79AAB00137D24 /* TestLayoutViewController.xib */,
-				4CDC1CBC1BC79AAB00137D24 /* TestSocketViewController.h */,
-				4CDC1CBD1BC79AAB00137D24 /* TestSocketViewController.m */,
 				4CDC1CBE1BC79AAB00137D24 /* TestViewController.h */,
 				4CDC1CBF1BC79AAB00137D24 /* TestViewController.m */,
 				4C0DAEB71BDA32C500E208EA /* TestViewController.xib */,
@@ -1190,9 +1193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CD2FD6F1C2D1598008A8B4F /* CGLocationService.m in Sources */,
 				4C1DC2C31C117B10007701E4 /* TodayViewController.mm in Sources */,
-				4CD2FD711C2D1866008A8B4F /* NSNotification+CGCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1232,7 @@
 				4CDBA4A81BCB8876004EC99D /* LoadingView.m in Sources */,
 				4CDC1D001BC79AAB00137D24 /* HomeViewController.m in Sources */,
 				4CDC1D2F1BC79CA300137D24 /* Model.xcdatamodeld in Sources */,
+				4CE4497B1C6A2E6D00C9FDCA /* TestSocketUDPViewController.m in Sources */,
 				4C34D7FA1BEB3A5B00632623 /* PunchedCardButton.m in Sources */,
 				4CB5E3BB1BFE1A910087294C /* TestPayViewController.m in Sources */,
 				4CDC1CD71BC79AAB00137D24 /* ItemEntity.m in Sources */,
@@ -1490,7 +1492,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ba3b592e-fb65-462e-9d05-c4c979e4da80";
 			};
 			name = Debug;
 		};
@@ -1564,7 +1566,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ba3b592e-fb65-462e-9d05-c4c979e4da80";
 			};
 			name = Release;
 		};

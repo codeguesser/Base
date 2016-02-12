@@ -30,7 +30,7 @@
 //
 //
 #import <Foundation/Foundation.h>
-NS_ENUM(NSInteger,ProvidentFundServiceError){
+typedef NS_ENUM(NSInteger,ProvidentFundServiceError){
     ProvidentFundServiceErrorTimeOut = 0,//访问网站自设置timeout超时
     ProvidentFundServiceErrorTimeOut2 = 1,//异端超时
     ProvidentFundServiceErrorRemoteNetworkConnect = 2,//远端网络访问失败

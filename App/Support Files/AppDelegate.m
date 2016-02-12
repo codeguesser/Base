@@ -16,6 +16,7 @@
 //#import "LoadingViewController.h"
 //#import "MasMakeViewController.h"
 //#import "TestLayoutViewController.h"
+
 #import "WebViewController.h"
 #import "NSString+Pinyin.h"
 //#import "TestContactManagerViewController.h"
@@ -28,6 +29,8 @@
 #import "TestImageMemoryViewController.h"
 #import "CGNetwork.h"
 #import "CGGetProvidentFundService.h"
+#import "TestSocketUDPViewController.h"
+#import "BookDetailViewController.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
     CGLocationService *service2;
@@ -54,7 +57,7 @@
 }
 
 -(void)tableViewEmptyPageDemo{
-    TestViewController *vc = [[TestViewController alloc] init];
+    BookDetailViewController *vc = [[BookDetailViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
