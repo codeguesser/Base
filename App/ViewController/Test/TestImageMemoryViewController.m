@@ -69,8 +69,9 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 }
 -(void)shareAction:(UIMenuItem *)item{
-    UIActivityViewController *avc = [[UIActivityViewController alloc]initWithActivityItems:@[[NSURL URLWithString:@"http://www.baidu.com"],@"title",@"contentcontent",[UIImage imageNamed:@"打卡icon4"]] applicationActivities:nil];
-    avc.excludedActivityTypes = @[UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,UIActivityTypePostToWeibo,UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo];
+    UIActivityViewController *avc = [[UIActivityViewController alloc]initWithActivityItems:@[[NSURL URLWithString:@"http://www.baidu.com"],@"title",@"contentcontent1231231231231231",[UIImage imageNamed:@"打卡icon4"]] applicationActivities:nil];
+    avc.excludedActivityTypes = nil;
+//  @[UIActivityTypePostToTwitter, UIActivityTypePostToFacebook,UIActivityTypePostToWeibo,UIActivityTypeMessage, UIActivityTypeMail,UIActivityTypePrint, UIActivityTypeCopyToPasteboard,UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll,UIActivityTypeAddToReadingList, UIActivityTypePostToFlickr,UIActivityTypePostToVimeo,UIActivityTypePostToTencentWeibo];
     [self presentViewController:avc animated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning {

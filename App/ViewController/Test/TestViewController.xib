@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestViewController">
@@ -10,6 +10,7 @@
                 <outlet property="_label1" destination="bDR-7v-uIA" id="Rnx-N6-mqf"/>
                 <outlet property="_label2" destination="KUQ-3t-cZv" id="qYS-zO-uOX"/>
                 <outlet property="_label3" destination="9J4-If-bKl" id="SC9-s4-GGv"/>
+                <outlet property="_label4" destination="Gbp-hm-FxS" id="6Hr-o7-X0D"/>
                 <outlet property="myContentVIew" destination="4I9-BG-yva" id="SYa-fs-N1F"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ihQ-to-y1N"/>
             </connections>
@@ -19,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" horizontalHuggingPriority="750" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="4I9-BG-yva">
+                <view hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="4I9-BG-yva">
                     <rect key="frame" x="8" y="202" width="304" height="21"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDR-7v-uIA">
@@ -68,6 +69,12 @@
                         <constraint firstItem="9J4-If-bKl" firstAttribute="top" secondItem="4I9-BG-yva" secondAttribute="top" id="pKY-Jp-V4k"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gbp-hm-FxS">
+                    <rect key="frame" x="39" y="64" width="243" height="65"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

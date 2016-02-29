@@ -10,9 +10,11 @@
 #import "LoadingView.h"
 #import "testDatepickerView.h"
 #import "StarView.h"
+#import <AdSupport/AdSupport.h>
 @interface TestViewController (){
     
     __weak IBOutlet UILabel *_label2;
+    __weak IBOutlet UILabel *_label4;
     __weak IBOutlet UILabel *_label1;
     __weak IBOutlet UILabel *_label3;
     __weak IBOutlet UIView *myContentVIew;
@@ -31,6 +33,8 @@
     
     
     //被证明如果想要使用systemLayoutSizeFittingSize来获取高度，必须让最后一个对象启用bottom的
+    _label4.text = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];;
+    NSLog(@"%@",[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString]);
     _label1.text = @"阿里；弗拉德科夫";
     _label2.text = @"阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫阿里；弗拉德科夫";
     _label3.text = @"第二";
@@ -42,6 +46,17 @@
     [_label3 setNeedsLayout];
     float height = [myContentVIew systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     NSLog(@"%f",height);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:.5f animations:^{
+            myContentVIew.transform = CGAffineTransformMakeRotation(-M_PI_2);
+        }completion:^(BOOL finished) {
+            [UIView animateWithDuration:.5f animations:^{
+                
+                myContentVIew.transform = CGAffineTransformIdentity;
+            }];
+        }];
+    });
 }
 //-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
 //    CGContextSetLineWidth(ctx, 10.0f);

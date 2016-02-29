@@ -1,11 +1,13 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, "9.1"
+platform :ios, "9.2"
 deployment_target = '7.0'
+
+#pragma mark - public cocoapods project
 pod 'Aspects'
 pod 'MagicalRecord'
 pod 'Masonry'
 #pod 'Objective-CArmyKnife'
-pod 'Bugly'
+pod 'Bugly'#腾讯用于采集错误的东东，如果有了友盟就抛弃它，只要有一个足矣
 pod 'MBProgressHUD'
 pod 'Appirater'
 pod 'DZNEmptyDataSet'#加上为空的页面
@@ -28,6 +30,12 @@ pod 'CocoaLumberjack'#日志系统
 #pod 'MJRefresh'#下拉刷新
 #pod 'GPUImage'#高级图片渲染，考虑要不要
 #pod 'BonMot'#考虑要不要用这个，attributeString的简化版
+pod 'TesseractOCRiOS'#文字识别
+
+
+
+
+#pragma mark - private pods
 pod 'MKNetworkKit', :git => 'https://git.oschina.net/codeguesser/MKNetworkKit.git'
 pod 'cg-weixinpay', :git => 'https://git.oschina.net/codeguesser/cg-weixinpay.git'#如果有了sharesdk，就要去掉这个，这个和sharesdk的微信是冲突的
 pod 'openssl', :git => 'https://git.oschina.net/codeguesser/openssl.git'#支付宝专用openssl

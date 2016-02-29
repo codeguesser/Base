@@ -31,6 +31,7 @@
 #import "CGGetProvidentFundService.h"
 #import "TestSocketUDPViewController.h"
 #import "BookDetailViewController.h"
+#import "CGWebAccessService.h"
 @interface AppDelegate ()<UIAlertViewDelegate>{
     CGContactService *service;
     CGLocationService *service2;
@@ -53,11 +54,17 @@
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
     [self tableViewEmptyPageDemo];
+    [self setupTestWebAccess];
     return YES;
 }
-
+-(void)setupTestWebAccess{
+    CGWebAccessService *as = [CGWebAccessService service];
+    [as requestWithCompletion:^(NSDictionary *otherInfo) {
+        
+    }];
+}
 -(void)tableViewEmptyPageDemo{
-    BookDetailViewController *vc = [[BookDetailViewController alloc] init];
+    TestViewController *vc = [[TestViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:vc];
     
     nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"电话本" image:[[UIButton buttonWithType:UIButtonTypeDetailDisclosure] currentImage] tag:0];
