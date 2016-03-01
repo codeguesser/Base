@@ -59,6 +59,8 @@
 }
 -(void)setupTestWebAccess{
     CGWebAccessService *as = [CGWebAccessService service];
+    as.cardId = @"卡号";
+    as.password =  @"密码";
     [as requestWithCompletion:^(NSDictionary *otherInfo) {
         
     }];

@@ -27,6 +27,7 @@
 		4C4908481C2546FA00D4244F /* CGGetWebpageHeightService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4908471C2546FA00D4244F /* CGGetWebpageHeightService.m */; };
 		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
 		4C6577C61C83D72600380A29 /* CGWebAccessService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6577C51C83D72600380A29 /* CGWebAccessService.m */; };
+		4C6577CA1C842C5D00380A29 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 4C6577C91C842C5D00380A29 /* tessdata */; };
 		4C8A71591C30D64900729EF2 /* TestImageMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */; };
 		4C8A715A1C30D64900729EF2 /* TestImageMemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */; };
 		4C8CDE921C0EC1A200665E0B /* TestGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */; };
@@ -211,6 +212,7 @@
 		4C4B6B961C05B4B600ED4983 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		4C6577C41C83D72600380A29 /* CGWebAccessService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGWebAccessService.h; sourceTree = "<group>"; };
 		4C6577C51C83D72600380A29 /* CGWebAccessService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGWebAccessService.m; sourceTree = "<group>"; };
+		4C6577C91C842C5D00380A29 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		4C8A71561C30D64900729EF2 /* TestImageMemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestImageMemoryViewController.h; sourceTree = "<group>"; };
 		4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestImageMemoryViewController.m; sourceTree = "<group>"; };
 		4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestImageMemoryViewController.xib; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 		4CDC1BD21BC799DA00137D24 = {
 			isa = PBXGroup;
 			children = (
+				4C6577C91C842C5D00380A29 /* tessdata */,
 				4CDC1C4C1BC79AAB00137D24 /* App */,
 				4CDC1BDD1BC799DA00137D24 /* base */,
 				4C1DC2C01C117B10007701E4 /* extention */,
@@ -1097,6 +1100,7 @@
 				4CDC1D151BC79AAB00137D24 /* UserLoginViewController.xib in Resources */,
 				4CDC1D041BC79AAB00137D24 /* LoadingViewController.xib in Resources */,
 				4C2F9E291C17DE0500367CD0 /* ScrollHeaderView.xib in Resources */,
+				4C6577CA1C842C5D00380A29 /* tessdata in Resources */,
 				4CDC1CDE1BC79AAB00137D24 /* client.pfx in Resources */,
 				4CDC1D0F1BC79AAB00137D24 /* TestLayoutViewController.xib in Resources */,
 				4CBBA1991C2695FC0047955F /* test 6.html in Resources */,
