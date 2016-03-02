@@ -9,6 +9,9 @@
 #import "CGGetProvidentFundService.h"
 #define kCGGetProvidentFundServiceKeys @[@"序号",@"交易日期",@"业务种类",@"增加金额",@"减少金额",@"账号余额",@"所属年月"]
 
+#define K_SERVICE_WAIT_TIME 5
+#define K_SERVICE_TIME_OUT [[[UIDevice currentDevice] systemVersion]compare:@"8.0"]==NSOrderedAscending?10+K_SERVICE_WAIT_TIME:10
+
 @interface CGGetProvidentFundService()<UIWebViewDelegate>{
     
     NSMutableArray *_datas;//最终获取的全部数据
@@ -116,7 +119,8 @@
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             semaphore = dispatch_semaphore_create(0);
             [_serverWebView loadRequest:[NSURLRequest requestWithURL:url]];
-            dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*10);
+            int time = K_SERVICE_TIME_OUT;
+            dispatch_time_t timeoutTime = dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*time);
             if (dispatch_semaphore_wait(semaphore, timeoutTime)) {
                 _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorTimeOut userInfo:@{@"msg":@"访问网站自设置timeout超时"}];
                 DDLogInfo(@"time out");
@@ -288,12 +292,23 @@
             _error = [NSError errorWithDomain:@"www.lyzfgjj.com" code:ProvidentFundServiceErrorAnalyse userInfo:@{@"msg":errorMsg}];
             dispatch_semaphore_signal(semaphore);
             self.webExcuteState = @"computed";
+        }else{
+            [self excuteScriptToGetDataWithWebView:webView];
+            if ([[[UIDevice currentDevice] systemVersion]compare:@"8.0"]==NSOrderedAscending) {
+                //ios7提前执行
+                int time = K_SERVICE_WAIT_TIME-1;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+                    [self analyseDataWithOriginHtml:webHtml];
+                });
+            }
         }
-        [self excuteScriptToGetDataWithWebView:webView];
     } else {
         //当目标代码被执行之后，进行的html获取，这时实际上获取到的值
-        NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
-        [self analyseDataWithOriginHtml:webHtml];
+        if ([[[UIDevice currentDevice] systemVersion]compare:@"8.0"]!=NSOrderedAscending) {
+            NSString *webHtml = [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"];
+            [self analyseDataWithOriginHtml:webHtml];
+        }
     }
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
