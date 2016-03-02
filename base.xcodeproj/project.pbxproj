@@ -28,6 +28,7 @@
 		4C4B6B971C05B4B600ED4983 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B6B941C05B4B600ED4983 /* WXApiManager.m */; };
 		4C6577C61C83D72600380A29 /* CGWebAccessService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6577C51C83D72600380A29 /* CGWebAccessService.m */; };
 		4C6577CA1C842C5D00380A29 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 4C6577C91C842C5D00380A29 /* tessdata */; };
+		4C74C0F81C8561DD000B0129 /* TestSocketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDC1CBD1BC79AAB00137D24 /* TestSocketViewController.m */; };
 		4C8A71591C30D64900729EF2 /* TestImageMemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8A71571C30D64900729EF2 /* TestImageMemoryViewController.m */; };
 		4C8A715A1C30D64900729EF2 /* TestImageMemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C8A71581C30D64900729EF2 /* TestImageMemoryViewController.xib */; };
 		4C8CDE921C0EC1A200665E0B /* TestGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8CDE911C0EC1A200665E0B /* TestGameViewController.m */; };
@@ -1255,6 +1256,7 @@
 				4CDC1CFB1BC79AAB00137D24 /* ShareHandle.m in Sources */,
 				4C2F9E271C17DDF500367CD0 /* ScrollHeaderView.m in Sources */,
 				4CDC1CFC1BC79AAB00137D24 /* BookDetailViewController.m in Sources */,
+				4C74C0F81C8561DD000B0129 /* TestSocketViewController.m in Sources */,
 				4CDC1C481BC79A3D00137D24 /* NSDateFormatter+Category.m in Sources */,
 				4CDC1CCF1BC79AAB00137D24 /* Cell.m in Sources */,
 			);
@@ -1486,7 +1488,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c783dc3d-8ad1-42ea-94a2-48ab935cb156";
+				PROVISIONING_PROFILE = "8b882e55-7b9c-469d-9b30-818b22fca854";
 			};
 			name = Debug;
 		};
@@ -1560,7 +1562,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c783dc3d-8ad1-42ea-94a2-48ab935cb156";
+				PROVISIONING_PROFILE = "8b882e55-7b9c-469d-9b30-818b22fca854";
 			};
 			name = Release;
 		};
