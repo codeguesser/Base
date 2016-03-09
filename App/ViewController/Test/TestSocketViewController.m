@@ -61,7 +61,7 @@ console.log('Server listening on ' + HOST +':'+ PORT);
     // Do any additional setup after loading the view.
     socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err;
-    if (![socket connectToHost:@"codeguesser.cn" onPort:8083 error:&err]){
+    if (![socket connectToHost:@"127.0.0.1" onPort:8083 error:&err]){
         NSLog(@"%@",err);
     }
     contentField = [[UITextField alloc]init];
