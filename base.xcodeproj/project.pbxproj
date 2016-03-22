@@ -14,6 +14,7 @@
 		4C1DC2C31C117B10007701E4 /* TodayViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DC2C21C117B10007701E4 /* TodayViewController.mm */; };
 		4C1DC2C61C117B10007701E4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1DC2C41C117B10007701E4 /* MainInterface.storyboard */; };
 		4C1DC2CA1C117B10007701E4 /* extention.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4C1DC2BD1C117B10007701E4 /* extention.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4C241EC81C9B882C00919BDA /* CalenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C241EC71C9B882C00919BDA /* CalenderView.m */; };
 		4C2F9E271C17DDF500367CD0 /* ScrollHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2F9E261C17DDF500367CD0 /* ScrollHeaderView.m */; };
 		4C2F9E291C17DE0500367CD0 /* ScrollHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C2F9E281C17DE0500367CD0 /* ScrollHeaderView.xib */; };
 		4C2FF3841C30C14200CC60C4 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDC1C1A1BC79A3D00137D24 /* BaiduMapAPI.framework */; };
@@ -194,6 +195,8 @@
 		4C1DC2C71C117B10007701E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C1DC2CF1C117BAD007701E4 /* base.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = base.entitlements; sourceTree = "<group>"; };
 		4C1DC2D01C117BC7007701E4 /* extention.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = extention.entitlements; sourceTree = "<group>"; };
+		4C241EC61C9B882C00919BDA /* CalenderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalenderView.h; sourceTree = "<group>"; };
+		4C241EC71C9B882C00919BDA /* CalenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderView.m; sourceTree = "<group>"; };
 		4C2F9E251C17DDF400367CD0 /* ScrollHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollHeaderView.h; sourceTree = "<group>"; };
 		4C2F9E261C17DDF500367CD0 /* ScrollHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollHeaderView.m; sourceTree = "<group>"; };
 		4C2F9E281C17DE0500367CD0 /* ScrollHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollHeaderView.xib; sourceTree = "<group>"; };
@@ -724,6 +727,8 @@
 				4C34D7F91BEB3A5B00632623 /* PunchedCardButton.m */,
 				4C8F62551C016226007E22AC /* StarView.h */,
 				4C8F62561C016226007E22AC /* StarView.m */,
+				4C241EC61C9B882C00919BDA /* CalenderView.h */,
+				4C241EC71C9B882C00919BDA /* CalenderView.m */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1209,6 +1214,7 @@
 				4C0DAEB51BDA22A400E208EA /* TableViewCell2.m in Sources */,
 				4CDC1CF91BC79AAB00137D24 /* NSNotification+CGCategory.m in Sources */,
 				4CD5E9431BC8A7AF00E04EEB /* HeaderView.m in Sources */,
+				4C241EC81C9B882C00919BDA /* CalenderView.m in Sources */,
 				4CDC1CFA1BC79AAB00137D24 /* Prefrence.m in Sources */,
 				4CDC1D141BC79AAB00137D24 /* UserLoginViewController.m in Sources */,
 				4CDC1CD11BC79AAB00137D24 /* CollectionViewCell.m in Sources */,
