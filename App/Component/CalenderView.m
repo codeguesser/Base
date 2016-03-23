@@ -8,6 +8,7 @@
 
 #import "CalenderView.h"
 #define kCVButtonHeight 55.0f
+#define intFromDay(myday) myday.year*10000+myday.month*100+myday.day
 @implementation CVButton
 
 +(CVButton *)defaultButtonWithDay:(CVDayEntity * )day{
@@ -63,8 +64,8 @@
     
     _titleLabel.textColor = self.day.state & CVStateToday?[UIColor redColor]:self.day.state & CVStateWorkday||self.day.state & CVStateMarked?[UIColor whiteColor]:[UIColor blackColor];
     _titleLabel.font = [UIFont systemFontOfSize:12.0f];
-//    _dotView.hidden = !(self.day.state & CVStateMarked);
-    _dotView.hidden = YES;
+    _dotView.hidden = !(self.day.state & CVStateOuttimed);
+
     if (self.superview) {
         NSDate *date = [self.day.date dateAtStartOfDay];
         NSDate *firstDate = [date dateByAddingDays:-date.day+1];
@@ -163,10 +164,10 @@
     _mainDisplayDayViews = [NSMutableArray new];
     self.month = [NSDate date];
     self.selectedDay = [self firstDayOfMonth:[NSDate date]];
-    _weekDays = @[@(NO),@(NO),@(YES),@(YES),@(YES),@(YES),@(NO)];
+    _weekDays = @[@(NO),@(YES),@(YES),@(YES),@(YES),@(YES),@(NO)];
     self.workingDays = _weekDays;
     self.dataSource = [NSMutableIndexSet new];//第一个是黑名单，第二个是白名单
-    
+    [self.dataSource addIndex:20160325];
     
     
     
@@ -285,6 +286,9 @@
         [self updateCalenderWithMonth:[self monthByAddingMonth:idx-1 withMonth:self.month] objects:buttons superview:v];
         [_mainScrollView addSubview:v];
         [_mainDisplayDayViews addObject:v];
+        if (self.changeSelectDateAction) {
+            self.changeSelectDateAction([(CVButton *)_mainCachedDayButtons[1][self.selectedDay.day-1] day]);
+        }
     }];
 }
 /*!
@@ -323,6 +327,7 @@
         [_mainCachedDayButtons insertObject:[_mainCachedDayButtons lastObject] atIndex:0];
         [_mainCachedDayButtons removeLastObject];
         [self updateCalenderWithMonth:[self monthByAddingMonth:-1 withMonth:self.month] objects:_mainCachedDayButtons.firstObject superview:nil];
+        [self changeCurrentSelectedDayFromDiffrentMonth];
     }else if (p.x/_mainScrollView.frame.size.width-kCalenderViewScrollPage > 0){
         
         if (self.changeMonthAction) {
@@ -337,6 +342,7 @@
         [_mainCachedDayButtons addObject:[_mainCachedDayButtons firstObject]];
         [_mainCachedDayButtons removeObjectAtIndex:0];
         [self updateCalenderWithMonth:[self monthByAddingMonth:1 withMonth:self.month] objects:_mainCachedDayButtons.lastObject superview:nil];
+        [self changeCurrentSelectedDayFromDiffrentMonth];
     }
     [_mainDisplayDayViews enumerateObjectsUsingBlock:^(UIView * contentView, NSUInteger idx, BOOL * _Nonnull stop) {
         contentView.frame = CGRectMake(_mainScrollView.frame.size.width*(idx+kCalenderViewScrollPage-1), 0, _mainScrollView.frame.size.width, _mainScrollView.frame.size.height);
@@ -345,7 +351,6 @@
     //更新头部信息
     _headerMonthLabel.text = [NSString stringWithFormat:@"%ld年%ld月",(long)self.month.year,(long)self.month.month];
     
-    [self changeCurrentSelectedDayFromDiffrentMonth];
 }
 -(void)changeCurrentSelectedDayFromDiffrentMonth{
     //更新选中的按钮
@@ -391,6 +396,8 @@
             b.day.state = [self setObject:b.day.state forKey:CVStateMarked value:b.day.date.day == self.selectedDay.day];
             b.day.state = [self setObject:b.day.state forKey:CVStateWorkday value:[self isWorkingDay:b.day.date]];
             b.day.state = [self setObject:b.day.state forKey:CVStateToday value:b.day.date.day==[NSDate date].day&&b.day.date.month==[NSDate date].month&&b.day.date.year==[NSDate date].year];
+
+            b.day.state = [self setObject:b.day.state forKey:CVStateOuttimed value:self.outtimeRange[[NSString stringWithFormat:@"%ld",intFromDay(b.day.date)]]];
         }
         b.day.isValiable = idx2<countOfMonth;
         __weak CVDayEntity * weak_date = b.day;
@@ -404,7 +411,7 @@
         [b updateSubView];
     }];
 }
--(CVDayEntity *)updateStatusWithTag:(NSUInteger)tag{
+-(CVDayEntity *)updateMarkStatusWithTag:(NSUInteger)tag{
     if (_mainCachedDayButtons&&_mainCachedDayButtons.count>1&&[_mainCachedDayButtons[1] count]==31) {
         CVButton *b = _mainCachedDayButtons[1][tag%100-1];
         b.day.state = [self setObject:b.day.state forKey:CVStateWorkday value:[self isWorkingDay:b.day.date]];
@@ -412,6 +419,32 @@
         return b.day;
     }
     return nil;
+}
+-(CVDayEntity *)reverseMarkStatusWithTag:(NSUInteger)tag{
+    if ([self.dataSource containsIndex:tag]) {
+        [self.dataSource removeIndex:tag];
+    }else{
+        [self.dataSource addIndex:tag];
+    }
+    return [self updateMarkStatusWithTag:tag];
+}
+-(BOOL)updateoutTimeWith:(NSString *)str targetTime:(NSUInteger)tag standardTime:(NSString *)compr{
+    NSString *tagStr = [NSString stringWithFormat:@"%lu",(unsigned long)tag];
+    if([str isEqualToString:compr]){
+        if (self.outtimeRange[tagStr]) {
+            [self.outtimeRange removeObjectForKey:tagStr];
+        }
+    }else{
+        [self.outtimeRange setObject:str forKey:tagStr];
+    }
+    NSUInteger comInt = self.month.year*10000+self.month.month*100;
+    if (tag>comInt&&tag<=comInt+31) {
+        CVButton *b = _mainCachedDayButtons[1][tag%100-1];
+        b.day.state = [self setObject:b.day.state forKey:CVStateOuttimed value:self.outtimeRange[[NSString stringWithFormat:@"%ld",intFromDay(b.day.date)]]];
+        [b updateSubView];
+        return YES;
+    }
+    return NO;
 }
 -(CVState)setObject:(CVState)object forKey:(CVState)key value:(BOOL)value{
     if (value) {
@@ -431,9 +464,9 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:day];
     if ([self.workingDays[components.weekday-1] boolValue]) {
         //选中的工作日
-        return ![self.dataSource containsIndex:day.year*10000+day.month*100+day.day];
+        return ![self.dataSource containsIndex:intFromDay(day)];
     }else{
-        return [self.dataSource containsIndex:day.year*10000+day.month*100+day.day];
+        return [self.dataSource containsIndex:intFromDay(day)];
     }
 }
 #pragma mark - day methods

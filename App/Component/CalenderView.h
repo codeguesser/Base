@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, CVState) {
     CVStateWorkday   = 1 << 0, // 00001
     CVStateToday    = 1 << 1, // 00010
     CVStateMarked    = 1 << 2, // 00100
+    CVStateOuttimed    = 1 << 3, // 00100
 };
 
 /*!
@@ -70,9 +71,13 @@ typedef NS_ENUM(NSUInteger, CVState) {
  */
 @property(nonatomic,strong)void(^changeSelectDateAction)(CVDayEntity *day);
 /*!
- @brief 原始数据
+ @brief 原始数据，所有的日期，在选择区域里，就是黑名单，非选择区域里就是白名单
  */
 @property(nonatomic,strong)NSMutableIndexSet *dataSource;
+/*!
+ @brief 改变了日期的信息
+ */
+@property(nonatomic,strong)NSMutableDictionary *outtimeRange;
 /*!
  @brief 初始化的月份，默认为当前月
  */
@@ -85,13 +90,30 @@ typedef NS_ENUM(NSUInteger, CVState) {
  @brief 工作日
  */
 @property(nonatomic,assign)NSArray *workingDays;
+//
+///*!
+// @brief 更新单个按钮的状态，需要在当前日历处理
+// 
+// @param tag 目标时间的tag
+// 
+// @return 默认为空，找到按钮则返回这个按钮的状态
+// */
+//-(CVDayEntity *)updateMarkStatusWithTag:(NSUInteger)tag;
+/*!
+ @brief 反转按钮的工作状态，默认为空
+ 
+ @param tag 工作的日期，也就是tag  请输入20150102
+ */
+-(CVDayEntity *)reverseMarkStatusWithTag:(NSUInteger)tag;
 
 /*!
- @brief 更新单个按钮的状态，需要在当前日历处理
+ @brief 更新日历里的修改了时间段的状态
  
- @param tag 目标时间的tag
+ @param str   新的时间段
+ @param tag   目标时间，也就是tag 如20150102
+ @param compr 要比较的目标时间
  
- @return 默认为空，找到按钮则返回这个按钮的状态
+ @return 是否获修改成功了
  */
--(CVDayEntity *)updateStatusWithTag:(NSUInteger)tag;
+-(BOOL)updateoutTimeWith:(NSString *)str targetTime:(NSUInteger)tag standardTime:(NSString *)compr;
 @end
