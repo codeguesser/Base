@@ -116,4 +116,6 @@ typedef NS_ENUM(NSUInteger, CVState) {
  @return 是否获修改成功了
  */
 -(BOOL)updateoutTimeWith:(NSString *)str targetTime:(NSUInteger)tag standardTime:(NSString *)compr;
+-(NSArray *)description;
+-(void)initData:(NSArray *)arr;
 @end

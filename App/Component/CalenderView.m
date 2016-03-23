@@ -230,6 +230,7 @@
     [_headerGobackButton setTitleColor:[UIColor colorWithRed:39.0/255 green:211.0/255 blue: 144.0/255 alpha:1] forState:0];
     _headerGobackButton.layer.masksToBounds = YES;
     _headerGobackButton.layer.cornerRadius = 33/2.0;
+    [_headerGobackButton addTarget:self action:@selector(goPreviousMonth) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_headerGobackButton];
     
     //下一个月按钮
@@ -239,6 +240,7 @@
     [_headerGoaheadButton setTitleColor:[UIColor colorWithRed:39.0/255 green:211.0/255 blue: 144.0/255 alpha:1] forState:0];
     _headerGoaheadButton.layer.masksToBounds = YES;
     _headerGoaheadButton.layer.cornerRadius = 33/2.0;
+    [_headerGoaheadButton addTarget:self action:@selector(goNextMonth) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_headerGoaheadButton];
     
 }
@@ -295,13 +297,21 @@
  @brief 前往下一个月
  */
 -(void)goNextMonth{
-    
+    [UIView animateWithDuration:.3f animations:^{
+        _mainScrollView.contentOffset = CGPointMake(_mainScrollView.contentOffset.x+_mainScrollView.frame.size.width, 0);
+    } completion:^(BOOL finished) {
+        [self resetAllScrollViews];
+    }];
 }
 /*!
  @brief 去之前的一个月
  */
 -(void)goPreviousMonth{
-    
+    [UIView animateWithDuration:.3f animations:^{
+        _mainScrollView.contentOffset = CGPointMake(_mainScrollView.contentOffset.x-_mainScrollView.frame.size.width, 0);
+    } completion:^(BOOL finished) {
+        [self resetAllScrollViews];
+    }];
 }
 /*!
  @brief 滚动到的月份
@@ -517,5 +527,49 @@
     [self resetAllScrollViews];
 }
 #pragma mark - public methods
-
+-(NSArray *)description{
+    NSMutableDictionary *dic = [NSMutableDictionary new];
+    NSDateFormatter *formmatter = [NSDateFormatter dateFormatterWithFormat:@"yyyyMMdd"];
+    
+    [self.dataSource enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *idxStr = [@(idx) stringValue];
+        NSDate *date = [formmatter dateFromString:idxStr];
+        dic[idxStr] = [@{@"date":idxStr,@"isWork":![self isWorkingDay:date]?@"False":@"True",@"begin":@"",@"end":@""} mutableCopy];
+    }];
+    [self.outtimeRange enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        NSDate *date = [formmatter dateFromString:key];
+        NSArray *arr = [obj componentsSeparatedByString:@"-"];
+        if (dic[key]) {
+            dic[key][@"begin"] = arr[0];
+            dic[key][@"end"] = arr[1];
+        }else{
+            dic[key] = @{@"date":key,@"isWork":![self isWorkingDay:date]?@"False":@"True",@"begin":arr[0],@"end":arr[1]};
+        }
+    }];
+    return dic.allValues;
+}
+-(void)initData:(NSArray *)arr{
+    arr = @[@{@"begin":@"16:00",@"date":@"20160319",@"end":@"18:00",@"isWork":@"True"},
+            @{@"begin":@"08:05",@"date":@"20160310",@"end":@"18:00",@"isWork":@"False"},
+            @{@"begin":@"11:11",@"date":@"20160325",@"end":@"19:00",@"isWork":@"False"},
+            @{@"begin":@"10:00",@"date":@"20160301",@"end":@"18:00",@"isWork":@"True"},
+            @{@"begin":@"",@"date":@"20160312",@"end":@"",@"isWork":@"True"},
+            @{@"begin":@"",@"date":@"20160303",@"end":@"",@"isWork":@"False"}];
+    [self.dataSource removeAllIndexes];
+    [self.outtimeRange removeAllObjects];
+    for (NSDictionary *dic in arr) {
+        NSDateFormatter *formmatter = [NSDateFormatter dateFormatterWithFormat:@"yyyyMMdd"];
+        NSDate *date = [formmatter dateFromString:dic[@"date"]];
+        if ([dic[@"begin"] length]>0) {
+            self.outtimeRange[dic[@"date"]] = [NSString stringWithFormat:@"%@-%@",dic[@"begin"],dic[@"end"]];
+        }
+        if (([dic[@"isWork"] isEqualToString:@"False"]&&[self isWorkingDay:date])||([dic[@"isWork"] isEqualToString:@"True"]&&![self isWorkingDay:date])) {
+            [self.dataSource addIndex:[dic[@"date"] integerValue]];
+        }
+    }
+    [_mainCachedDayButtons enumerateObjectsUsingBlock:^(NSArray * buttons, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        [self updateCalenderWithMonth:[self monthByAddingMonth:idx-1 withMonth:self.month] objects:buttons superview:nil];
+    }];
+}
 @end
