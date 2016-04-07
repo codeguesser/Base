@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/*!
+ @brief 测试的时间选择器，去掉日期中的时分秒
+ */
 @interface testDatepickerView : UIView
 
 @end
