@@ -13,9 +13,10 @@ NSString *const kGroupServiceName = @"kGroupServiceName";
 NSString *const kServicePinyin = @"kServicePinyin";
 NSString *const kServiceTels = @"kServiceTels";
 NSString *const kServiceContactId = @"kServiceContactId";
+NSString *const kServiceContactPhoto = @"kServiceContactPhoto";
 
 NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
-#define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey]
+#define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactImageDataAvailableKey,CNContactImageDataKey]
 @interface CGContactService()
 -(void)allgroupsFor9MinusChecked;
 @end
@@ -210,7 +211,9 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
         [telArr addObject:[(CNPhoneNumber *)v.value stringValue]];
     }
     NSString *contactName = [NSString stringWithFormat:@"%@%@%@",contact.familyName,contact.middleName,contact.givenName];
-    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier};
+    
+    UIImage *contactPhotoImage = contact.imageDataAvailable?[UIImage imageWithData:contact.imageData]:[UIImage new];
+    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage};
 }
 -(NSDictionary *)groupFromCNRecode:(CNGroup *)group{
     
@@ -223,6 +226,11 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     return @{kGroupServiceName:group.name,kServicePinyin:[group.name pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],@"data":arr};
 }
 -(NSDictionary *)contactFromRecordId:(ABRecordRef)contact{
+    CFDataRef contactPhoto = ABPersonCopyImageDataWithFormat(contact, kABPersonImageFormatOriginalSize);
+    UIImage *contactPhotoImage = [UIImage imageWithData:(__bridge NSData * _Nonnull)(contactPhoto)];
+    if (contactPhotoImage) {
+        
+    }
     CFTypeRef contactName = ABRecordCopyValue(contact, kABPersonFirstNameProperty);
     CFTypeRef contactMiddleName = ABRecordCopyValue(contact, kABPersonMiddleNameProperty);
     CFTypeRef contactFamilyName = ABRecordCopyValue(contact, kABPersonLastNameProperty);
@@ -231,9 +239,10 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     if(!contactName)contactName = @"";
     if(!contactMiddleName)contactMiddleName = @"";
     if(!contactFamilyName)contactFamilyName = @"";
+    if(!contactPhotoImage)contactPhotoImage = [UIImage new];
     NSString *finalName = [NSString stringWithFormat:@"%@%@%@",(__bridge NSString *)contactFamilyName,(__bridge NSString *)contactMiddleName,(__bridge NSString *)contactName];
     NSArray *targetArr = tels&&ABMultiValueGetCount(tels)>0?(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels):@[];
-    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier};
+    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage};
 }
 -(NSDictionary *)groupFromRecordId:(ABRecordRef)group{
     NSMutableArray *arr = [NSMutableArray new];
