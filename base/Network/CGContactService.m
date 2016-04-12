@@ -52,7 +52,9 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                                  @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                                  @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
                                  @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
-                                 }];
+                                 ,@"photo":groupDic[kServiceContactPhoto]?groupDic[kServiceContactPhoto]:[NSNull null]
+                                 }
+                 ];
                 [arrForCheck addObject:contactDic[kServiceContactId]];
             }
         }else{
@@ -61,6 +63,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                              @"group_title":groupDic[kGroupServiceName],
                              @"name":@"",
                              @"tel":@"",
+                             @"photo":@"",
                              @"contact_other":@""}];
         }
     }
@@ -79,6 +82,7 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                              @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                              @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
                              @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
+                             ,@"photo":contactDic[kServiceContactPhoto]?contactDic[kServiceContactPhoto]:[NSNull null]
                              }];
         }
         
