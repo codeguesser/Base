@@ -1302,7 +1302,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = extention/extention.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: li zhang (Y8QM93SKYY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1316,7 +1316,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base.extention;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cbe2040e-0aab-490e-ad2a-c9462616b053";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -1325,7 +1325,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = extention/extention.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: li zhang (Y8QM93SKYY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1339,7 +1339,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base.extention;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cbe2040e-0aab-490e-ad2a-c9462616b053";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -1494,7 +1494,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8b882e55-7b9c-469d-9b30-818b22fca854";
+				PROVISIONING_PROFILE = "93a9bcf2-a631-4c52-9cd4-81cd27a6ee59";
 			};
 			name = Debug;
 		};
@@ -1568,7 +1568,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rsaif.base;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8b882e55-7b9c-469d-9b30-818b22fca854";
+				PROVISIONING_PROFILE = "93a9bcf2-a631-4c52-9cd4-81cd27a6ee59";
 			};
 			name = Release;
 		};

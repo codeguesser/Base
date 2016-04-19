@@ -11,16 +11,39 @@
 NSString *const kContactServiceName = @"kContactServiceName";
 NSString *const kGroupServiceName = @"kGroupServiceName";
 NSString *const kServicePinyin = @"kServicePinyin";
+NSString *const kServiceDepartment = @"kServiceDepartment";
+NSString *const kServiceJob = @"kServiceJob";
+NSString *const kServiceBirthday = @"kServiceBirthday";
+NSString *const kServiceNonGregorianBirthday = @"kServiceNonGregorianBirthday";
+NSString *const kServiceNote = @"kServiceNote";
+NSString *const kServiceEmails = @"kServiceEmails";
+NSString *const kServicePostals = @"kServicePostals";
+NSString *const kServiceDates = @"kServiceDates";
+NSString *const kServiceUrls = @"kServiceUrls";
+NSString *const kServiceRelations = @"kServiceRelations";
+NSString *const kServiceProfiles = @"kServiceProfiles";
+NSString *const kServiceIMs = @"kServiceIMs";
+
 NSString *const kServiceTels = @"kServiceTels";
 NSString *const kServiceContactId = @"kServiceContactId";
 NSString *const kServiceContactPhoto = @"kServiceContactPhoto";
 
 NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
-#define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactImageDataAvailableKey,CNContactImageDataKey]
-@interface CGContactService()
+#define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactImageDataAvailableKey,CNContactImageDataKey,CNContactDepartmentNameKey,CNContactJobTitleKey,CNContactBirthdayKey,CNContactNonGregorianBirthdayKey,CNContactNoteKey,CNContactEmailAddressesKey,CNContactPostalAddressesKey,CNContactDatesKey,CNContactUrlAddressesKey,CNContactRelationsKey,CNContactSocialProfilesKey,CNContactInstantMessageAddressesKey]
+@interface CGContactService(){
+    NSDateFormatter *formatter;
+}
 -(void)allgroupsFor9MinusChecked;
 @end
 @implementation CGContactService
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        formatter = [NSDateFormatter dateFormatterWithFormat:@"yyyyMMdd"];
+    }
+    return self;
+}
 + (id)service{
     //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:kNotificationContactUpdated object:nil];
     CGContactService *s = [[CGContactService alloc] init];
@@ -51,8 +74,20 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                                  @"group_title":groupDic[kGroupServiceName],
                                  @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                                  @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
-                                 @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
-                                 ,@"photo":groupDic[kServiceContactPhoto]?groupDic[kServiceContactPhoto]:[NSNull null]
+                                 @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:0 error:nil] encoding:NSUTF8StringEncoding]
+                                 ,@"photo":contactDic[kServiceContactPhoto]?contactDic[kServiceContactPhoto]:[NSNull null],
+                                 @"department":contactDic[kServiceDepartment],
+                                 @"job":contactDic[kServiceJob],
+                                 @"birthday":contactDic[kServiceBirthday],
+                                 @"nonGregorianBirthday":contactDic[kServiceNonGregorianBirthday],
+                                 @"note":contactDic[kServiceNote],
+                                 @"emails":contactDic[kServiceEmails],
+                                 @"postals":contactDic[kServicePostals],
+                                 @"dates":contactDic[kServiceDates],
+                                 @"urls":contactDic[kServiceUrls],
+                                 @"relations":contactDic[kServiceRelations],
+                                 @"profiles":contactDic[kServiceProfiles],
+                                 @"ims":contactDic[kServiceIMs],
                                  }
                  ];
                 [arrForCheck addObject:contactDic[kServiceContactId]];
@@ -82,7 +117,19 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
                              @"name":[contactDic[kContactServiceName] length]>0?contactDic[kContactServiceName]:[contactDic[kServiceTels] firstObject],
                              @"tel":[contactDic[kServiceTels] count]>0?[contactDic[kServiceTels] firstObject]:@"",
                              @"contact_other":[[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:[self withoutFirstObjectFromData:tels] options:NSJSONWritingPrettyPrinted error:nil] encoding:NSUTF8StringEncoding]
-                             ,@"photo":contactDic[kServiceContactPhoto]?contactDic[kServiceContactPhoto]:[NSNull null]
+                             ,@"photo":contactDic[kServiceContactPhoto]?contactDic[kServiceContactPhoto]:[NSNull null],
+                             @"department":contactDic[kServiceDepartment],
+                             @"job":contactDic[kServiceJob],
+                             @"birthday":contactDic[kServiceBirthday],
+                             @"nonGregorianBirthday":contactDic[kServiceNonGregorianBirthday],
+                             @"note":contactDic[kServiceNote],
+                             @"emails":contactDic[kServiceEmails],
+                             @"postals":contactDic[kServicePostals],
+                             @"dates":contactDic[kServiceDates],
+                             @"urls":contactDic[kServiceUrls],
+                             @"relations":contactDic[kServiceRelations],
+                             @"profiles":contactDic[kServiceProfiles],
+                             @"ims":contactDic[kServiceIMs],
                              }];
         }
         
@@ -209,15 +256,40 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     return arr;
 }
 -(NSDictionary *)contactFromCNRecode:(CNContact *)contact{
-    NSMutableArray *telArr = [NSMutableArray new];
     NSString *identifier = contact.identifier;
+    NSString *contactName = [NSString stringWithFormat:@"%@%@%@",contact.familyName,contact.middleName,contact.givenName];
+    UIImage *contactPhotoImage = contact.imageDataAvailable?[UIImage imageWithData:contact.imageData]:[UIImage new];
+    
+    NSMutableArray *telArr = [NSMutableArray new];
     for (CNLabeledValue *v in contact.phoneNumbers) {
         [telArr addObject:[(CNPhoneNumber *)v.value stringValue]];
     }
-    NSString *contactName = [NSString stringWithFormat:@"%@%@%@",contact.familyName,contact.middleName,contact.givenName];
+    NSArray *emailArr = [self formattedAarrayFromArray:contact.emailAddresses];
+    NSArray *postalArr = [self formattedAarrayFromArray:contact.postalAddresses];
+    NSArray *dateArr = [self formattedAarrayFromArray:contact.dates];
+    NSArray *urlArr = [self formattedAarrayFromArray:contact.urlAddresses];
+    NSArray *relationArr = [self formattedAarrayFromArray:contact.contactRelations];
+    NSArray *profileArr = [self formattedAarrayFromArray:contact.socialProfiles];
+    NSArray *imArr = [self formattedAarrayFromArray:contact.instantMessageAddresses];
     
-    UIImage *contactPhotoImage = contact.imageDataAvailable?[UIImage imageWithData:contact.imageData]:[UIImage new];
-    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage};
+    return @{kContactServiceName:contactName,kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage,kServiceDepartment:contact.departmentName,
+             kServiceJob:contact.jobTitle,kServiceBirthday:contact.birthday?[formatter stringFromDate:contact.birthday.date]:@"",kServiceNonGregorianBirthday:contact.nonGregorianBirthday?[formatter stringFromDate:contact.nonGregorianBirthday.date]:@"",kServiceNote:contact.note,kServiceEmails:emailArr,kServicePostals:postalArr,kServiceDates:dateArr,kServiceUrls:urlArr,kServiceRelations:relationArr,kServiceProfiles:profileArr,kServiceIMs:imArr};
+}
+-(NSArray <NSDictionary<NSString *,NSString *>*>*)formattedAarrayFromArray:(NSArray<CNLabeledValue*>*)arr{
+    NSMutableArray *_arr = [NSMutableArray new];
+    for (CNLabeledValue *v in arr) {
+        [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:v.value}];
+    }
+    return _arr;
+}
+-(NSArray <NSDictionary<NSString *,NSString *>*>*)formattedAarrayFromMultiValue:(ABMultiValueRef)value{
+    NSMutableArray *_arr = [NSMutableArray new];
+    if(value&&ABMultiValueGetCount(value)>0){
+        for (int i=0; i<ABMultiValueGetCount(value); i++) {
+            [_arr addObject:@{(__bridge NSString *)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(value, i)):(__bridge NSString *)ABMultiValueCopyValueAtIndex(value, i)}];
+        }
+    }
+    return _arr;
 }
 -(NSDictionary *)groupFromCNRecode:(CNGroup *)group{
     
@@ -238,15 +310,48 @@ NSString *const kNotificationContactUpdated = @"kNotificationContactUpdated";
     CFTypeRef contactName = ABRecordCopyValue(contact, kABPersonFirstNameProperty);
     CFTypeRef contactMiddleName = ABRecordCopyValue(contact, kABPersonMiddleNameProperty);
     CFTypeRef contactFamilyName = ABRecordCopyValue(contact, kABPersonLastNameProperty);
-    ABMultiValueRef tels = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    CFTypeRef contactDepartmentName = ABRecordCopyValue(contact, kABPersonDepartmentProperty);
+    CFTypeRef contactJob = ABRecordCopyValue(contact, kABPersonJobTitleProperty);
+    CFTypeRef contactBirthday = ABRecordCopyValue(contact, kABPersonBirthdayProperty);
+    CFTypeRef contactNonGregorianBirthday = ABRecordCopyValue(contact, kABPersonAlternateBirthdayProperty);
+    CFTypeRef contactNote = ABRecordCopyValue(contact, kABPersonNoteProperty);
     NSString *identifier = [NSString stringWithFormat:@"%d",ABRecordGetRecordID(contact)];
+    ABMultiValueRef tels = ABRecordCopyValue(contact, kABPersonPhoneProperty);
+    ABMultiValueRef emails = ABRecordCopyValue(contact, kABPersonEmailProperty);
+    ABMultiValueRef postals = ABRecordCopyValue(contact, kABPersonAddressProperty);
+    ABMultiValueRef dates = ABRecordCopyValue(contact, kABPersonDateProperty);
+    ABMultiValueRef urls = ABRecordCopyValue(contact, kABPersonURLProperty);
+    ABMultiValueRef relations = ABRecordCopyValue(contact, kABPersonRelatedNamesProperty);
+    ABMultiValueRef profiles = ABRecordCopyValue(contact, kABPersonSocialProfileProperty);
+    ABMultiValueRef ims = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
+    
+
     if(!contactName)contactName = @"";
     if(!contactMiddleName)contactMiddleName = @"";
     if(!contactFamilyName)contactFamilyName = @"";
+    if(!contactDepartmentName)contactDepartmentName = @"";
+    if(!contactJob)contactJob = @"";
+    if(!contactBirthday)contactBirthday = @"";
+    if(!contactNonGregorianBirthday)contactNonGregorianBirthday = @"";
+    if(!contactNote)contactNote = @"";
     if(!contactPhotoImage)contactPhotoImage = [UIImage new];
+    
     NSString *finalName = [NSString stringWithFormat:@"%@%@%@",(__bridge NSString *)contactFamilyName,(__bridge NSString *)contactMiddleName,(__bridge NSString *)contactName];
+    NSString *finalDepartment = [NSString stringWithFormat:@"%@",contactDepartmentName];
+    NSString *finalJob = [NSString stringWithFormat:@"%@",contactJob];
+    NSString *finalBirthday = [NSString stringWithFormat:@"%@",contactBirthday];
+    NSString *finalNonGregorianBirthday = [NSString stringWithFormat:@"%@",contactNonGregorianBirthday];
+    NSString *finalNote = [NSString stringWithFormat:@"%@",contactNote];
     NSArray *targetArr = tels&&ABMultiValueGetCount(tels)>0?(__bridge NSArray *)ABMultiValueCopyArrayOfAllValues(tels):@[];
-    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage};
+    NSArray *targetEmailArr = [self formattedAarrayFromMultiValue:emails];
+    NSArray *targetPostalArr = [self formattedAarrayFromMultiValue:postals];
+    NSArray *dateArr = [self formattedAarrayFromMultiValue:dates];
+    NSArray *urlArr = [self formattedAarrayFromMultiValue:urls];
+    NSArray *relationArr = [self formattedAarrayFromMultiValue:relations];
+    NSArray *profileArr = [self formattedAarrayFromMultiValue:profiles];
+    NSArray *imArr = [self formattedAarrayFromMultiValue:ims];
+    
+    return @{kContactServiceName:finalName,kServiceTels:targetArr,kServicePinyin:[finalName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kServiceContactId:identifier,kServiceContactPhoto:contactPhotoImage,kServiceDepartment:finalDepartment,kServiceJob:finalJob,kServiceBirthday:finalBirthday,kServiceNonGregorianBirthday:finalNonGregorianBirthday,kServiceNote:finalNote,kServiceEmails:targetEmailArr,kServicePostals:targetPostalArr,kServiceDates:dateArr,kServiceUrls:urlArr,kServiceRelations:relationArr,kServiceProfiles:profileArr,kServiceIMs:imArr};
 }
 -(NSDictionary *)groupFromRecordId:(ABRecordRef)group{
     NSMutableArray *arr = [NSMutableArray new];
