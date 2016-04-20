@@ -43,5 +43,9 @@
  
  @return 返回值，成功即是yes
  */
--(BOOL)saveToContacts;
+-(BOOL)saveWithContacts:(NSArray *)contacts;
+/*!
+ @brief 获取数据
+ */
+-(void)requestData;
 @end
