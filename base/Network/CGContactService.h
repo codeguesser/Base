@@ -38,4 +38,10 @@
  @return 默认返回空数组
  */
 -(NSArray *)contactsForExport;
+/*!
+ @brief 写入数据到本地通讯录
+ 
+ @return 返回值，成功即是yes
+ */
+-(BOOL)saveToContacts;
 @end
