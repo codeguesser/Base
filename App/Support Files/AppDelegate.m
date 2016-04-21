@@ -85,7 +85,12 @@
 @end
 
 @implementation AppDelegate
-
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler{
+    NSLog(@"1:%@",shortcutItem.localizedTitle);
+    NSLog(@"2:%@",shortcutItem.localizedSubtitle);
+    NSLog(@"3:%@",shortcutItem.userInfo);
+    NSLog(@"4:%@",shortcutItem.type);
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -100,7 +105,7 @@
     [self tableViewEmptyPageDemo];
     
 //    [self getUserContact];
-    [self getTouchidPower];
+//    [self getTouchidPower];
 //    [self getGatewayIPAddress];
 //    [self testProvidentFund];
 //    [self setupTestWebAccess];
