@@ -495,12 +495,12 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
 -(void)cleanAllDataFor9FromStore:(CNContactStore *)store{
     for (CNGroup *group in [store groupsMatchingPredicate:nil error:nil]) {
         CNSaveRequest *request = [[CNSaveRequest  alloc] init];
-        [request deleteGroup:group];
+        [request deleteGroup:[group mutableCopy]];
         [store executeSaveRequest:request error:nil];
     }
     [store enumerateContactsWithFetchRequest:[[CNContactFetchRequest alloc] initWithKeysToFetch:kFetchedField] error:nil usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
         CNSaveRequest *request = [[CNSaveRequest  alloc] init];
-        [request deleteContact:contact];
+        [request deleteContact:[contact mutableCopy]];
         [store executeSaveRequest:request error:nil];
     }];
 }
@@ -563,6 +563,15 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         contact.birthday = component;
     }
     if(dic[kServiceNonGregorianBirthday])contact.nonGregorianBirthday = [self deFormattedDateComponentFromDictionary:dic[kServiceNonGregorianBirthday]];
+    if([dic[kServiceTels] count]>0)contact.phoneNumbers = [self deFormattedArrayFromArray:dic[kServiceTels] class:@"CNPhoneNumber"];
+    if([dic[kServiceDates] count]>0)contact.dates = [self deFormattedArrayFromArray:dic[kServiceDates] class:@"NSDateComponents"];
+    if([dic[kServicePostals] count]>0)contact.postalAddresses = [self deFormattedArrayFromArray:dic[kServicePostals] class:@"CNPostalAddress"];
+    if([dic[kServiceUrls] count]>0)contact.urlAddresses = [self deFormattedArrayFromArray:dic[kServiceUrls] class:@"NSString"];
+    if([dic[kServiceRelations] count]>0)contact.contactRelations = [self deFormattedArrayFromArray:dic[kServiceRelations] class:@"CNContactRelation"];
+    if([dic[kServiceProfiles] count]>0)contact.socialProfiles = [self deFormattedArrayFromArray:dic[kServiceProfiles] class:@"CNSocialProfile"];
+    if([dic[kServiceIMs] count]>0)contact.instantMessageAddresses = [self deFormattedArrayFromArray:dic[kServiceIMs] class:@"CNInstantMessageAddress"];
+    if([dic[kServiceEmails] count]>0)contact.emailAddresses = [self deFormattedArrayFromArray:dic[kServiceEmails] class:@"NSString"];
+    
     [request addContact:contact toContainerWithIdentifier:nil];
     BOOL isSuccessed = [store executeSaveRequest:request error:nil];
     return isSuccessed?contact:nil;
@@ -597,14 +606,14 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         if(dic[kServiceNonGregorianBirthday])ABRecordSetValue(contact, kABPersonAlternateBirthdayProperty, (__bridge CFTypeRef)(dic[kServiceNonGregorianBirthday]), nil);
         if([dic[kServiceNote] length]>0)ABRecordSetValue(contact, kABPersonNoteProperty, (__bridge CFTypeRef)(dic[kServiceNote]), nil);
         CFErrorRef error = NULL;
-        ABRecordSetValue(contact, kABPersonPhoneProperty, [self deFormattedArrayFromMultiValue:dic[kServiceTels] property:kABPersonPhoneProperty], &error);
-        ABRecordSetValue(contact, kABPersonDateProperty, [self deFormattedArrayFromMultiValue:dic[kServiceDates] property:kABPersonDateProperty], &error);
-        ABRecordSetValue(contact, kABPersonAddressProperty, [self deFormattedArrayFromMultiValue:dic[kServicePostals] property:kABPersonAddressProperty], &error);
-        ABRecordSetValue(contact, kABPersonURLProperty, [self deFormattedArrayFromMultiValue:dic[kServiceUrls] property:kABPersonURLProperty], &error);
-        ABRecordSetValue(contact, kABPersonRelatedNamesProperty, [self deFormattedArrayFromMultiValue:dic[kServiceRelations] property:kABPersonRelatedNamesProperty], &error);
-        ABRecordSetValue(contact, kABPersonSocialProfileProperty, [self deFormattedArrayFromMultiValue:dic[kServiceProfiles] property:kABPersonSocialProfileProperty], &error);
-        ABRecordSetValue(contact, kABPersonInstantMessageProperty, [self deFormattedArrayFromMultiValue:dic[kServiceIMs] property:kABPersonInstantMessageProperty], &error);
-        ABRecordSetValue(contact, kABPersonEmailProperty, [self deFormattedArrayFromMultiValue:dic[kServiceEmails] property:kABPersonEmailProperty], &error);
+        if([dic[kServiceTels] count]>0)ABRecordSetValue(contact, kABPersonPhoneProperty, [self deFormattedArrayFromMultiValue:dic[kServiceTels] property:kABPersonPhoneProperty], &error);
+        if([dic[kServiceDates] count]>0)ABRecordSetValue(contact, kABPersonDateProperty, [self deFormattedArrayFromMultiValue:dic[kServiceDates] property:kABPersonDateProperty], &error);
+        if([dic[kServicePostals] count]>0)ABRecordSetValue(contact, kABPersonAddressProperty, [self deFormattedArrayFromMultiValue:dic[kServicePostals] property:kABPersonAddressProperty], &error);
+        if([dic[kServiceUrls] count]>0)ABRecordSetValue(contact, kABPersonURLProperty, [self deFormattedArrayFromMultiValue:dic[kServiceUrls] property:kABPersonURLProperty], &error);
+        if([dic[kServiceRelations] count]>0)ABRecordSetValue(contact, kABPersonRelatedNamesProperty, [self deFormattedArrayFromMultiValue:dic[kServiceRelations] property:kABPersonRelatedNamesProperty], &error);
+        if([dic[kServiceProfiles] count]>0)ABRecordSetValue(contact, kABPersonSocialProfileProperty, [self deFormattedArrayFromMultiValue:dic[kServiceProfiles] property:kABPersonSocialProfileProperty], &error);
+        if([dic[kServiceIMs] count]>0)ABRecordSetValue(contact, kABPersonInstantMessageProperty, [self deFormattedArrayFromMultiValue:dic[kServiceIMs] property:kABPersonInstantMessageProperty], &error);
+        if([dic[kServiceEmails] count]>0)ABRecordSetValue(contact, kABPersonEmailProperty, [self deFormattedArrayFromMultiValue:dic[kServiceEmails] property:kABPersonEmailProperty], &error);
         
     }
     bool isSuccess = ABAddressBookAddRecord(address, contact, NULL);
@@ -651,12 +660,6 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
             
             [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
                                   @{
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressStreetKey]:_v.street,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressCityKey]:_v.city,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressStateKey]:_v.state,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressPostalCodeKey]:_v.postalCode,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressCountryKey]:_v.country,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressISOCountryCodeKey]:_v.ISOCountryCode,
                                       @"Street":_v.street,
                                       @"City":_v.city,
                                       @"State":_v.state,
@@ -674,10 +677,6 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
             CNSocialProfile *_v = (CNSocialProfile *)v.value;
             [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
                                   @{
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileURLStringKey]:_v.urlString,
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileUsernameKey]:_v.username,
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileUserIdentifierKey]:_v.userIdentifier?_v.userIdentifier:@"",
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileServiceKey]:[CNSocialProfile localizedStringForService:_v.service],
                                       @"url":_v.urlString,
                                       @"username":_v.username,
                                       @"userIdentifier":_v.userIdentifier?_v.userIdentifier:@"",
@@ -699,8 +698,102 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     }
     return _arr;
 }
--(NSArray<CNLabeledValue*>*)deFormattedArrayFromArray:(NSArray <NSDictionary<NSString *,NSString *>*>*)arr{
+-(NSArray<CNLabeledValue*>*)deFormattedArrayFromArray:(NSArray <NSDictionary<NSString *,NSString *>*>*)arr class:(NSString *)className{
     NSMutableArray *_arr = [NSMutableArray new];
+    if ([className isEqualToString:@"CNPhoneNumber"]) {
+        for (NSDictionary *dic in arr) {
+            CNPhoneNumber *_v = [[CNPhoneNumber alloc]initWithStringValue:dic.allValues.firstObject];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNLabelPhoneNumberiPhone,CNLabelPhoneNumberMobile,CNLabelPhoneNumberMain,CNLabelPhoneNumberHomeFax,CNLabelPhoneNumberWorkFax,CNLabelPhoneNumberOtherFax,CNLabelPhoneNumberPager]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:_v]];
+            
+        }
+    }else if ([className isEqualToString:@"NSDateComponents"]) {
+        for (NSDictionary *dic in arr) {
+            NSDate *date = [formatter dateFromString:dic.allValues.firstObject];
+            NSDateComponents *component = [[NSDateComponents alloc]init];
+            NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            component.calendar = gregorian;
+            component.day = [date day];
+            component.month = [date month];
+            component.year = [date year];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNLabelDateAnniversary]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:component]];
+        }
+    }else if ([className isEqualToString:@"CNPostalAddress"]) {
+        for (NSDictionary *dic in arr) {
+            CNMutablePostalAddress *_v = [[CNMutablePostalAddress alloc] init];
+            _v.street = dic.allValues.firstObject[@"Street"];
+            _v.city = dic.allValues.firstObject[@"City"];
+            _v.state = dic.allValues.firstObject[@"State"];
+            _v.postalCode = dic.allValues.firstObject[@"Country"];
+            _v.ISOCountryCode = dic.allValues.firstObject[@"CountryCode"];
+            _v.postalCode = dic.allValues.firstObject[@"ZIP"];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:_v]];
+        }
+    }else if ([className isEqualToString:@"NSString"]) {
+        for (NSDictionary *dic in arr) {
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNLabelURLAddressHomePage,CNLabelEmailiCloud]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:dic.allValues.firstObject]];
+        }
+    }else if ([className isEqualToString:@"CNContactRelation"]) {
+        for (NSDictionary *dic in arr) {
+            CNContactRelation *relation = [[CNContactRelation alloc] initWithName:dic.allValues.firstObject];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNLabelContactRelationFather,CNLabelContactRelationMother,CNLabelContactRelationParent,CNLabelContactRelationBrother,CNLabelContactRelationSister,CNLabelContactRelationChild,CNLabelContactRelationFriend,CNLabelContactRelationSpouse,CNLabelContactRelationPartner,CNLabelContactRelationAssistant,CNLabelContactRelationManager]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:relation]];
+        }
+    }else if ([className isEqualToString:@"CNSocialProfile"]) {
+        for (NSDictionary *dic in arr) {
+            CNSocialProfile *relation = [[CNSocialProfile alloc] initWithUrlString:dic.allValues.firstObject[@"url"] username:dic.allValues.firstObject[@"username"] userIdentifier:nil service:dic.allValues.firstObject[@"service"]];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNSocialProfileServiceFacebook,CNSocialProfileServiceFlickr,CNSocialProfileServiceLinkedIn,CNSocialProfileServiceMySpace,CNSocialProfileServiceSinaWeibo,CNSocialProfileServiceTencentWeibo,CNSocialProfileServiceTwitter,CNSocialProfileServiceYelp,CNSocialProfileServiceGameCenter]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:relation]];
+        }
+    }else if ([className isEqualToString:@"CNInstantMessageAddress"]) {
+        for (NSDictionary *dic in arr) {
+            CNInstantMessageAddress *im = [[CNInstantMessageAddress alloc] initWithUsername:dic.allValues.firstObject[[CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressUsernameKey]] service:dic.allValues.firstObject[[CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressServiceKey]]];
+            NSString *label = [CNLabeledValue localizedStringForLabel:dic.allKeys.firstObject];
+            for (NSString *s in @[CNLabelHome,CNLabelWork,CNLabelOther,CNInstantMessageServiceAIM,CNInstantMessageServiceFacebook,CNInstantMessageServiceGaduGadu,CNInstantMessageServiceGoogleTalk,CNInstantMessageServiceICQ,CNInstantMessageServiceJabber,CNInstantMessageServiceMSN,CNInstantMessageServiceQQ,CNInstantMessageServiceSkype,CNInstantMessageServiceYahoo]) {
+                if ([[CNLabeledValue localizedStringForLabel:s] isEqualToString:dic.allKeys.firstObject]) {
+                    label = s;
+                }
+            }
+            [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:im]];
+        }
+    }
+    
+    
+    
+    
     for (CNLabeledValue *v in arr) {
         if ([v.value isKindOfClass:[NSString class]]) {
             [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:v.value}];
@@ -709,12 +802,6 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
             
             [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
                                   @{
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressStreetKey]:_v.street,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressCityKey]:_v.city,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressStateKey]:_v.state,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressPostalCodeKey]:_v.postalCode,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressCountryKey]:_v.country,
-                                      //                                      [CNPostalAddress localizedStringForKey:CNPostalAddressISOCountryCodeKey]:_v.ISOCountryCode,
                                       @"Street":_v.street,
                                       @"City":_v.city,
                                       @"State":_v.state,
