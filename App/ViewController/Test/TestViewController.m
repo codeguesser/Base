@@ -56,8 +56,10 @@
     dic = [NSMutableDictionary new];
     defaultDateRange = @"08:00-18:00";
     
+    if (NSClassFromString(@"UITraitCollection")&&[UITraitCollection instancesRespondToSelector:@selector(traitCollectionWithForceTouchCapability:)]&&[UITraitCollection traitCollectionWithForceTouchCapability:UIForceTouchCapabilityAvailable]) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }
     
-    [self registerForPreviewingWithDelegate:self sourceView:self.view];
     
     
     
