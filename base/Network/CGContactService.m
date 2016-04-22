@@ -79,6 +79,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSDictionary *(^contactFromData)(NSDictionary *,NSString *)=^(NSDictionary *contactDic,NSString *groupName){
         return @{
           @"group_title":groupName,
+          @"name":!contactDic?@"":contactDic[kContactServiceName],
           @"family_name":!contactDic?@"":contactDic[kContactServiceFamilyName],
           @"given_name":!contactDic?@"":contactDic[kContactServiceGivenName],
           @"middle_name":!contactDic?@"":contactDic[kContactServiceMiddleName],
@@ -136,6 +137,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     
     NSDictionary *(^contactFromData)(NSDictionary *,NSString *) = ^(NSDictionary *dic,NSString *idx){
         NSMutableDictionary *_dic = [NSMutableDictionary new];
+        _dic[kContactServiceName] = dic[@"name"],
         _dic[kContactServiceFamilyName] = dic[@"family_name"],
         _dic[kContactServiceGivenName] = dic[@"given_name"],
         _dic[kContactServiceMiddleName] = dic[@"middle_name"],
@@ -160,6 +162,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         _dic[kServiceDates] = dic[@"dates"];
         _dic[kServiceUrls] = dic[@"urls"];
         _dic[kServiceRelations] = dic[@"relations"];
+        _dic[kServiceProfiles] = dic[@"profiles"];
         _dic[kServiceIMs] = dic[@"ims"];
         _dic[kServicePinyin] = [_dic[kContactServiceName] pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]];
         _dic[kContactServiceId] = idx;
@@ -170,18 +173,25 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSInteger idx_contact = 0;
     NSInteger idx_group = 0;
     for (NSDictionary *contacts in __contacts) {
+        NSDictionary *targetContact = contactFromData(contacts,[NSString stringWithFormat:@"%ld",(long)idx_contact]);
         if (allGroups[contacts[@"group_title"]]) {
-            [allGroups[contacts[@"group_title"]][@"data"] addObject:contactFromData(contacts,[NSString stringWithFormat:@"%ld",(long)idx_contact])];
+            if([self isContactValable:targetContact]){
+                [allGroups[contacts[@"group_title"]][@"data"] addObject:targetContact];
+                [allContacts addObject:targetContact];
+            }
         }else{
             NSMutableDictionary *groupDic = [NSMutableDictionary new];
             groupDic[kGroupServiceName] = contacts[@"group_title"];
             groupDic[kGroupServiceId] = [NSString stringWithFormat:@"%ld",(long)idx_group];
             groupDic[@"data"] = [NSMutableArray new];
-            [groupDic[@"data"] addObject:contactFromData(contacts,[NSString stringWithFormat:@"%ld",(long)idx_contact])];
+            if([self isContactValable:targetContact]){
+                [groupDic[@"data"] addObject:targetContact];
+                [allContacts addObject:targetContact];
+            }
             allGroups[contacts[@"group_title"]] = groupDic;
             idx_group++;
         }
-        [allContacts addObject:contacts];
+        
         idx_contact++;
     }
     self.contacts = allContacts;
@@ -445,7 +455,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
 -(void)saveData{
     if ([[[UIDevice currentDevice]systemVersion] floatValue]>=9) {
         [self allgroupsFor9Checked:^(CNContactStore *store) {
-//            [self cleanAllDataFor9FromStore:store];
+            [self cleanAllDataFor9FromStore:store];
             for (NSDictionary *group in self.groups) {
                 CNGroup *savedGroup = [self writeGroupsFor9:group toStore:store];
                 for (NSDictionary *contact in group[@"data"]) {
@@ -457,15 +467,17 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         }];
     }else{
         [self allgroupsFor9MinusChecked:^(ABAddressBookRef addressBook) {
-//            [self cleanAllDataFor9MinusFromAddress:addressBook];
+            [self cleanAllDataFor9MinusFromAddress:addressBook];
             for (NSDictionary *group in self.groups) {
                 ABRecordRef savedGroup = [self writeGroupsFor9Minus:group toAddress:addressBook];
                 for (NSDictionary *contact in group[@"data"]) {
                     ABRecordRef savedContact = [self writeContactsFor9Minus:contact toAddress:addressBook];
+                    ABAddressBookSave(addressBook, NULL);
                     [self moveContactFor9Minus:savedContact toGroup:savedGroup];
                 }
             }
-            ABAddressBookSave(addressBook, nil);
+            CFErrorRef error;
+            ABAddressBookSave(addressBook, &error);
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactSaved object:self];
         }];
     }
@@ -475,8 +487,10 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     [request addMember:contact toGroup:group];
     return [store executeSaveRequest:request error:nil];
 }
--(bool)moveContactFor9Minus:(ABRecordRef)contact toGroup:(ABRecordRef)group{
-    return ABGroupAddMember(group, contact, NULL);
+-(CFErrorRef)moveContactFor9Minus:(ABRecordRef)contact toGroup:(ABRecordRef)group{
+    CFErrorRef error;
+    ABGroupAddMember(group, contact, &error);
+    return error;
 }
 -(void)cleanAllDataFor9FromStore:(CNContactStore *)store{
     for (CNGroup *group in [store groupsMatchingPredicate:nil error:nil]) {
@@ -551,45 +565,37 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     {
         if([dic[kServiceContactPhoto] isKindOfClass:[UIImage class]])ABPersonSetImageData(contact, (__bridge CFDataRef)(UIImagePNGRepresentation(dic[kServiceContactPhoto])), nil);
         
-        ABRecordSetValue(contact, kABPersonFirstNameProperty, (__bridge CFTypeRef)(dic[kContactServiceGivenName]), nil);
-        ABRecordSetValue(contact, kABPersonLastNameProperty, (__bridge CFTypeRef)(dic[kContactServiceFamilyName]), nil);
-        ABRecordSetValue(contact, kABPersonMiddleNameProperty, (__bridge CFTypeRef)(dic[kContactServiceMiddleName]), nil);
-        ABRecordSetValue(contact, kABPersonLastNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticFamilyName]), nil);
-        ABRecordSetValue(contact, kABPersonFirstNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticGivenName]), nil);
-        ABRecordSetValue(contact, kABPersonMiddleNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticMiddleName]), nil);
-        ABRecordSetValue(contact, kABPersonPrefixProperty, (__bridge CFTypeRef)(dic[kContactServiceNamePrefix]), nil);
-        ABRecordSetValue(contact, kABPersonSuffixProperty, (__bridge CFTypeRef)(dic[kContactServiceSuffixName]), nil);
-        ABRecordSetValue(contact, kABPersonKindProperty, (__bridge CFTypeRef)(@([dic[kContactServiceType] integerValue])), nil);
-        ABRecordSetValue(contact, kABPersonOrganizationProperty, (__bridge CFTypeRef)(dic[kServiceCompany]), nil);
-        ABRecordSetValue(contact, kABPersonDepartmentProperty, (__bridge CFTypeRef)(dic[kServiceDepartment]), nil);
-        ABRecordSetValue(contact, kABPersonJobTitleProperty, (__bridge CFTypeRef)(dic[kServiceJob]), nil);
-        ABRecordSetValue(contact, kABPersonBirthdayProperty, (__bridge CFTypeRef)(dic[kServiceBirthday]), nil);
+        if([dic[kContactServiceGivenName] length]>0)ABRecordSetValue(contact, kABPersonFirstNameProperty, (__bridge CFTypeRef)(dic[kContactServiceGivenName]), nil);
+        if([dic[kContactServiceFamilyName] length]>0)ABRecordSetValue(contact, kABPersonLastNameProperty, (__bridge CFTypeRef)(dic[kContactServiceFamilyName]), nil);
+        if([dic[kContactServiceMiddleName] length]>0)ABRecordSetValue(contact, kABPersonMiddleNameProperty, (__bridge CFTypeRef)(dic[kContactServiceMiddleName]), nil);
+        if([dic[kContactServicePhoneticFamilyName] length]>0)ABRecordSetValue(contact, kABPersonLastNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticFamilyName]), nil);
+        if([dic[kContactServicePhoneticGivenName] length]>0)ABRecordSetValue(contact, kABPersonFirstNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticGivenName]), nil);
+        if([dic[kContactServicePhoneticMiddleName] length]>0)ABRecordSetValue(contact, kABPersonMiddleNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticMiddleName]), nil);
+        if([dic[kContactServiceNamePrefix] length]>0)ABRecordSetValue(contact, kABPersonPrefixProperty, (__bridge CFTypeRef)(dic[kContactServiceNamePrefix]), nil);
+        if([dic[kContactServiceSuffixName] length]>0)ABRecordSetValue(contact, kABPersonSuffixProperty, (__bridge CFTypeRef)(dic[kContactServiceSuffixName]), nil);
+        if([dic[kContactServiceType] length]>0)ABRecordSetValue(contact, kABPersonKindProperty, (__bridge CFTypeRef)(@([dic[kContactServiceType] integerValue])), nil);
+        if([dic[kServiceCompany] length]>0)ABRecordSetValue(contact, kABPersonOrganizationProperty, (__bridge CFTypeRef)(dic[kServiceCompany]), nil);
+        if([dic[kServiceDepartment] length]>0)ABRecordSetValue(contact, kABPersonDepartmentProperty, (__bridge CFTypeRef)(dic[kServiceDepartment]), nil);
+        if([dic[kServiceJob] length]>0)ABRecordSetValue(contact, kABPersonJobTitleProperty, (__bridge CFTypeRef)(dic[kServiceJob]), nil);
+        if([dic[kServiceBirthday] isKindOfClass:[NSString class]]&&[dic[kServiceBirthday] length]>0){
+            ABRecordSetValue(contact, kABPersonBirthdayProperty, (__bridge CFTypeRef)([formatter dateFromString:dic[kServiceBirthday]]), nil);
+        }else{
+            NSLog(@"%@,%@",dic[kServiceBirthday],[dic[kServiceBirthday]class]);
+        }
+        NSLog(@"non:%@",dic[kServiceNonGregorianBirthday]);
         ABRecordSetValue(contact, kABPersonAlternateBirthdayProperty, (__bridge CFTypeRef)(dic[kServiceNonGregorianBirthday]), nil);
         ABRecordSetValue(contact, kABPersonNoteProperty, (__bridge CFTypeRef)(dic[kServiceNote]), nil);
-        ABRecordSetValue(contact, kABPersonPhoneProperty, [self deFormattedArrayFromMultiValue:dic[kServiceTels] property:kABPersonPhoneProperty], nil);
-        ABRecordSetValue(contact, kABPersonAddressProperty, [self deFormattedArrayFromMultiValue:dic[kServicePostals] property:kABPersonAddressProperty], nil);
+        CFErrorRef error = NULL;
+        ABRecordSetValue(contact, kABPersonPhoneProperty, [self deFormattedArrayFromMultiValue:dic[kServiceTels] property:kABPersonPhoneProperty], &error);
+        ABRecordSetValue(contact, kABPersonDateProperty, [self deFormattedArrayFromMultiValue:dic[kServiceDates] property:kABPersonDateProperty], &error);
+        ABRecordSetValue(contact, kABPersonAddressProperty, [self deFormattedArrayFromMultiValue:dic[kServicePostals] property:kABPersonAddressProperty], &error);
+        ABRecordSetValue(contact, kABPersonURLProperty, [self deFormattedArrayFromMultiValue:dic[kServiceUrls] property:kABPersonURLProperty], &error);
+        ABRecordSetValue(contact, kABPersonRelatedNamesProperty, [self deFormattedArrayFromMultiValue:dic[kServiceRelations] property:kABPersonRelatedNamesProperty], &error);
+        ABRecordSetValue(contact, kABPersonSocialProfileProperty, [self deFormattedArrayFromMultiValue:dic[kServiceProfiles] property:kABPersonSocialProfileProperty], &error);
+        ABRecordSetValue(contact, kABPersonInstantMessageProperty, [self deFormattedArrayFromMultiValue:dic[kServiceIMs] property:kABPersonInstantMessageProperty], &error);
+        ABRecordSetValue(contact, kABPersonEmailProperty, [self deFormattedArrayFromMultiValue:dic[kServiceEmails] property:kABPersonEmailProperty], &error);
         
-//        ABMultiValueRef emails      = ABRecordCopyValue(contact, kABPersonEmailProperty);
-//        ABMultiValueRef postals     = ABRecordCopyValue(contact, kABPersonAddressProperty);
-//        ABMultiValueRef dates       = ABRecordCopyValue(contact, kABPersonDateProperty);
-//        ABMultiValueRef urls        = ABRecordCopyValue(contact, kABPersonURLProperty);
-//        ABMultiValueRef relations   = ABRecordCopyValue(contact, kABPersonRelatedNamesProperty);
-//        ABMultiValueRef profiles    = ABRecordCopyValue(contact, kABPersonSocialProfileProperty);
-//        ABMultiValueRef ims         = ABRecordCopyValue(contact, kABPersonInstantMessageProperty);
-//        
-//        NSArray *targetTelArr = [self formattedArrayFromMultiValue:tels property:kABPersonPhoneProperty];
-//        NSArray *targetEmailArr = [self formattedArrayFromMultiValue:emails property:kABPersonEmailProperty];
-//        NSArray *targetPostalArr = [self formattedArrayFromMultiValue:postals property:kABPersonAddressProperty];
-//        NSArray *dateArr = [self formattedArrayFromMultiValue:dates property:kABPersonDateProperty];
-//        NSArray *urlArr = [self formattedArrayFromMultiValue:urls property:kABPersonURLProperty];
-//        NSArray *relationArr = [self formattedArrayFromMultiValue:relations property:kABPersonRelatedNamesProperty];
-//        NSArray *profileArr = [self formattedArrayFromMultiValue:profiles property:kABPersonSocialProfileProperty];
-//        NSArray *imArr = [self formattedArrayFromMultiValue:ims property:kABPersonInstantMessageProperty];
     }
-    
-    
-    
-    //    ABRecordSetValue(contact, <#ABPropertyID property#>, <#CFTypeRef value#>, <#CFErrorRef *error#>)
     bool isSuccess = ABAddressBookAddRecord(address, contact, NULL);
     return isSuccess?contact:NULL;
 }
@@ -762,38 +768,114 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     if (property==kABPersonPhoneProperty) {
         ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
         for (NSDictionary *dic in value) {
-            for (NSString *s in @[(__bridge NSString *)kABPersonPhoneMobileLabel,(__bridge NSString *)kABPersonPhoneIPhoneLabel,(__bridge NSString *)kABPersonPhoneMainLabel,(__bridge NSString *)kABPersonPhoneHomeFAXLabel,(__bridge NSString *)kABPersonPhoneWorkFAXLabel,(__bridge NSString *)kABPersonPhoneOtherFAXLabel,(__bridge NSString *)kABPersonPhonePagerLabel]) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            for (NSString *s in @[(__bridge NSString *)kABPersonPhoneMobileLabel,(__bridge NSString *)kABPersonPhoneIPhoneLabel,(__bridge NSString *)kABPersonPhoneMainLabel,(__bridge NSString *)kABPersonPhoneHomeFAXLabel,(__bridge NSString *)kABPersonPhoneWorkFAXLabel,(__bridge NSString *)kABPersonPhoneOtherFAXLabel,(__bridge NSString *)kABPersonPhonePagerLabel,(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel]) {
                 if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
-                    ABMultiValueAddValueAndLabel(arr, (__bridge CFStringRef)dic.allValues.firstObject, (__bridge CFStringRef)(s), NULL);
+                    label = (__bridge CFStringRef)(s);
                 }
             }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFStringRef)dic.allValues.firstObject, label, NULL);
         }
         return arr;
     }else if (property==kABPersonAddressProperty){
         ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
         for (NSDictionary *dic in value) {
-            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, (__bridge CFStringRef)dic.allValues.firstObject, NULL);
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+        }
+        return arr;
+    }else if (property==kABPersonDateProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel,(__bridge NSString *)kABPersonAnniversaryLabel]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            CFDateRef date = (__bridge CFDateRef)([formatter dateFromString:dic.allValues.firstObject]);
+            ABMultiValueAddValueAndLabel(arr, date, label, NULL);
+        }
+        return arr;
+    }else if (property==kABPersonURLProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel,(__bridge NSString *)kABPersonHomePageLabel]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+        }
+        return arr;
+    }else if (property==kABPersonRelatedNamesProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel,(__bridge NSString *)kABPersonFatherLabel,(__bridge NSString *)kABPersonMotherLabel,(__bridge NSString *)kABPersonParentLabel,(__bridge NSString *)kABPersonBrotherLabel,(__bridge NSString *)kABPersonSisterLabel,(__bridge NSString *)kABPersonChildLabel,(__bridge NSString *)kABPersonFriendLabel,(__bridge NSString *)kABPersonSpouseLabel,(__bridge NSString *)kABPersonPartnerLabel,(__bridge NSString *)kABPersonAssistantLabel,(__bridge NSString *)kABPersonManagerLabel]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+        }
+        return arr;
+    }else if (property==kABPersonSocialProfileProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel,(__bridge NSString *)kABPersonFatherLabel,(__bridge NSString *)kABPersonSocialProfileServiceTwitter,(__bridge NSString *)kABPersonSocialProfileServiceSinaWeibo,(__bridge NSString *)kABPersonSocialProfileServiceGameCenter,(__bridge NSString *)kABPersonSocialProfileServiceFacebook,(__bridge NSString *)kABPersonSocialProfileServiceMyspace,(__bridge NSString *)kABPersonSocialProfileServiceLinkedIn,(__bridge NSString *)kABPersonSocialProfileServiceFlickr]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+            
+        }
+        return arr;
+    }else if (property==kABPersonInstantMessageProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel,(__bridge NSString *)kABPersonInstantMessageServiceYahoo,(__bridge NSString *)kABPersonInstantMessageServiceJabber,(__bridge NSString *)kABPersonInstantMessageServiceMSN,(__bridge NSString *)kABPersonInstantMessageServiceICQ,(__bridge NSString *)kABPersonInstantMessageServiceAIM,(__bridge NSString *)kABPersonInstantMessageServiceQQ,(__bridge NSString *)kABPersonInstantMessageServiceGoogleTalk,(__bridge NSString *)kABPersonInstantMessageServiceSkype,(__bridge NSString *)kABPersonInstantMessageServiceFacebook,(__bridge NSString *)kABPersonInstantMessageServiceGaduGadu]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+            
+        }
+        return arr;
+    }else if (property==kABPersonEmailProperty){
+        ABMultiValueRef arr = ABMultiValueCreateMutable(kABStringPropertyType);
+        for (NSDictionary *dic in value) {
+            CFStringRef label = (__bridge CFStringRef)dic.allKeys.firstObject;
+            
+            for (NSString *s in @[(__bridge NSString *)kABWorkLabel,(__bridge NSString *)kABHomeLabel,(__bridge NSString *)kABOtherLabel]) {
+                if (CFStringCompare(ABAddressBookCopyLocalizedLabel((__bridge CFStringRef)(s)), (__bridge CFStringRef)dic.allKeys.firstObject, kCFCompareLocalized)==kCFCompareEqualTo) {
+                    label = (__bridge CFStringRef)(s);
+                }
+            }
+            ABMultiValueAddValueAndLabel(arr, (__bridge CFDictionaryRef)dic.allValues.firstObject, label, NULL);
+            
         }
         return arr;
     }
     return NULL;
-//    if(value&&ABMultiValueGetCount(value)>0){
-//        for (int i=0; i<ABMultiValueGetCount(value); i++) {
-//            if ([(__bridge id)ABMultiValueCopyValueAtIndex(value, i) isKindOfClass:[NSDate class]]) {
-//                [_arr addObject:@{(__bridge NSString *)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(value, i)):[formatter stringFromDate:(__bridge NSDate *)ABMultiValueCopyValueAtIndex(value, i)]}];
-//            }else if([(__bridge id)ABMultiValueCopyValueAtIndex(value, i) isKindOfClass:[NSDictionary class]]){
-//                [_arr addObject:@{(__bridge NSString *)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(value, i)):(__bridge NSDictionary *)ABMultiValueCopyValueAtIndex(value, i)}];
-//            }else if([(__bridge id)ABMultiValueCopyValueAtIndex(value, i) isKindOfClass:[NSString class]]){
-//                [_arr addObject:@{(__bridge NSString *)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(value, i)):(__bridge NSString *)ABMultiValueCopyValueAtIndex(value, i)}];
-//            }else{
-//                [_arr addObject:@{(__bridge NSString *)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(value, i)):(__bridge NSString *)ABMultiValueCopyValueAtIndex(value, i)}];
-//            }
-//            
-//        }
-//    }
 }
 -(BOOL)isContactValable:(NSDictionary *)dic{
-    return (dic[kContactServiceName]&&dic[kServiceTels])&&([dic[kContactServiceName] length]>0||[dic[kServiceTels] count]>0);
+    return (dic[kContactServiceName]&&dic[kServiceTels]&&[dic[kServiceTels] isKindOfClass:[NSArray class]])&&([dic[kContactServiceName] length]>0||[dic[kServiceTels] count]>0);
 }
 -(NSArray *)withoutFirstObjectFromData:(NSArray *)arr{
     NSMutableArray *arrNew = [[NSMutableArray alloc] initWithArray:arr];
