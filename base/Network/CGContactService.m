@@ -340,7 +340,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSArray *relationArr = [self formattedArrayFromArray:contact.contactRelations];
     NSArray *profileArr = [self formattedArrayFromArray:contact.socialProfiles];
     NSArray *imArr = [self formattedArrayFromArray:contact.instantMessageAddresses];
-    return @{kContactServiceName:contactName,kContactServiceFamilyName:contact.familyName,kContactServiceGivenName:contact.givenName,kContactServiceMiddleName:contact.middleName,kContactServiceNamePrefix:contact.namePrefix,kContactServicePreviousFamilyName:contact.previousFamilyName,kContactServiceSuffixName:contact.nameSuffix,kContactServiceNickName:contact.nickname,kContactServicePhoneticGivenName:contact.phoneticGivenName,kContactServicePhoneticMiddleName:contact.phoneticMiddleName,kContactServicePhoneticFamilyName:contact.phoneticFamilyName,kContactServiceType:@(contact.contactType),kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kContactServiceId:identifier,kServiceContactPhoto:contactPhotoImage,kServiceDepartment:contact.departmentName,
+    return @{kContactServiceName:contactName,kContactServiceFamilyName:contact.familyName,kContactServiceGivenName:contact.givenName,kContactServiceMiddleName:contact.middleName,kContactServiceNamePrefix:contact.namePrefix,kContactServicePreviousFamilyName:contact.previousFamilyName,kContactServiceSuffixName:contact.nameSuffix,kContactServiceNickName:contact.nickname,kContactServicePhoneticGivenName:contact.phoneticGivenName,kContactServicePhoneticMiddleName:contact.phoneticMiddleName,kContactServicePhoneticFamilyName:contact.phoneticFamilyName,kContactServiceType:[@(contact.contactType) stringValue],kServiceTels:telArr,kServicePinyin:[contactName pinyinFromSource:[[ShareHandle shareHandle] pinyinSourceDic]],kContactServiceId:identifier,kServiceContactPhoto:contactPhotoImage,kServiceDepartment:contact.departmentName,
              kServiceJob:contact.jobTitle,kServiceBirthday:contact.birthday?[formatter stringFromDate:contact.birthday.date]:@"",kServiceNonGregorianBirthday:[self formattedDateComponentFromComponent:contact.nonGregorianBirthday],kServiceNote:contact.note,kServiceEmails:emailArr,kServicePostals:postalArr,kServiceDates:dateArr,kServiceUrls:urlArr,kServiceRelations:relationArr,kServiceProfiles:profileArr,kServiceIMs:imArr,kServiceCompany:contact.organizationName};
 }
 
@@ -537,17 +537,32 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
 -(CNContact *)writeContactsFor9:(NSDictionary *)dic inStore:(CNContactStore *)store{
     CNSaveRequest *request = [[CNSaveRequest  alloc] init];
     CNMutableContact *contact = [[CNMutableContact alloc] init];
-    contact.familyName = dic[kContactServiceFamilyName];
-    contact.givenName = dic[kContactServiceGivenName];
-    contact.middleName = dic[kContactServiceMiddleName];
-    contact.namePrefix = dic[kContactServiceNamePrefix];
-    contact.previousFamilyName = dic[kContactServicePreviousFamilyName];
-    contact.nameSuffix = dic[kContactServiceSuffixName];
-    contact.nickname = dic[kContactServiceNickName];
-    contact.phoneticGivenName = dic[kContactServicePhoneticGivenName];
-    contact.phoneticMiddleName = dic[kContactServicePhoneticMiddleName];
-    contact.phoneticFamilyName = dic[kContactServicePhoneticFamilyName];
-    contact.contactType = [dic[kContactServiceType] integerValue];
+    if([dic[kServiceContactPhoto] isKindOfClass:[UIImage class]])contact.imageData = UIImagePNGRepresentation(dic[kServiceContactPhoto]);
+    if([dic[kContactServiceFamilyName] length]>0)contact.familyName = dic[kContactServiceFamilyName];
+    if([dic[kContactServiceGivenName] length]>0)contact.givenName = dic[kContactServiceGivenName];
+    if([dic[kContactServiceMiddleName] length]>0)contact.middleName = dic[kContactServiceMiddleName];
+    if([dic[kContactServiceNamePrefix] length]>0)contact.namePrefix = dic[kContactServiceNamePrefix];
+    if([dic[kContactServicePreviousFamilyName] length]>0)contact.previousFamilyName = dic[kContactServicePreviousFamilyName];
+    if([dic[kContactServiceSuffixName] length]>0)contact.nameSuffix = dic[kContactServiceSuffixName];
+    if([dic[kContactServiceNickName] length]>0)contact.nickname = dic[kContactServiceNickName];
+    if([dic[kContactServicePhoneticGivenName] length]>0)contact.phoneticGivenName = dic[kContactServicePhoneticGivenName];
+    if([dic[kContactServicePhoneticMiddleName] length]>0)contact.phoneticMiddleName = dic[kContactServicePhoneticMiddleName];
+    if([dic[kContactServicePhoneticFamilyName] length]>0)contact.phoneticFamilyName = dic[kContactServicePhoneticFamilyName];
+    if([dic[kContactServiceType] length]>0)contact.contactType = [dic[kContactServiceType] integerValue];
+    if([dic[kServiceCompany] length]>0)contact.organizationName = dic[kServiceCompany];
+    if([dic[kServiceDepartment] length]>0)contact.departmentName = dic[kServiceDepartment];
+    if([dic[kServiceJob] length]>0)contact.jobTitle = dic[kServiceJob];
+    if(dic[kServiceBirthday]&&[dic[kServiceBirthday] length]>0){
+        NSDate *birthDay = [formatter dateFromString:dic[kServiceBirthday]];
+        NSDateComponents *component = [[NSDateComponents alloc]init];
+        NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        component.calendar = gregorian;
+        component.day = [birthDay day];
+        component.month = [birthDay month];
+        component.year = [birthDay year];
+        contact.birthday = component;
+    }
+    if(dic[kServiceNonGregorianBirthday])contact.nonGregorianBirthday = [self deFormattedDateComponentFromDictionary:dic[kServiceNonGregorianBirthday]];
     [request addContact:contact toContainerWithIdentifier:nil];
     BOOL isSuccessed = [store executeSaveRequest:request error:nil];
     return isSuccessed?contact:nil;
@@ -571,20 +586,16 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         if([dic[kContactServicePhoneticFamilyName] length]>0)ABRecordSetValue(contact, kABPersonLastNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticFamilyName]), nil);
         if([dic[kContactServicePhoneticGivenName] length]>0)ABRecordSetValue(contact, kABPersonFirstNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticGivenName]), nil);
         if([dic[kContactServicePhoneticMiddleName] length]>0)ABRecordSetValue(contact, kABPersonMiddleNamePhoneticProperty, (__bridge CFTypeRef)(dic[kContactServicePhoneticMiddleName]), nil);
+        if(dic[kContactServiceNickName])ABRecordSetValue(contact, kABPersonNicknameProperty, (__bridge CFTypeRef)(dic[kContactServiceNickName]), nil);
         if([dic[kContactServiceNamePrefix] length]>0)ABRecordSetValue(contact, kABPersonPrefixProperty, (__bridge CFTypeRef)(dic[kContactServiceNamePrefix]), nil);
         if([dic[kContactServiceSuffixName] length]>0)ABRecordSetValue(contact, kABPersonSuffixProperty, (__bridge CFTypeRef)(dic[kContactServiceSuffixName]), nil);
         if([dic[kContactServiceType] length]>0)ABRecordSetValue(contact, kABPersonKindProperty, (__bridge CFTypeRef)(@([dic[kContactServiceType] integerValue])), nil);
         if([dic[kServiceCompany] length]>0)ABRecordSetValue(contact, kABPersonOrganizationProperty, (__bridge CFTypeRef)(dic[kServiceCompany]), nil);
         if([dic[kServiceDepartment] length]>0)ABRecordSetValue(contact, kABPersonDepartmentProperty, (__bridge CFTypeRef)(dic[kServiceDepartment]), nil);
         if([dic[kServiceJob] length]>0)ABRecordSetValue(contact, kABPersonJobTitleProperty, (__bridge CFTypeRef)(dic[kServiceJob]), nil);
-        if([dic[kServiceBirthday] isKindOfClass:[NSString class]]&&[dic[kServiceBirthday] length]>0){
-            ABRecordSetValue(contact, kABPersonBirthdayProperty, (__bridge CFTypeRef)([formatter dateFromString:dic[kServiceBirthday]]), nil);
-        }else{
-            NSLog(@"%@,%@",dic[kServiceBirthday],[dic[kServiceBirthday]class]);
-        }
-        NSLog(@"non:%@",dic[kServiceNonGregorianBirthday]);
-        ABRecordSetValue(contact, kABPersonAlternateBirthdayProperty, (__bridge CFTypeRef)(dic[kServiceNonGregorianBirthday]), nil);
-        ABRecordSetValue(contact, kABPersonNoteProperty, (__bridge CFTypeRef)(dic[kServiceNote]), nil);
+        if([dic[kServiceBirthday] isKindOfClass:[NSString class]]&&[dic[kServiceBirthday] length]>0)ABRecordSetValue(contact, kABPersonBirthdayProperty, (__bridge CFTypeRef)([formatter dateFromString:dic[kServiceBirthday]]), nil);
+        if(dic[kServiceNonGregorianBirthday])ABRecordSetValue(contact, kABPersonAlternateBirthdayProperty, (__bridge CFTypeRef)(dic[kServiceNonGregorianBirthday]), nil);
+        if([dic[kServiceNote] length]>0)ABRecordSetValue(contact, kABPersonNoteProperty, (__bridge CFTypeRef)(dic[kServiceNote]), nil);
         CFErrorRef error = NULL;
         ABRecordSetValue(contact, kABPersonPhoneProperty, [self deFormattedArrayFromMultiValue:dic[kServiceTels] property:kABPersonPhoneProperty], &error);
         ABRecordSetValue(contact, kABPersonDateProperty, [self deFormattedArrayFromMultiValue:dic[kServiceDates] property:kABPersonDateProperty], &error);
