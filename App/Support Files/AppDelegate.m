@@ -103,7 +103,7 @@
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
     [self tableViewEmptyPageDemo];
-    
+    [self testContact];
 //    [self getUserContact];
 //    [self getTouchidPower];
 //    [self getGatewayIPAddress];
@@ -255,7 +255,8 @@
     self.window.rootViewController = tbc;
 }
 -(void)sthComming:(NSNotification *)no{
-    NSLog(@"%@",[(CGContactService*)no.object contactsForExport]);
+//    NSLog(@"%@",);
+    [(CGContactService*)no.object saveWithContacts:[(CGContactService*)no.object contactsForExport]];
 }
 //测试获取定位服务
 #ifdef U_BAIDU_KEY
