@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,13 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestViewController">
             <connections>
-                <outlet property="_configButton" destination="n28-Ir-67v" id="JOE-Si-8ZI"/>
-                <outlet property="_detailLabel" destination="BWS-Cg-Htn" id="lvI-tc-INN"/>
                 <outlet property="_label1" destination="bDR-7v-uIA" id="Rnx-N6-mqf"/>
                 <outlet property="_label2" destination="KUQ-3t-cZv" id="qYS-zO-uOX"/>
                 <outlet property="_label3" destination="9J4-If-bKl" id="SC9-s4-GGv"/>
                 <outlet property="_label4" destination="Gbp-hm-FxS" id="6Hr-o7-X0D"/>
-                <outlet property="contentView" destination="wJe-v3-bRW" id="Hmm-TC-SJA"/>
                 <outlet property="myContentVIew" destination="4I9-BG-yva" id="SYa-fs-N1F"/>
                 <outlet property="view" destination="iN0-l3-epB" id="ihQ-to-y1N"/>
             </connections>
@@ -78,44 +75,12 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wJe-v3-bRW" customClass="CalenderView">
-                    <rect key="frame" x="0.0" y="53" width="320" height="373"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="373" id="6Lh-xB-XUm"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n28-Ir-67v">
-                    <rect key="frame" x="0.0" y="495" width="320" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="ihx-rt-ib7"/>
-                    </constraints>
-                    <state key="normal" title="设为休息"/>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWS-Cg-Htn">
-                    <rect key="frame" x="0.0" y="434" width="320" height="53"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="53" id="cfl-wW-p30"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="BWS-Cg-Htn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4nx-rR-Tct"/>
-                <constraint firstItem="n28-Ir-67v" firstAttribute="top" secondItem="BWS-Cg-Htn" secondAttribute="bottom" constant="8" id="4qM-ER-xPZ"/>
-                <constraint firstAttribute="trailing" secondItem="wJe-v3-bRW" secondAttribute="trailing" id="7u6-Sj-eLU"/>
                 <constraint firstItem="4I9-BG-yva" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="202" id="Auc-HA-vE4"/>
-                <constraint firstItem="wJe-v3-bRW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JIJ-vJ-1R9"/>
-                <constraint firstAttribute="trailing" secondItem="n28-Ir-67v" secondAttribute="trailing" id="Wc7-2J-O6d"/>
                 <constraint firstAttribute="trailing" secondItem="4I9-BG-yva" secondAttribute="trailing" constant="8" id="YJL-eg-Gpr"/>
                 <constraint firstItem="4I9-BG-yva" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cs2-4x-fc5"/>
-                <constraint firstItem="BWS-Cg-Htn" firstAttribute="top" secondItem="wJe-v3-bRW" secondAttribute="bottom" constant="8" id="fdn-bF-BIc"/>
-                <constraint firstItem="n28-Ir-67v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gVM-j3-SC3"/>
-                <constraint firstItem="wJe-v3-bRW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="53" id="nVP-6m-xca"/>
-                <constraint firstAttribute="trailing" secondItem="BWS-Cg-Htn" secondAttribute="trailing" id="uu3-3B-sZc"/>
             </constraints>
             <point key="canvasLocation" x="297" y="279"/>
         </view>

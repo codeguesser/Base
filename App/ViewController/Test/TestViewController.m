@@ -13,7 +13,23 @@
 #import <AdSupport/AdSupport.h>
 #import "CalenderView.h"
 #import <Accelerate/Accelerate.h>
-@interface TestViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>{
+@interface ViewControllerPreviewing:UIViewController<UIViewControllerPreviewingDelegate>
+@end
+@implementation ViewControllerPreviewing
+
+- (NSArray<id<UIPreviewActionItem>> *)previewActionItems{
+    UIPreviewAction *p1 =[UIPreviewAction actionWithTitle:@"分享" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSLog(@"点击了分享");
+    }];
+    UIPreviewAction *p2 =[UIPreviewAction actionWithTitle:@"收藏" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSLog(@"点击了收藏");
+    }];
+    NSArray *actions = @[p1,p2];
+    return actions;
+}
+
+@end
+@interface TestViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UIViewControllerPreviewingDelegate>{
     
     __weak IBOutlet UILabel *_label2;
     __weak IBOutlet UILabel *_label4;
@@ -21,9 +37,9 @@
     __weak IBOutlet UILabel *_label3;
     __weak IBOutlet UIView *myContentVIew;
     
-    __weak IBOutlet UILabel *_detailLabel;
-    __weak IBOutlet UIButton *_configButton;
-    __weak IBOutlet CalenderView *contentView;
+//    __weak IBOutlet UILabel *_detailLabel;
+//    __weak IBOutlet UIButton *_configButton;
+//    __weak IBOutlet CalenderView *contentView;
     NSMutableDictionary *dic;
     UIControl *ctrl;
     UIPickerView *pickview;
@@ -39,8 +55,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     dic = [NSMutableDictionary new];
     defaultDateRange = @"08:00-18:00";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(getResult)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(inputData)];
+    
+    
+    [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    
+    
+    
+    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(getResult)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(inputData)];
     
     // Do any additional setup after loading the view.
     /*
@@ -89,6 +112,7 @@
      [self.view addSubview:v];
      });
      */
+    /*
     [dic setValue:@"11:11-19:00" forKey:@"20160325"];
     contentView.outtimeRange = dic;
     UITapGestureRecognizer *editTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(timeRangeChangeAction:)];
@@ -107,8 +131,9 @@
         }
     };
     [_configButton addTarget:self action:@selector(changeStatus:) forControlEvents:UIControlEventTouchUpInside];
+     */
 }
-
+/*
 -(void)changeStatus:(UIButton *)b{
     contentView.changeSelectDateAction([contentView reverseMarkStatusWithTag:b.tag]);
 }
@@ -175,7 +200,11 @@
 -(void)controlAction{
     [ctrl removeFromSuperview];
 }
-
+*/
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location{
+    ViewControllerPreviewing *vc = [[ViewControllerPreviewing alloc] init];
+    return vc;
+}
 #pragma mark - pickview
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 5;
