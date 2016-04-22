@@ -460,7 +460,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
                 CNGroup *savedGroup = [self writeGroupsFor9:group toStore:store];
                 for (NSDictionary *contact in group[@"data"]) {
                     CNContact *savedContact = [self writeContactsFor9:contact inStore:store];
-                    [self moveContactFor9:savedContact toGroup:savedGroup inStore:store];
+                    if([group[kGroupServiceName] length]>0)[self moveContactFor9:savedContact toGroup:savedGroup inStore:store];
                 }
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactSaved object:self];
@@ -473,7 +473,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
                 for (NSDictionary *contact in group[@"data"]) {
                     ABRecordRef savedContact = [self writeContactsFor9Minus:contact toAddress:addressBook];
                     ABAddressBookSave(addressBook, NULL);
-                    [self moveContactFor9Minus:savedContact toGroup:savedGroup];
+                    if([group[kGroupServiceName] length]>0)[self moveContactFor9Minus:savedContact toGroup:savedGroup];
                 }
             }
             CFErrorRef error;
@@ -571,9 +571,9 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     if([dic[kServiceProfiles] count]>0)contact.socialProfiles = [self deFormattedArrayFromArray:dic[kServiceProfiles] class:@"CNSocialProfile"];
     if([dic[kServiceIMs] count]>0)contact.instantMessageAddresses = [self deFormattedArrayFromArray:dic[kServiceIMs] class:@"CNInstantMessageAddress"];
     if([dic[kServiceEmails] count]>0)contact.emailAddresses = [self deFormattedArrayFromArray:dic[kServiceEmails] class:@"NSString"];
-    
+    NSError *error;
     [request addContact:contact toContainerWithIdentifier:nil];
-    BOOL isSuccessed = [store executeSaveRequest:request error:nil];
+    BOOL isSuccessed = [store executeSaveRequest:request error:&error];
     return isSuccessed?contact:nil;
 }
 -(CNGroup *)writeGroupsFor9:(NSDictionary *)dic toStore:(CNContactStore *)store{
@@ -647,6 +647,8 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         component.era = [dic[@"era"] intValue];
         component.month = [dic[@"month"] intValue];
         component.year = [dic[@"year"] intValue];
+    }else{
+        return nil;
     }
     return component;
 }
