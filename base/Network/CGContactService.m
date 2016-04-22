@@ -790,58 +790,6 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
             [_arr addObject:[CNLabeledValue labeledValueWithLabel:label value:im]];
         }
     }
-    
-    
-    
-    
-    for (CNLabeledValue *v in arr) {
-        if ([v.value isKindOfClass:[NSString class]]) {
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:v.value}];
-        }else if ([v.value isKindOfClass:[CNPostalAddress class]]){
-            CNPostalAddress *_v = (CNPostalAddress *)v.value;
-            
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
-                                  @{
-                                      @"Street":_v.street,
-                                      @"City":_v.city,
-                                      @"State":_v.state,
-                                      @"ZIP":_v.postalCode,
-                                      @"Country":_v.country,
-                                      @"CountryCode":_v.ISOCountryCode,
-                                      }}];
-        }else if ([v.value isKindOfClass:[CNPhoneNumber class]]){
-            CNPhoneNumber *_v = (CNPhoneNumber *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:_v.stringValue}];
-        }else if ([v.value isKindOfClass:[CNContactRelation class]]){
-            CNContactRelation *_v = (CNContactRelation *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:_v.name}];
-        }else if ([v.value isKindOfClass:[CNSocialProfile class]]){
-            CNSocialProfile *_v = (CNSocialProfile *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
-                                  @{
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileURLStringKey]:_v.urlString,
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileUsernameKey]:_v.username,
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileUserIdentifierKey]:_v.userIdentifier?_v.userIdentifier:@"",
-                                      //                                      [CNSocialProfile localizedStringForKey:CNSocialProfileServiceKey]:[CNSocialProfile localizedStringForService:_v.service],
-                                      @"url":_v.urlString,
-                                      @"username":_v.username,
-                                      @"userIdentifier":_v.userIdentifier?_v.userIdentifier:@"",
-                                      @"service":_v.service,
-                                      }}];
-            
-        }else if ([v.value isKindOfClass:[CNInstantMessageAddress class]]){
-            CNInstantMessageAddress *_v = (CNInstantMessageAddress *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
-                                  @{
-                                      [CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressUsernameKey]:_v.username,
-                                      [CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressServiceKey]:_v.service,
-                                      }}];
-        }else if ([v.value isKindOfClass:[NSDateComponents class]]){
-            NSDateComponents *_v = (NSDateComponents *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:[formatter stringFromDate:_v.date]}];
-        }
-        
-    }
     return _arr;
 }
 -(NSArray <NSDictionary<NSString *,NSString *>*>*)formattedArrayFromMultiValue:(ABMultiValueRef)value property:(ABPropertyID) property{
