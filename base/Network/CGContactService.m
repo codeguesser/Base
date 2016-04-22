@@ -457,10 +457,11 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         [self allgroupsFor9Checked:^(CNContactStore *store) {
             [self cleanAllDataFor9FromStore:store];
             for (NSDictionary *group in self.groups) {
-                CNGroup *savedGroup = [self writeGroupsFor9:group toStore:store];
+                CNGroup *savedGroup;
+                if([group[kGroupServiceName] length]>0)savedGroup = [self writeGroupsFor9:group toStore:store];
                 for (NSDictionary *contact in group[@"data"]) {
                     CNContact *savedContact = [self writeContactsFor9:contact inStore:store];
-                    if([group[kGroupServiceName] length]>0)[self moveContactFor9:savedContact toGroup:savedGroup inStore:store];
+                    if(savedGroup)[self moveContactFor9:savedContact toGroup:savedGroup inStore:store];
                 }
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationContactSaved object:self];
@@ -469,11 +470,12 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         [self allgroupsFor9MinusChecked:^(ABAddressBookRef addressBook) {
             [self cleanAllDataFor9MinusFromAddress:addressBook];
             for (NSDictionary *group in self.groups) {
-                ABRecordRef savedGroup = [self writeGroupsFor9Minus:group toAddress:addressBook];
+                ABRecordRef savedGroup = NULL;
+                if([group[kGroupServiceName] length]>0)savedGroup = [self writeGroupsFor9Minus:group toAddress:addressBook];
                 for (NSDictionary *contact in group[@"data"]) {
                     ABRecordRef savedContact = [self writeContactsFor9Minus:contact toAddress:addressBook];
                     ABAddressBookSave(addressBook, NULL);
-                    if([group[kGroupServiceName] length]>0)[self moveContactFor9Minus:savedContact toGroup:savedGroup];
+                    if(savedGroup)[self moveContactFor9Minus:savedContact toGroup:savedGroup];
                 }
             }
             CFErrorRef error;
