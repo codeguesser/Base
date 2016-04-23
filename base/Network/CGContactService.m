@@ -51,6 +51,10 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSDateFormatter *formatter;
 }
 -(void)allgroupsFor9MinusChecked:(void(^)(ABAddressBookRef addressBook))action;
+/*!
+ @brief 获取数据
+ */
+-(void)requestData;
 @end
 @implementation CGContactService
 #pragma mark - system methods
