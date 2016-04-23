@@ -77,6 +77,16 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSMutableArray *arr = [NSMutableArray new];
     NSMutableSet *arrForCheck = [NSMutableSet new];//检验重复的人
     NSDictionary *(^contactFromData)(NSDictionary *,NSString *)=^(NSDictionary *contactDic,NSString *groupName){
+        NSData *imageData;
+        if (contactDic&&contactDic[kServiceContactPhoto]&&[contactDic[kServiceContactPhoto] isKindOfClass:[UIImage class]]) {
+            UIImage * img = contactDic[kServiceContactPhoto];
+            if([img isKindOfClass:[UIImage class]]&&!CGSizeEqualToSize(img.size, CGSizeZero)){
+                imageData = UIImagePNGRepresentation(img);
+            }else{
+                imageData = [@"" dataUsingEncoding:NSUTF8StringEncoding];
+            }
+        }
+//        &&(CGSizeEqualToSize([(UIImage *)contactDic[kServiceContactPhoto] size], CGSizeZero))?[UIImagePNGRepresentation((UIImage *)contactDic[kServiceContactPhoto]) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]:@"",
         return @{
           @"group_title":groupName,
           @"name":!contactDic?@"":contactDic[kContactServiceName],
@@ -92,7 +102,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
           @"phonetic_family_name":!contactDic?@"":contactDic[kContactServicePhoneticFamilyName],
           @"type":!contactDic?@"":contactDic[kContactServiceType],
           @"tels":!contactDic?@"":contactDic[kServiceTels],
-          @"photo":!contactDic?@"":contactDic[kServiceContactPhoto]?contactDic[kServiceContactPhoto]:[NSNull null],
+          @"photo":!contactDic?@"":[imageData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed],
           @"department":!contactDic?@"":contactDic[kServiceDepartment],
           @"company":!contactDic?@"":contactDic[kServiceCompany],
           @"job":!contactDic?@"":contactDic[kServiceJob],
@@ -554,6 +564,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     if([dic[kServiceCompany] length]>0)contact.organizationName = dic[kServiceCompany];
     if([dic[kServiceDepartment] length]>0)contact.departmentName = dic[kServiceDepartment];
     if([dic[kServiceJob] length]>0)contact.jobTitle = dic[kServiceJob];
+    if([dic[kServiceNote] length]>0)contact.note = dic[kServiceNote];
     if(dic[kServiceBirthday]&&[dic[kServiceBirthday] length]>0){
         NSDate *birthDay = [formatter dateFromString:dic[kServiceBirthday]];
         NSDateComponents *component = [[NSDateComponents alloc]init];
