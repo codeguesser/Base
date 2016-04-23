@@ -86,7 +86,6 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
                 imageData = [@"" dataUsingEncoding:NSUTF8StringEncoding];
             }
         }
-//        &&(CGSizeEqualToSize([(UIImage *)contactDic[kServiceContactPhoto] size], CGSizeZero))?[UIImagePNGRepresentation((UIImage *)contactDic[kServiceContactPhoto]) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]:@"",
         return @{
           @"group_title":groupName,
           @"name":!contactDic?@"":contactDic[kContactServiceName],
@@ -144,8 +143,12 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     return arr;
 }
 -(BOOL)saveWithContacts:(NSArray *)__contacts{
-    
     NSDictionary *(^contactFromData)(NSDictionary *,NSString *) = ^(NSDictionary *dic,NSString *idx){
+        id image = @"";
+        if (dic[@"photo"]&&[dic[@"photo"] length]>0) {
+            NSData *imgData = [[NSData alloc] initWithBase64EncodedString:dic[@"photo"] options:0];
+            image = [UIImage imageWithData:imgData];
+        }
         NSMutableDictionary *_dic = [NSMutableDictionary new];
         _dic[kContactServiceName] = dic[@"name"],
         _dic[kContactServiceFamilyName] = dic[@"family_name"],
@@ -160,7 +163,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
         _dic[kContactServicePhoneticFamilyName] = dic[@"phonetic_family_name"],
         _dic[kContactServiceType] = dic[@"type"],
         _dic[kServiceTels] = dic[@"tels"];
-        _dic[kServiceContactPhoto] = dic[@"photo"];
+        _dic[kServiceContactPhoto] = image;
         _dic[kServiceCompany] = dic[@"company"];
         _dic[kServiceDepartment] = dic[@"department"];
         _dic[kServiceJob] = dic[@"job"];
@@ -207,7 +210,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     self.contacts = allContacts;
     self.groups = allGroups.allValues;
     
-    [self saveData];
+//    [self saveData];
     return YES;
 }
 -(NSString *)description{
