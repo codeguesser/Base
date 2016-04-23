@@ -210,7 +210,7 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     self.contacts = allContacts;
     self.groups = allGroups.allValues;
     
-//    [self saveData];
+    [self saveData];
     return YES;
 }
 -(NSString *)description{
@@ -672,11 +672,11 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
     NSMutableArray *_arr = [NSMutableArray new];
     for (CNLabeledValue *v in arr) {
         if ([v.value isKindOfClass:[NSString class]]) {
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:v.value}];
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:v.value}];
         }else if ([v.value isKindOfClass:[CNPostalAddress class]]){
             CNPostalAddress *_v = (CNPostalAddress *)v.value;
             
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:
                                   @{
                                       @"Street":_v.street,
                                       @"City":_v.city,
@@ -687,13 +687,13 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
                                       }}];
         }else if ([v.value isKindOfClass:[CNPhoneNumber class]]){
             CNPhoneNumber *_v = (CNPhoneNumber *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:_v.stringValue}];
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:_v.stringValue}];
         }else if ([v.value isKindOfClass:[CNContactRelation class]]){
             CNContactRelation *_v = (CNContactRelation *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:_v.name}];
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:_v.name}];
         }else if ([v.value isKindOfClass:[CNSocialProfile class]]){
             CNSocialProfile *_v = (CNSocialProfile *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:
                                   @{
                                       @"url":_v.urlString,
                                       @"username":_v.username,
@@ -703,14 +703,14 @@ NSString *const kNotificationContactSaved = @"kNotificationContactSaved";
             
         }else if ([v.value isKindOfClass:[CNInstantMessageAddress class]]){
             CNInstantMessageAddress *_v = (CNInstantMessageAddress *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:
                                   @{
                                       [CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressUsernameKey]:_v.username,
                                       [CNInstantMessageAddress localizedStringForKey:CNInstantMessageAddressServiceKey]:_v.service,
                                       }}];
         }else if ([v.value isKindOfClass:[NSDateComponents class]]){
             NSDateComponents *_v = (NSDateComponents *)v.value;
-            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label]:[formatter stringFromDate:_v.date]}];
+            [_arr addObject:@{[CNLabeledValue localizedStringForLabel:v.label?v.label:@""]:[formatter stringFromDate:_v.date]}];
         }
         
     }
