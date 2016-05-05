@@ -103,7 +103,7 @@
     [[UIBarButtonItem appearance]setTintColor:[UIColor greenColor]];
     [[UINavigationBar appearance]setTintColor:[UIColor greenColor]];
     [self tableViewEmptyPageDemo];
-    [self testContact];
+//    [self testContact];
 //    [self getUserContact];
 //    [self getTouchidPower];
 //    [self getGatewayIPAddress];
@@ -255,8 +255,12 @@
     self.window.rootViewController = tbc;
 }
 -(void)sthComming:(NSNotification *)no{
-//    NSLog(@"%@",);
     [(CGContactService*)no.object saveWithContacts:[(CGContactService*)no.object contactsForExport]];
+//    NSArray *arr = [(CGContactService*)no.object contactsForExport];
+//    NSError *error;
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:arr options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//    NSLog(@"%@",str);
 }
 //测试获取定位服务
 #ifdef U_BAIDU_KEY

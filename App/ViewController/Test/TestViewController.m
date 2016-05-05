@@ -13,6 +13,7 @@
 #import <AdSupport/AdSupport.h>
 #import "CalenderView.h"
 #import <Accelerate/Accelerate.h>
+@import AVFoundation;
 @interface ViewControllerPreviewing:UIViewController<UIViewControllerPreviewingDelegate>
 @end
 @implementation ViewControllerPreviewing
@@ -59,8 +60,9 @@
     if (NSClassFromString(@"UITraitCollection")&&[UITraitCollection instancesRespondToSelector:@selector(traitCollectionWithForceTouchCapability:)]&&[UITraitCollection traitCollectionWithForceTouchCapability:UIForceTouchCapabilityAvailable]) {
         [self registerForPreviewingWithDelegate:self sourceView:self.view];
     }
+    [self testTTS];
     
-    
+    [self testTTS];
     
     
     
@@ -256,6 +258,13 @@
 /*!
  @brief 星星控件的使用
  */
+-(void)testTTS{
+    AVSpeechSynthesizer* speaker = [[AVSpeechSynthesizer alloc] init];
+    AVSpeechUtterance * speechString = [[AVSpeechUtterance alloc] initWithString:@"维导图的第一步。这些练习可以加强和磨砺联想技巧，为全面开发放射性思维作好"];
+    speechString.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+    speechString.rate *= 0.5;
+    [speaker speakUtterance:speechString];
+}
 -(void)setupStarDemo{
     StarView *starView = [[StarView alloc]initWithFrame:CGRectMake(0, 0, 200, 30)];
     starView.imgUrl = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"名片icon4" ofType:@"png"]];
