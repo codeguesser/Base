@@ -10,7 +10,7 @@
 //  如何使用    How to use it...
 //  tip:本类的数据都是动态获取的，所以如果想使用它，最好先初始化，等待数据处理完毕在调用，提前初始化
 //
-//  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationContactUpdated" object:nil];
+//  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sthComming:) name:@"kNotificationCGContactServiceDidLoad" object:nil];
 //  service = [CGContactService service];
 //  arr = [service contactsForExport];
 //
@@ -33,6 +33,10 @@
 @property(nonatomic,strong)NSArray *contacts;
 #pragma mark - unReused , just for service
 /*!
+ @brief 获取数据
+ */
+-(void)requestData;
+/*!
  @brief  需要导出时数组，组装好的内容
  
  @return 默认返回空数组
@@ -44,4 +48,20 @@
  @return 返回值，成功即是yes
  */
 -(BOOL)saveWithContacts:(NSArray *)contacts;
+/*!
+ @brief 由对应格式规范数据，不进行保存
+ 
+ @param contacts 要盖章的通讯录
+ 
+ @return
+ */
+-(BOOL)initWithContacts:(NSArray *)contacts;
+/*!
+ @brief 保存联系人
+ 
+ @param contact 联系人
+ @param isMerge 是否进行融合
+ */
+-(void)saveContact:(NSDictionary *)contact merge:(BOOL)isMerge;
+-(void)cancelAllSaveing;
 @end
