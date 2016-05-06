@@ -50,6 +50,24 @@ NSString *const kNotificationCGContactServiceSavedPercent = @"kNotificationCGCon
 NSString *const kNotificationCGContactServiceOutsideContactChanged = @"kNotificationCGContactServiceOutsideContactChanged";
 #define kFetchedField @[CNContactFamilyNameKey,CNContactGivenNameKey,CNContactMiddleNameKey,CNContactPhoneNumbersKey,CNContactImageDataAvailableKey,CNContactImageDataKey,CNContactThumbnailImageDataKey,CNContactDepartmentNameKey,CNContactJobTitleKey,CNContactBirthdayKey,CNContactNonGregorianBirthdayKey,CNContactNoteKey,CNContactEmailAddressesKey,CNContactPostalAddressesKey,CNContactDatesKey,CNContactUrlAddressesKey,CNContactRelationsKey,CNContactSocialProfilesKey,CNContactInstantMessageAddressesKey,CNContactOrganizationNameKey,CNContactNamePrefixKey,CNContactPreviousFamilyNameKey,CNContactNameSuffixKey,CNContactNicknameKey,CNContactPhoneticGivenNameKey,CNContactPhoneticMiddleNameKey,CNContactPhoneticFamilyNameKey,CNContactTypeKey]
 #define checkMultiableValue(arr,kABPersonPhoneProperty,record) [arr count]>0&&ABRecordCopyValue(record, kABPersonPhoneProperty)&&ABMultiValueGetCount(ABRecordCopyValue(record, kABPersonPhoneProperty))>0
+@implementation UIImage(CGContactService)
+- (UIImage*)scaleToSize:(CGSize)size {
+    
+    UIGraphicsBeginImageContext(size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(context, 0.0, size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    
+    CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height), self.CGImage);
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+@end
 @interface CGContactService(){
     NSDateFormatter *formatter;
     BOOL _isCancelSaving;
@@ -355,11 +373,10 @@ void callback(){
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
                             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取通讯录权限" message:@"请在iPhone \"设置-隐私-通讯录\" 中允许动本使用定位服务" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
-                            [alert showWithCompletion:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                if (buttonIndex!=alert.cancelButtonIndex) {
-                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                }
-                            }];
+                            [alert show];
+//                            if (buttonIndex!=alert.cancelButtonIndex) {
+//                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                            }
                         }else{
                             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取通讯录权限" message:@"请在iPhone \"设置-隐私-通讯录\" 中允许动本使用定位服务" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                             [alert show];
@@ -384,11 +401,10 @@ void callback(){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if ([[UIApplication sharedApplication]canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取通讯录权限" message:@"请在iPhone \"设置-隐私-通讯录\" 中允许动本使用定位服务" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"前往", nil];
-                        [alert showWithCompletion:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                            if (buttonIndex!=alert.cancelButtonIndex) {
-                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                            }
-                        }];
+                        [alert show];
+//                        if (buttonIndex!=alert.cancelButtonIndex) {
+//                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                        }
                     }else{
                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"无法获取通讯录权限" message:@"请在iPhone \"设置-隐私-通讯录\" 中允许动本使用定位服务" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                         [alert show];
