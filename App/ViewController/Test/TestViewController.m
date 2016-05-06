@@ -60,11 +60,11 @@
     if (NSClassFromString(@"UITraitCollection")&&[UITraitCollection instancesRespondToSelector:@selector(traitCollectionWithForceTouchCapability:)]&&[UITraitCollection traitCollectionWithForceTouchCapability:UIForceTouchCapabilityAvailable]) {
         [self registerForPreviewingWithDelegate:self sourceView:self.view];
     }
-    [self testTTS];
     
-    [self testTTS];
-    
-    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        int i =[(NSArray *)@"" count];
+//        i++;
+    });
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(getResult)];
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"xxxx" style:UIBarButtonItemStylePlain target:self action:@selector(inputData)];

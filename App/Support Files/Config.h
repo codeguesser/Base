@@ -63,8 +63,8 @@ UIKIT_EXTERN NSString *const kCGFalseTag;
 #ifdef U_BAIDU_KEY
 UIKIT_EXTERN NSString *const CGBaiduGetLocationAttributeNotification;
 #endif
-//#define BuglyAppId @"900005994"//Bugly App ID 上传crash信息用的，注释掉即是不上传
-//#define AppStoreAppId @"1231231231"//AppStore里的应用程序ID，提醒用户评分使用，注释即是不提示
+#define BuglyAppId @"900005994"//Bugly App ID 上传crash信息用的，注释掉即是不上传
+#define AppStoreAppId @"1231231231"//AppStore里的应用程序ID，提醒用户评分使用，注释即是不提示
 #define XingeAppId 2200165541//信鸽推送需要的id，下面的key不写都不行，注释任意一行就表示不支持信鸽
 #define XingeAppKey @"I52MN8IKH83X"//信鸽推送需要的key，上面的id不写都不行，注释任意一行就表示不支持信鸽
 #define WeixinAppId @"wxb4ba3c02aa476ea1"//微信的appid，没有微信的appid，代表不支持微信支付

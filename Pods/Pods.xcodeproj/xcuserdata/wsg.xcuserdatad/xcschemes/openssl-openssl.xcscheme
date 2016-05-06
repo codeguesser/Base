@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '857B16EDB09FFF69378F788C'
+               BlueprintIdentifier = 'B060E198DD1EEE86B675D355'
                BlueprintName = 'openssl-openssl'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'openssl.bundle'>

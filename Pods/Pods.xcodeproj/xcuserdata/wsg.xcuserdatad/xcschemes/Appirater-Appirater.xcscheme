@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5C8F2E5AD1785C3BDC04BCD9'
+               BlueprintIdentifier = '6AE3659D3D71A4443770EE05'
                BlueprintName = 'Appirater-Appirater'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Appirater.bundle'>
